@@ -1,0 +1,379 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    /* Colors - Maroon palette */
+    --color-maroon-accent: #7e1c1f;
+    --color-maroon-primary: #5c1416;
+    --color-maroon-deep: #1a0405;
+    --color-maroon-hover: #3d0d0f;
+    --color-maroon-secondary: #4d1012;
+
+    /* Neutral colors */
+    --color-spanish-gray: hsl(0, 0%, 60%);
+    --color-black-coral: hsl(225, 8%, 42%);
+    --color-gunmetal: #5c1416;
+    --color-gainsboro: hsl(0, 0%, 88%);
+    --color-cultured: hsl(0, 0%, 98%);
+    --color-onyx: hsl(0, 0%, 25%);
+    --color-jet: hsl(0, 0%, 20%);
+
+    /* Marketplace colors */
+    --color-mp-primary: #1a2b4c;
+    --color-mp-orange: #ff5722;
+    --color-mp-bg: #f4f7f6;
+    --color-mp-border: #e2e8f0;
+    --color-mp-text: #334155;
+    --color-mp-text-light: #64748b;
+
+    /* Admin / Filament theme colors */
+    --color-fi-bg: #f9fafb;
+    --color-fi-surface: #ffffff;
+    --color-fi-border: #e5e7eb;
+    --color-fi-text-main: #111827;
+    --color-fi-text-muted: #6b7280;
+    --color-fi-primary: #8B1A1A;
+    --color-fi-primary-hover: #6B1010;
+    --color-fi-input-bg: #ffffff;
+
+    /* Typography */
+    --font-poppins: 'Poppins', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+
+    /* Transitions */
+    --transition-default: 0.25s ease-in-out;
+}
+
+/* ============================================ */
+/* GLOBAL RESETS                                */
+/* ============================================ */
+@layer base {
+    html {
+        font-family: var(--font-poppins);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a,
+    img,
+    span,
+    input,
+    label,
+    button,
+    ion-icon {
+        display: block;
+    }
+
+    input,
+    button {
+        background: none;
+        border: none;
+        font: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    ion-icon {
+        pointer-events: none;
+    }
+}
+
+/* ============================================ */
+/* COMPONENTS THAT REQUIRE COMPLEX CSS          */
+/* (pseudo-elements, keyframes, checkbox hack)  */
+/* ============================================ */
+@layer components {
+
+    /* === HERO BACKGROUNDS === */
+    .hero-bg {
+        background-image: url('/assets/images/hero.webp');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-color: hsla(0, 0%, 0%, 0.7);
+        background-blend-mode: overlay;
+    }
+
+    /* === BATIK OVERLAY (tour-search, footer) === */
+    .batik-overlay {
+        position: relative;
+    }
+
+    .batik-overlay::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url('/assets/images/batik.webp') repeat;
+        background-size: 300px;
+        opacity: 0.3;
+        z-index: 0;
+    }
+
+    .batik-overlay>.container-inner {
+        position: relative;
+        z-index: 1;
+    }
+
+    .batik-overlay-sm::before {
+        background-size: 220px;
+    }
+
+    /* === HEADER STICKY === */
+    .header-sticky .header-top-bar {
+        transition: var(--transition-default);
+    }
+
+    .header-sticky.active .header-top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--color-gunmetal);
+        z-index: 50;
+    }
+
+    /* Desktop: override sticky behavior */
+    @media (min-width: 992px) {
+        .header-sticky.active .header-top-bar {
+            position: unset;
+            background: unset;
+        }
+
+        .header-sticky.active .header-bottom-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            color: var(--color-onyx);
+            box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.08);
+            transition: var(--transition-default);
+            z-index: 50;
+        }
+
+        .header-sticky.active .nav-link-item:not(.btn-auth) {
+            color: var(--color-onyx) !important;
+        }
+
+        .header-sticky.active .nav-link-item:not(.btn-auth):hover {
+            color: var(--color-maroon-primary) !important;
+        }
+
+        .header-sticky.active .social-link-item {
+            color: var(--color-onyx);
+            border-color: hsla(0, 0%, 0%, 0.15);
+        }
+    }
+
+    /* === MOBILE NAVBAR === */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 100%;
+        max-width: 300px;
+        height: 100%;
+        background: white;
+        visibility: hidden;
+        pointer-events: none;
+        transition: 0.15s ease-in;
+        z-index: 60;
+    }
+
+    .mobile-nav.active {
+        right: 0;
+        visibility: visible;
+        pointer-events: all;
+        transition: 0.25s ease-out;
+    }
+
+    /* On desktop, reset mobile nav */
+    @media (min-width: 992px) {
+        .mobile-nav {
+            all: unset;
+        }
+    }
+
+    /* === OVERLAY === */
+    .nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 55;
+        transition: var(--transition-default);
+    }
+
+    .nav-overlay.active {
+        opacity: 0.7;
+        pointer-events: all;
+    }
+
+    @media (min-width: 992px) {
+        .nav-overlay {
+            display: none;
+        }
+    }
+
+    /* === GO TO TOP BUTTON === */
+    .go-top-btn {
+        opacity: 0;
+        transform: translateY(10px);
+        visibility: hidden;
+        transition: var(--transition-default);
+    }
+
+    .go-top-btn.active {
+        opacity: 0.8;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .go-top-btn:hover {
+        opacity: 1;
+    }
+
+    /* === CARD HOVER === */
+    .popular-card-wrap:hover {
+        transform: translateY(-4px);
+    }
+
+    /* === FAQ ACCORDION (checkbox hack) === */
+    .faq-toggle {
+        display: none;
+    }
+
+    .faq-toggle:checked+.faq-question-label {
+        background: var(--color-maroon-primary);
+        color: white;
+    }
+
+    .faq-toggle:checked+.faq-question-label .faq-icon-el {
+        transform: rotate(180deg);
+        color: white;
+    }
+
+    .faq-answer-wrap {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .faq-toggle:checked~.faq-answer-wrap {
+        max-height: 300px;
+    }
+
+    /* === PRODUCT CARD HOVER === */
+    .product-card-wrap:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        transform: translateY(-4px);
+        border-color: #cbd5e1;
+    }
+
+    /* === TAB SYSTEM === */
+    .tab-pane-item {
+        display: none;
+    }
+
+    .tab-pane-item.active {
+        display: block;
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* === MOBILE FILTER ANIMATION === */
+    @media (max-width: 991px) {
+        .mp-sidebar-wrap form {
+            display: none;
+        }
+
+        .mp-sidebar-wrap.show-filter form {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* line-clamp-2 is provided natively by Tailwind v4 */
+
+    /* === ADMIN DARK MODE === */
+    body.dark-mode {
+        --color-fi-bg: #111827;
+        --color-fi-surface: #1f2937;
+        --color-fi-border: #374151;
+        --color-fi-text-main: #f3f4f6;
+        --color-fi-text-muted: #9ca3af;
+        --color-fi-primary: #C53030;
+        --color-fi-primary-hover: #A83232;
+        --color-fi-input-bg: #111827;
+    }
+
+    /* === CONTACT TITLE UNDERLINE === */
+    .contact-title-underline {
+        position: relative;
+    }
+
+    .contact-title-underline::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: var(--color-maroon-primary);
+    }
+
+    /* === SCROLLBAR HIDE === */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        scrollbar-width: none;
+    }
+}

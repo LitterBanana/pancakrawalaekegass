@@ -1,0 +1,4 @@
+[23-Feb-2026 20:42:14 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/whisefu1/hmitour.site/hmitour/app/Http/Controllers/Admin/PackageController.php on line 9
+[23-Feb-2026 20:42:31 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/whisefu1/hmitour.site/hmitour/app/Http/Controllers/Admin/PackageController.php on line 9
+[23-Feb-2026 20:44:27 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/whisefu1/hmitour.site/hmitour/app/Http/Controllers/Admin/PackageController.php on line 9
+[23-Feb-2026 20:44:29 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/whisefu1/hmitour.site/hmitour/app/Http/Controllers/Admin/PackageController.php on line 9
