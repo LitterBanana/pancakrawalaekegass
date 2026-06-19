@@ -7,6 +7,7 @@
   <meta name="description" content="@yield('description', 'HMI Tour Admin Panel')">
   <title>@yield('title', 'HMI Tour Admin')</title>
 
+  @vite(['resources/css/app.css'])
   <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -49,17 +50,17 @@
       <!-- Main Content -->
       <main class="main-content">
         @if(session('success'))
-          <div class="card" style="background: var(--color-success-bg); border-color: var(--color-success-border); margin-bottom: var(--space-6);">
-            <div class="card-body" style="padding: var(--space-4) var(--space-6); color: var(--color-success); font-weight: 600; display: flex; align-items: center; gap: 8px;">
-              <i data-lucide="check-circle-2" style="width: 20px; height: 20px;"></i> {{ session('success') }}
+          <div class="card bg-emerald-50 border-emerald-200 mb-6">
+            <div class="card-body px-6 py-4 text-emerald-600 font-semibold flex items-center gap-2">
+              <i data-lucide="check-circle-2" class="w-5 h-5"></i> {{ session('success') }}
             </div>
           </div>
         @endif
         @if($errors->any())
-          <div class="card" style="background: var(--color-danger-bg); border-color: var(--color-danger-border); margin-bottom: var(--space-6);">
-            <div class="card-body" style="padding: var(--space-4) var(--space-6); color: var(--color-danger);">
+          <div class="card bg-red-50 border-red-200 mb-6">
+            <div class="card-body px-6 py-4 text-red-600">
               <strong>Terjadi kesalahan:</strong>
-              <ul style="margin: var(--space-2) 0 0; padding-left: var(--space-5);">
+              <ul class="mt-2 pl-5">
                 @foreach($errors->all() as $error) <li>{{ $error }}</li> @endforeach
               </ul>
             </div>

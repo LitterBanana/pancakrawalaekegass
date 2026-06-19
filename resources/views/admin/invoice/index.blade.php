@@ -11,7 +11,7 @@
         </div>
         <div class="stat-card">
             <div class="stat-card-label">Total Pendapatan</div>
-            <div class="stat-card-value" style="color: var(--color-success);">IDR {{ number_format($totalRevenue, 0, ',', '.') }}</div>
+            <div class="stat-card-value text-emerald-600">IDR {{ number_format($totalRevenue, 0, ',', '.') }}</div>
         </div>
         <div class="stat-card">
             <div class="stat-card-label">Invoice Bulan Ini</div>
@@ -25,9 +25,9 @@
 
     <div class="card animate-fade-in-up delay-1">
         <div class="card-header">
-            <h3 class="section-title" style="font-size: var(--text-lg);">Daftar Invoice</h3>
-            <form action="{{ route('admin.invoice.index') }}" method="GET" style="display: flex; gap: var(--space-2); margin: 0;">
-                <select name="status" class="form-select" style="width: auto; font-size: var(--text-xs); padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3);">
+            <h3 class="section-title text-lg">Daftar Invoice</h3>
+            <form action="{{ route('admin.invoice.index') }}" method="GET" class="flex gap-2 m-0">
+                <select name="status" class="form-select w-auto text-xs px-3 py-2 pr-8">
                     <option value="">Semua Status</option>
                     <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Lunas</option>
                     <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
@@ -62,14 +62,14 @@
                                 @else <span class="badge badge-danger">Batal</span> @endif
                             </td>
                             <td>
-                                <div style="display: flex; gap: var(--space-2);">
+                                <div class="flex gap-2">
                                     <a href="{{ route('admin.invoice.show', $invoice->id) }}" class="btn btn-ghost btn-sm">Detail</a>
                                     <a href="{{ route('admin.invoice.print', $invoice->id) }}" target="_blank" class="btn btn-secondary btn-sm">Cetak</a>
                                 </div>
                             </td>
                         </tr>
                     @empty
-                        <tr><td colspan="7" class="text-center text-muted" style="padding: var(--space-8);">Belum ada invoice.</td></tr>
+                        <tr><td colspan="7" class="text-center text-muted p-8">Belum ada invoice.</td></tr>
                     @endforelse
                 </tbody>
             </table>

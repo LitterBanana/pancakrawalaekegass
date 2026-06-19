@@ -7,7 +7,7 @@
 
     <!-- Welcome Banner -->
     <section class="welcome-banner animate-fade-in-up" aria-label="Banner selamat datang">
-      <div class="welcome-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-6);">
+      <div class="welcome-content flex justify-between items-center flex-wrap gap-6">
         <div>
             <h2>Halo, Admin!</h2>
             <p>Kelola seluruh operasional sistem HMI Tour & Travel di sini.</p>
@@ -19,7 +19,7 @@
     <section class="stats-grid animate-fade-in-up delay-1" aria-label="Statistik Admin">
         <div class="stat-card">
             <div class="stat-card-label">Total Uang Kas Masuk</div>
-            <div class="stat-card-value" style="color: var(--color-success);">IDR {{ number_format($totalRevenue, 0, ',', '.') }}</div>
+            <div class="stat-card-value text-emerald-600">IDR {{ number_format($totalRevenue, 0, ',', '.') }}</div>
         </div>
         <div class="stat-card">
             <div class="stat-card-label">Total Transaksi Bookings</div>
@@ -27,7 +27,7 @@
         </div>
         <div class="stat-card">
             <div class="stat-card-label">Menunggu Pembayaran</div>
-            <div class="stat-card-value" style="color: var(--color-warning);">{{ $pendingPayments }}</div>
+            <div class="stat-card-value text-amber-600">{{ $pendingPayments }}</div>
         </div>
         <div class="stat-card">
             <div class="stat-card-label">Pemesanan Tertunda</div>
@@ -37,8 +37,8 @@
 
     {{-- Alert: Error --}}
     @if(session('error'))
-        <div class="card" style="background: var(--color-danger-bg); border-color: var(--color-danger-border); margin-bottom: var(--space-6);">
-            <div class="card-body" style="padding: var(--space-4) var(--space-6); color: var(--color-danger); font-weight: 600;">
+        <div class="card bg-red-50 border-red-200 mb-6">
+            <div class="card-body px-6 py-4 text-red-600 font-semibold">
                 {{ session('error') }}
             </div>
         </div>
@@ -48,7 +48,7 @@
         <!-- User Leader Access -->
         <section class="card" aria-label="Daftar Akses Kode Akun">
             <div class="card-header">
-                <h3 class="section-title" style="font-size: var(--text-lg);">Daftar User & Leader Referral</h3>
+                <h3 class="section-title text-lg">Daftar User & Leader Referral</h3>
             </div>
 
             @if($users->count() > 0)
@@ -67,14 +67,14 @@
                         @foreach($users as $user)
                         <tr>
                             <td>
-                                <div style="display: flex; align-items: center; gap: var(--space-3);">
-                                    <div class="avatar" style="width: 32px; height: 32px; font-size: var(--text-xs);">
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar w-8 h-8 text-xs">
                                         {{ strtoupper(substr($user->name, 0, 2)) }}
                                     </div>
                                     <span class="font-semibold">{{ $user->name }}</span>
                                 </div>
                             </td>
-                            <td style="color: var(--color-text-muted);">{{ $user->email }}</td>
+                            <td class="text-gray-400">{{ $user->email }}</td>
                             <td>
                                 @if($user->role === 'leader')
                                     <span class="badge badge-info">Leader</span>
@@ -83,10 +83,10 @@
                                 @endif
                             </td>
                             <td>
-                                <code style="background: var(--color-bg-alt); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); font-size: var(--text-xs); user-select: all;">{{ $user->referral_code }}</code>
+                                <code class="bg-gray-100 px-2 py-1 rounded text-xs select-all">{{ $user->referral_code }}</code>
                             </td>
                             <td>
-                                <form action="{{ route('admin.user.access') }}" method="POST" style="margin: 0; display: inline;">
+                                <form action="{{ route('admin.user.access') }}" method="POST" class="m-0 inline">
                                     @csrf
                                     <input type="hidden" name="referral_code" value="{{ $user->referral_code }}">
                                     <button type="submit" class="btn btn-secondary btn-sm">
@@ -100,9 +100,8 @@
                 </table>
             </div>
             @else
-            <div class="card-body text-center" style="padding: var(--space-12);">
-
-                <p class="text-muted" style="margin: 0;">Belum ada user dengan kode referral.</p>
+            <div class="card-body text-center py-12">
+                <p class="text-muted m-0">Belum ada user dengan kode referral.</p>
             </div>
             @endif
         </section>
@@ -110,9 +109,9 @@
         <!-- Inquiries / Calon Jamaah -->
         <section class="card animate-fade-in-up delay-3" aria-label="Calon Jamaah">
             <div class="card-header">
-                <h3 class="section-title" style="font-size: var(--text-lg);">Prospek Calon Jamaah</h3>
-                <form action="{{ route('admin.dashboard') }}" method="GET" style="display: flex; gap: var(--space-2);">
-                    <select name="status" onchange="this.form.submit()" class="form-select" style="width: auto; padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3); font-size: var(--text-xs);">
+                <h3 class="section-title text-lg">Prospek Calon Jamaah</h3>
+                <form action="{{ route('admin.dashboard') }}" method="GET" class="flex gap-2">
+                    <select name="status" onchange="this.form.submit()" class="form-select w-auto px-3 py-2 pr-8 text-xs">
                         <option value="">Semua Status</option>
                         <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Tertunda</option>
                         <option value="followed_up" {{ request('status') == 'followed_up' ? 'selected' : '' }}>Di-Follow Up</option>
@@ -142,13 +141,13 @@
                                 <td>{{ $inquiry->created_at->format('d M Y, H:i') }}</td>
                                 <td>
                                     <div class="font-semibold">{{ $inquiry->name }}</div>
-                                    <div style="font-size: var(--text-xs); color: var(--color-text-muted);">{{ $inquiry->phone }}</div>
+                                    <div class="text-xs text-gray-400">{{ $inquiry->phone }}</div>
                                 </td>
                                 <td>{{ $inquiry->package->name ?? '-' }}</td>
                                 <td>
                                     <form action="{{ route('admin.inquiry.update_status', $inquiry->id) }}" method="POST">
                                         @csrf
-                                        <select name="status" onchange="this.form.submit()" class="badge {{ $inquiry->status == 'pending' ? 'badge-warning' : 'badge-success' }}" style="border: none; cursor: pointer; appearance: none; padding: var(--space-1) var(--space-3);">
+                                        <select name="status" onchange="this.form.submit()" class="badge {{ $inquiry->status == 'pending' ? 'badge-warning' : 'badge-success' }} border-0 cursor-pointer appearance-none px-3 py-1">
                                             <option value="pending" {{ $inquiry->status == 'pending' ? 'selected' : '' }}>Tertunda</option>
                                             <option value="followed_up" {{ $inquiry->status == 'followed_up' ? 'selected' : '' }}>Follow Up</option>
                                             <option value="closed" {{ $inquiry->status == 'closed' ? 'selected' : '' }}>Selesai</option>
@@ -156,14 +155,14 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <div style="display: flex; gap: var(--space-2);">
+                                    <div class="flex gap-2">
                                         <a href="{{ $link_wa }}" target="_blank" class="btn btn-success btn-sm">WA</a>
-                                        <a href="{{ route('admin.inquiry.convert', $inquiry->id) }}" class="btn btn-primary btn-sm" style="background: var(--color-info); box-shadow: none;">Convert</a>
+                                        <a href="{{ route('admin.inquiry.convert', $inquiry->id) }}" class="btn btn-primary btn-sm bg-blue-600 shadow-none">Convert</a>
                                     </div>
                                 </td>
                             </tr>
                         @empty
-                            <tr><td colspan="5" class="text-center text-muted" style="padding: var(--space-8);">Belum ada prospek.</td></tr>
+                            <tr><td colspan="5" class="text-center text-muted p-8">Belum ada prospek.</td></tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -173,7 +172,7 @@
         <!-- Recent Bookings -->
         <section class="card animate-fade-in-up delay-4" aria-label="Pesanan Terbaru">
             <div class="card-header">
-                <h3 class="section-title" style="font-size: var(--text-lg);">Riwayat Pesanan Terbaru</h3>
+                <h3 class="section-title text-lg">Riwayat Pesanan Terbaru</h3>
                 <a href="{{ route('admin.bookings.index') }}" class="btn btn-ghost btn-sm">Lihat Semua →</a>
             </div>
             <div class="table-container">
@@ -204,7 +203,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr><td colspan="5" class="text-center text-muted" style="padding: var(--space-8);">Belum ada pesanan terbaru.</td></tr>
+                            <tr><td colspan="5" class="text-center text-muted p-8">Belum ada pesanan terbaru.</td></tr>
                         @endforelse
                     </tbody>
                 </table>

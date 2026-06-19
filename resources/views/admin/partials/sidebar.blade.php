@@ -2,7 +2,7 @@
 <aside class="sidebar" id="sidebar" aria-label="Navigasi admin">
   <div class="sidebar-brand">
     <a href="{{ url('/') }}">
-      <img src="{{ asset('assets/images/side-logo.png') }}" alt="Logo HMI Tour" style="max-width: 150px; height: auto;">
+      <img src="{{ asset('assets/images/side-logo.png') }}" alt="Logo HMI Tour" class="max-w-[150px] h-auto">
     </a>
   </div>
 
@@ -80,10 +80,10 @@
         <div class="sidebar-user-role">Administrator</div>
       </div>
     </div>
-    <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+    <form action="{{ route('logout') }}" method="POST" class="m-0">
       @csrf
-      <button type="submit" class="sidebar-logout-btn" aria-label="Logout" style="display: flex; align-items: center; gap: 8px;">
-        <i data-lucide="log-out" style="width: 18px; height: 18px;"></i><span>Logout</span>
+      <button type="submit" class="sidebar-logout-btn flex items-center gap-2" aria-label="Logout">
+        <i data-lucide="log-out" class="w-[18px] h-[18px]"></i><span>Logout</span>
       </button>
     </form>
   </div>

@@ -4,238 +4,37 @@
 @section('page-title', 'Analitik')
 @section('page-description', 'Data performa tim dan tren referral')
 
-@push('styles')
-    <style>
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 1024px) {
-            .analytics-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .analytics-card {
-            background: var(--color-fi-surface, #ffffff);
-            border-radius: 0.75rem;
-            border: 1px solid var(--color-fi-border, #e5e7eb);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-
-        .analytics-card-header {
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--color-fi-border, #e5e7eb);
-        }
-
-        .analytics-card-header h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--color-fi-text-main, #111827);
-            margin: 0;
-        }
-
-        .analytics-card-header p {
-            font-size: 0.8rem;
-            color: var(--color-fi-text-muted, #6b7280);
-            margin: 0.25rem 0 0;
-        }
-
-        .analytics-card-body {
-            padding: 1.5rem;
-        }
-
-        /* Bar Chart */
-        .bar-chart {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .bar-row {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .bar-label {
-            min-width: 80px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--color-fi-text-muted, #6b7280);
-            text-align: right;
-        }
-
-        .bar-track {
-            flex: 1;
-            height: 28px;
-            background: var(--color-fi-bg, #f9fafb);
-            border-radius: 0.375rem;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .bar-fill {
-            height: 100%;
-            border-radius: 0.375rem;
-            transition: width 0.6s ease;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 0.5rem;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: white;
-            min-width: fit-content;
-        }
-
-        .bar-fill.revenue {
-            background: linear-gradient(90deg, #8B1A1A, #b91c1c);
-        }
-
-        .bar-fill.members {
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-        }
-
-        .bar-value {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--color-fi-text-main, #111827);
-            min-width: 90px;
-            text-align: right;
-        }
-
-        /* Top Members */
-        .top-member-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .top-member-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            background: var(--color-fi-bg, #f9fafb);
-            transition: background 0.15s ease;
-        }
-
-        .top-member-item:hover {
-            background: var(--color-fi-primary-50, #fef2f2);
-        }
-
-        .top-member-rank {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .top-member-rank.gold {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .top-member-rank.silver {
-            background: #f3f4f6;
-            color: #374151;
-        }
-
-        .top-member-rank.bronze {
-            background: #fed7aa;
-            color: #9a3412;
-        }
-
-        .top-member-rank.normal {
-            background: var(--color-fi-bg, #f9fafb);
-            color: var(--color-fi-text-muted, #6b7280);
-        }
-
-        .top-member-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .top-member-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-fi-text-main, #111827);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .top-member-email {
-            font-size: 0.75rem;
-            color: var(--color-fi-text-muted, #6b7280);
-        }
-
-        .top-member-amount {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: var(--color-fi-primary, #8B1A1A);
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 2rem;
-            color: var(--color-fi-text-muted, #6b7280);
-        }
-
-        .empty-state-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .full-width {
-            grid-column: 1 / -1;
-        }
-    </style>
-@endpush
-
 @section('content')
-    <div class="analytics-grid animate-fade-in-up">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 animate-fade-in-up">
         <!-- Grafik Revenue Bulanan -->
-        <div class="analytics-card full-width">
-            <div class="analytics-card-header">
-                <h3>📊 Tren Revenue 6 Bulan Terakhir</h3>
-                <p>Total pembayaran terverifikasi dari downline per bulan</p>
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden col-span-1 lg:col-span-2">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-base font-semibold text-gray-900 m-0">📊 Tren Revenue 6 Bulan Terakhir</h3>
+                <p class="text-xs text-gray-500 mt-1 mb-0">Total pembayaran terverifikasi dari downline per bulan</p>
             </div>
-            <div class="analytics-card-body">
+            <div class="p-6">
                 @php
                     $maxRevenue = collect($monthlyData)->max('revenue') ?: 1;
                 @endphp
 
                 @if($maxRevenue > 0)
-                    <div class="bar-chart">
+                    <div class="flex flex-col gap-3">
                         @foreach($monthlyData as $data)
-                            <div class="bar-row">
-                                <div class="bar-label">{{ $data['month'] }}</div>
-                                <div class="bar-track">
-                                    <div class="bar-fill revenue"
+                            <div class="flex items-center gap-3">
+                                <div class="min-w-[80px] text-xs font-medium text-gray-500 text-right">{{ $data['month'] }}</div>
+                                <div class="flex-1 h-7 bg-gray-50 rounded-md overflow-hidden relative">
+                                    <div class="h-full rounded-md bg-gradient-to-r from-[#8B1A1A] to-red-600 transition-all duration-600 flex items-center justify-end pr-2 text-[0.7rem] font-semibold text-white"
                                         style="width: {{ $maxRevenue > 0 ? ($data['revenue'] / $maxRevenue * 100) : 0 }}%;">
                                     </div>
                                 </div>
-                                <div class="bar-value">Rp {{ number_format($data['revenue'], 0, ',', '.') }}</div>
+                                <div class="text-xs font-semibold text-gray-900 min-w-[90px] text-right">Rp
+                                    {{ number_format($data['revenue'], 0, ',', '.') }}</div>
                             </div>
                         @endforeach
                     </div>
                 @else
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📊</div>
+                    <div class="text-center py-8 text-gray-500">
+                        <div class="text-2xl mb-2">📊</div>
                         <p>Belum ada data revenue.</p>
                     </div>
                 @endif
@@ -243,33 +42,34 @@
         </div>
 
         <!-- Grafik Anggota Baru -->
-        <div class="analytics-card">
-            <div class="analytics-card-header">
-                <h3>👥 Anggota Baru per Bulan</h3>
-                <p>Tren pertumbuhan downline</p>
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-base font-semibold text-gray-900 m-0">👥 Anggota Baru per Bulan</h3>
+                <p class="text-xs text-gray-500 mt-1 mb-0">Tren pertumbuhan downline</p>
             </div>
-            <div class="analytics-card-body">
+            <div class="p-6">
                 @php
                     $maxMembers = collect($monthlyData)->max('new_members') ?: 1;
                 @endphp
 
                 @if($maxMembers > 0)
-                    <div class="bar-chart">
+                    <div class="flex flex-col gap-3">
                         @foreach($monthlyData as $data)
-                            <div class="bar-row">
-                                <div class="bar-label">{{ $data['month'] }}</div>
-                                <div class="bar-track">
-                                    <div class="bar-fill members"
+                            <div class="flex items-center gap-3">
+                                <div class="min-w-[80px] text-xs font-medium text-gray-500 text-right">{{ $data['month'] }}</div>
+                                <div class="flex-1 h-7 bg-gray-50 rounded-md overflow-hidden relative">
+                                    <div class="h-full rounded-md bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-600 flex items-center justify-end pr-2 text-[0.7rem] font-semibold text-white"
                                         style="width: {{ $maxMembers > 0 ? ($data['new_members'] / $maxMembers * 100) : 0 }}%;">
                                     </div>
                                 </div>
-                                <div class="bar-value">{{ $data['new_members'] }} orang</div>
+                                <div class="text-xs font-semibold text-gray-900 min-w-[90px] text-right">{{ $data['new_members'] }}
+                                    orang</div>
                             </div>
                         @endforeach
                     </div>
                 @else
-                    <div class="empty-state">
-                        <div class="empty-state-icon">👥</div>
+                    <div class="text-center py-8 text-gray-500">
+                        <div class="text-2xl mb-2">👥</div>
                         <p>Belum ada data anggota baru.</p>
                     </div>
                 @endif
@@ -277,33 +77,37 @@
         </div>
 
         <!-- Top Downline -->
-        <div class="analytics-card">
-            <div class="analytics-card-header">
-                <h3>🏆 Top Downline</h3>
-                <p>5 downline dengan pembayaran terbesar</p>
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-base font-semibold text-gray-900 m-0">🏆 Top Downline</h3>
+                <p class="text-xs text-gray-500 mt-1 mb-0">5 downline dengan pembayaran terbesar</p>
             </div>
-            <div class="analytics-card-body">
+            <div class="p-6">
                 @if($topDownlines->count() > 0 && $topDownlines->first()->total_paid > 0)
-                    <div class="top-member-list">
+                    <div class="flex flex-col gap-3">
                         @foreach($topDownlines as $i => $member)
                             @php
-                                $rankClass = $i === 0 ? 'gold' : ($i === 1 ? 'silver' : ($i === 2 ? 'bronze' : 'normal'));
+                                $rankBg = $i === 0 ? 'bg-amber-100 text-amber-800' : ($i === 1 ? 'bg-gray-100 text-gray-700' : ($i === 2 ? 'bg-orange-100 text-orange-800' : 'bg-gray-50 text-gray-500'));
                             @endphp
-                            <div class="top-member-item">
-                                <div class="top-member-rank {{ $rankClass }}">{{ $i + 1 }}</div>
-                                <div class="top-member-info">
-                                    <div class="top-member-name">{{ $member->name }}</div>
-                                    <div class="top-member-email">{{ $member->email }}</div>
+                            <div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-red-50 transition-colors">
+                                <div
+                                    class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 {{ $rankBg }}">
+                                    {{ $i + 1 }}</div>
+                                <div class="flex-1 min-w-0">
+                                    <div
+                                        class="text-sm font-semibold text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">
+                                        {{ $member->name }}</div>
+                                    <div class="text-xs text-gray-500">{{ $member->email }}</div>
                                 </div>
-                                <div class="top-member-amount">
+                                <div class="text-sm font-bold text-[#8B1A1A] text-right shrink-0">
                                     Rp {{ number_format($member->total_paid ?? 0, 0, ',', '.') }}
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 @else
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🏆</div>
+                    <div class="text-center py-8 text-gray-500">
+                        <div class="text-2xl mb-2">🏆</div>
                         <p>Belum ada data pembayaran dari downline.</p>
                     </div>
                 @endif

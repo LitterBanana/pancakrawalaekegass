@@ -6,7 +6,7 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Daftar Transaksi Masuk</h3>
+        <h3 class="section-title text-lg">Daftar Transaksi Masuk</h3>
     </div>
     <div class="table-container">
         <table class="data-table">
@@ -24,11 +24,11 @@
             <tbody>
                 @forelse($bookings as $booking)
                 <tr>
-                    <td style="color: var(--color-text-muted);">#{{ $booking->id }}</td>
+                    <td class="text-gray-400">#{{ $booking->id }}</td>
                     <td>{{ $booking->created_at->format('d M Y') }}</td>
                     <td>
                         <span class="font-semibold">{{ $booking->customer_name }}</span>
-                        <div style="font-size: var(--text-xs); color: var(--color-text-muted);">{{ $booking->customer_phone }}</div>
+                        <div class="text-xs text-gray-400">{{ $booking->customer_phone }}</div>
                     </td>
                     <td>{{ $booking->package->name ?? 'Paket Terhapus' }}</td>
                     <td class="font-semibold">IDR {{ number_format($booking->total_price, 0, ',', '.') }}</td>
@@ -49,7 +49,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center text-muted" style="padding: var(--space-8);">Belum ada data pesanan masuk.</td>
+                    <td colspan="7" class="text-center text-muted p-8">Belum ada data pesanan masuk.</td>
                 </tr>
                 @endforelse
             </tbody>

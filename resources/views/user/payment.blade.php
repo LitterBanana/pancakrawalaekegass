@@ -5,28 +5,7 @@
 @section('page-title', 'Pembayaran')
 
 @section('page_styles')
-  <style>
-    .payment-form-card.payment-disabled { position: relative; }
-    .payment-form-card.payment-disabled .payment-form-header { opacity: 0.5; }
-    .section-disabled { opacity: 0.4; pointer-events: none; user-select: none; }
-    .payment-form-card.payment-disabled .payment-summary { opacity: 0.4; }
-    .payment-form-card.payment-disabled .payment-form-footer { opacity: 0.5; }
-    .btn-disabled { opacity: 0.5 !important; cursor: not-allowed !important; pointer-events: none; }
-    
-    /* Validasi Error State */
-    .error { border-color: #c0392b !important; box-shadow: 0 0 0 3px rgba(192,57,43,0.12) !important; }
-    .radio-group.error-group .radio-card:not(:has(input:checked)) .radio-card-label { border-color: #c0392b; background: #fff8f8; }
-    .field-error-msg { display: none; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; font-weight: 500; color: #c0392b; animation: fadeIn .2s ease; }
-    .field-error-msg.visible { display: flex; }
-    .bank-grid.error-group .bank-option-label { border-color: #c0392b; background: #fff8f8; }
-    
-    .radio-group.error-group input:checked + .radio-card-label,
-    .bank-grid.error-group input:checked + .bank-option-label { border-color: #8B1A1A; background: #FEF2F2; box-shadow: 0 0 0 3px rgba(139,26,26,0.1); }
-    .file-upload.error-upload { border-color: #c0392b !important; background: #fff8f8 !important; }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-  </style>
+  <!-- Styles moved to app.css -->
 @endsection
 
 @section('page_scripts')

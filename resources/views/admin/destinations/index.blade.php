@@ -6,7 +6,7 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Destinasi & Objek Wisata</h3>
+        <h3 class="section-title text-lg">Destinasi & Objek Wisata</h3>
         <a href="{{ route('admin.destinations.create') }}" class="btn btn-primary btn-sm">Tambah Destinasi</a>
     </div>
     <div class="table-container">
@@ -23,15 +23,15 @@
             <tbody>
                 @forelse($destinations as $dest)
                 <tr>
-                    <td><img src="{{ asset('assets/images/' . $dest->image) }}" alt="Dest" style="width: 80px; height: 50px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid var(--color-border);"></td>
+                    <td><img src="{{ asset('assets/images/' . $dest->image) }}" alt="Dest" class="w-20 h-[50px] object-cover rounded-md border border-gray-200"></td>
                     <td class="font-semibold">{{ $dest->name }}</td>
                     <td>{{ $dest->location }}</td>
-                    <td style="color: var(--color-warning);">{{ $dest->rating }} ★</td>
+                    <td class="text-amber-600">{{ $dest->rating }} ★</td>
                     <td>
-                        <div style="display: flex; gap: var(--space-2);">
+                        <div class="flex gap-2">
                             <a href="{{ route('admin.destinations.show', $dest->id) }}" class="btn btn-ghost btn-sm">Lihat</a>
                             <a href="{{ route('admin.destinations.edit', $dest->id) }}" class="btn btn-ghost btn-sm">Edit</a>
-                            <form action="{{ route('admin.destinations.destroy', $dest->id) }}" method="POST" onsubmit="return confirm('Hapus destinasi ini?');" style="margin: 0;">
+                            <form action="{{ route('admin.destinations.destroy', $dest->id) }}" method="POST" onsubmit="return confirm('Hapus destinasi ini?');" class="m-0">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                             </form>
@@ -39,7 +39,7 @@
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="5" class="text-center text-muted" style="padding: var(--space-8);">Belum ada destinasi.</td></tr>
+                <tr><td colspan="5" class="text-center text-muted p-8">Belum ada destinasi.</td></tr>
                 @endforelse
             </tbody>
         </table>

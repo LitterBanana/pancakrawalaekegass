@@ -6,7 +6,7 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Edit Destinasi</h3>
+        <h3 class="section-title text-lg">Edit Destinasi</h3>
         <a href="{{ route('admin.destinations.index') }}" class="btn btn-ghost btn-sm">← Kembali</a>
     </div>
     <div class="card-body">
@@ -33,8 +33,8 @@
                 <input type="file" name="image" accept="image/*" class="form-input">
                 <div class="form-hint">Biarkan kosong jika tidak ingin mengubah gambar.</div>
                 @if($destination->image)
-                    <div style="margin-top: var(--space-2);">
-                        <img src="{{ asset('assets/images/' . $destination->image) }}" alt="Current" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+                    <div class="mt-2">
+                        <img src="{{ asset('assets/images/' . $destination->image) }}" alt="Current" class="w-20 h-20 object-cover rounded-lg border border-gray-200">
                     </div>
                 @endif
             </div>
@@ -42,7 +42,7 @@
                 <label class="form-label">Deskripsi Singkat</label>
                 <textarea name="description" rows="4" class="form-textarea">{{ $destination->description }}</textarea>
             </div>
-            <div style="margin-top: var(--space-8);">
+            <div class="mt-8">
                 <button type="submit" class="btn btn-primary btn-lg">Update Destinasi</button>
             </div>
         </form>

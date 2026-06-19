@@ -6,14 +6,14 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Tambah Paket Tour Baru</h3>
+        <h3 class="section-title text-lg">Tambah Paket Tour Baru</h3>
         <a href="{{ route('admin.packages.index') }}" class="btn btn-ghost btn-sm">← Kembali</a>
     </div>
     <div class="card-body">
         @if ($errors->any())
-            <div style="background: var(--color-danger-bg); color: var(--color-danger); padding: var(--space-4) var(--space-6); border-radius: var(--radius-xl); margin-bottom: var(--space-6); border: 1px solid var(--color-danger-border);">
+            <div class="bg-red-50 text-red-600 px-6 py-4 rounded-xl mb-6 border border-red-200">
                 <strong>Data Gagal Disimpan:</strong>
-                <ul style="margin: var(--space-2) 0 0; padding-left: var(--space-5);">
+                <ul class="mt-2 pl-5">
                     @foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach
                 </ul>
             </div>
@@ -59,7 +59,7 @@
                 <textarea name="terms_conditions" rows="5" placeholder="Tulis syarat pendaftaran..." class="form-textarea"></textarea>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div class="form-group">
                     <label class="form-label">Tanggal Keberangkatan</label>
                     <input type="date" name="departure_date" required class="form-input">
@@ -69,7 +69,7 @@
                     <input type="date" name="return_date" required class="form-input">
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div class="form-group">
                     <label class="form-label">Durasi (Hari)</label>
                     <input type="number" name="duration" required class="form-input">
@@ -79,7 +79,7 @@
                     <input type="number" name="quota" required class="form-input">
                 </div>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div class="form-group">
                     <label class="form-label">Hotel Makkah</label>
                     <select name="hotel_makkah_id" required class="form-select">
@@ -113,7 +113,7 @@
                     <option value="Lainnya">Lainnya</option>
                 </select>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-5);">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                 <div class="form-group">
                     <label class="form-label">Harga Kamar Quad (Ber-4) <span class="required">*</span></label>
                     <input type="number" name="price_quad" required placeholder="Cth: 28000000" class="form-input">
@@ -132,19 +132,10 @@
                 <input type="file" name="thumbnail" accept="image/*" required class="form-input">
             </div>
 
-            <div style="margin-top: var(--space-8); padding-top: var(--space-5); border-top: 1px solid var(--color-border);">
+            <div class="mt-8 pt-5 border-t border-gray-200">
                 <button type="submit" class="btn btn-primary btn-full btn-lg">Simpan Paket</button>
             </div>
         </form>
     </div>
 </div>
-
-@push('styles')
-<style>
-    @media (max-width: 768px) {
-        [style*="grid-template-columns: 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
-        [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-    }
-</style>
-@endpush
 @endsection

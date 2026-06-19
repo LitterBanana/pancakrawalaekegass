@@ -6,7 +6,7 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Tambah Hotel Baru</h3>
+        <h3 class="section-title text-lg">Tambah Hotel Baru</h3>
         <a href="{{ route('admin.hotels.index') }}" class="btn btn-ghost btn-sm">← Kembali</a>
     </div>
     <div class="card-body">
@@ -16,7 +16,7 @@
                 <label class="form-label">Nama Hotel</label>
                 <input type="text" name="name" class="form-input" placeholder="Cth: Pullman Zamzam" required>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div class="form-group">
                     <label class="form-label">Lokasi Kota</label>
                     <select name="city" class="form-select" required>
@@ -36,18 +36,10 @@
                     </select>
                 </div>
             </div>
-            <div style="margin-top: var(--space-8);">
+            <div class="mt-8">
                 <button type="submit" class="btn btn-primary btn-lg">Simpan Hotel</button>
             </div>
         </form>
     </div>
 </div>
-
-@push('styles')
-<style>
-    @media (max-width: 768px) {
-        [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-    }
-</style>
-@endpush
 @endsection

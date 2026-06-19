@@ -4,50 +4,50 @@
 @section('page_subtitle', 'Informasi lengkap pesanan jamaah')
 
 @section('content')
-<div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-6);">
+<div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
 
     <div>
         <!-- Info Jamaah & Paket -->
         <div class="card mb-6 animate-fade-in-up">
             <div class="card-header">
-                <h3 class="section-title" style="font-size: var(--text-lg);">Informasi Jamaah & Paket</h3>
+                <h3 class="section-title text-lg">Informasi Jamaah & Paket</h3>
                 <a href="{{ route('admin.bookings.index') }}" class="btn btn-ghost btn-sm">← Kembali</a>
             </div>
             <div class="card-body">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-bottom: var(--space-5);">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
                     <div>
-                        <div class="form-hint" style="margin-bottom: var(--space-1);">Nama Jamaah</div>
-                        <div class="font-semibold" style="font-size: var(--text-base);">{{ $booking->customer_name }}</div>
+                        <div class="form-hint mb-1">Nama Jamaah</div>
+                        <div class="font-semibold text-base">{{ $booking->customer_name }}</div>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: var(--space-1);">Nomor WhatsApp</div>
-                        <div class="font-semibold" style="font-size: var(--text-base);">
-                            <a href="https://wa.me/{{ preg_replace('/^0/', '62', $booking->customer_phone) }}" target="_blank" style="color: var(--color-success);">
+                        <div class="form-hint mb-1">Nomor WhatsApp</div>
+                        <div class="font-semibold text-base">
+                            <a href="https://wa.me/{{ preg_replace('/^0/', '62', $booking->customer_phone) }}" target="_blank" class="text-emerald-600">
                                 {{ $booking->customer_phone }} ↗
                             </a>
                         </div>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: var(--space-1);">Paket Umrah</div>
-                        <div class="font-semibold" style="font-size: var(--text-base);">{{ $booking->package->name ?? '-' }}</div>
+                        <div class="form-hint mb-1">Paket Umrah</div>
+                        <div class="font-semibold text-base">{{ $booking->package->name ?? '-' }}</div>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: var(--space-1);">Tipe Kamar</div>
-                        <div class="font-semibold" style="font-size: var(--text-base);">{{ $booking->room_type }}</div>
+                        <div class="form-hint mb-1">Tipe Kamar</div>
+                        <div class="font-semibold text-base">{{ $booking->room_type }}</div>
                     </div>
                 </div>
 
-                <div style="background: var(--color-bg); padding: var(--space-4); border-radius: var(--radius-xl); border: 1px solid var(--color-border-light);">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <div class="flex justify-between mb-2">
                         <span>Harga Paket</span>
                         <strong>IDR {{ number_format($booking->package_price, 0, ',', '.') }}</strong>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2);">
+                    <div class="flex justify-between mb-2">
                         <span>Jumlah Jamaah</span>
                         <strong>{{ $booking->quantity }} Orang</strong>
                     </div>
-                    <hr style="border: none; height: 1px; background: var(--color-border); margin: var(--space-3) 0;">
-                    <div style="display: flex; justify-content: space-between; font-size: var(--text-lg); color: var(--color-primary);">
+                    <hr class="border-0 h-px bg-gray-200 my-3">
+                    <div class="flex justify-between text-lg text-red-800">
                         <strong>Total Tagihan</strong>
                         <strong>IDR {{ number_format($booking->total_price, 0, ',', '.') }}</strong>
                     </div>
@@ -58,7 +58,7 @@
         <!-- Riwayat Pembayaran -->
         <div class="card animate-fade-in-up delay-1">
             <div class="card-header">
-                <h3 class="section-title" style="font-size: var(--text-lg);">Riwayat Pembayaran</h3>
+                <h3 class="section-title text-lg">Riwayat Pembayaran</h3>
             </div>
             <div class="table-container">
                 <table class="data-table">
@@ -76,11 +76,11 @@
                         <tr>
                             <td>{{ $payment->created_at->format('d M Y') }}</td>
                             <td>{{ ucfirst($payment->method) }}</td>
-                            <td class="font-semibold" style="color: var(--color-success);">+ IDR {{ number_format($payment->amount, 0, ',', '.') }}</td>
-                            <td style="font-size: var(--text-xs); color: var(--color-text-muted);">{{ $payment->notes ?? '-' }}</td>
+                            <td class="font-semibold text-emerald-600">+ IDR {{ number_format($payment->amount, 0, ',', '.') }}</td>
+                            <td class="text-xs text-gray-400">{{ $payment->notes ?? '-' }}</td>
                             <td>
                                 @if($payment->proof_image)
-                                    <a href="{{ asset('assets/images/payments/' . $payment->proof_image) }}" target="_blank" style="font-size: var(--text-xs); color: var(--color-primary);">Lihat Bukti</a>
+                                    <a href="{{ asset('assets/images/payments/' . $payment->proof_image) }}" target="_blank" class="text-xs text-red-800">Lihat Bukti</a>
                                 @else
                                     -
                                 @endif
@@ -88,17 +88,17 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="5" class="text-center text-muted" style="padding: var(--space-5);">Belum ada pembayaran tercatat.</td>
+                            <td colspan="5" class="text-center text-muted p-5">Belum ada pembayaran tercatat.</td>
                         </tr>
                         @endforelse
                     </tbody>
                     <tfoot>
-                        <tr style="background: var(--color-bg);">
+                        <tr class="bg-gray-50">
                             <td colspan="2" class="text-right font-semibold">Total Terbayar:</td>
-                            <td class="font-bold" style="color: var(--color-success);">IDR {{ number_format($booking->payments->sum('amount'), 0, ',', '.') }}</td>
+                            <td class="font-bold text-emerald-600">IDR {{ number_format($booking->payments->sum('amount'), 0, ',', '.') }}</td>
                             <td colspan="2">
                                 @php $sisa = $booking->total_price - $booking->payments->sum('amount'); @endphp
-                                (Sisa: <span style="color: {{ $sisa > 0 ? 'var(--color-danger)' : 'var(--color-success)' }};">IDR {{ number_format($sisa, 0, ',', '.') }}</span>)
+                                (Sisa: <span class="{{ $sisa > 0 ? 'text-red-600' : 'text-emerald-600' }}">IDR {{ number_format($sisa, 0, ',', '.') }}</span>)
                             </td>
                         </tr>
                     </tfoot>
@@ -111,7 +111,7 @@
         <!-- Update Status -->
         <div class="card mb-6 animate-fade-in-up delay-2">
             <div class="card-header">
-                <h3 class="section-title" style="font-size: var(--text-lg);">Update Status</h3>
+                <h3 class="section-title text-lg">Update Status</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.bookings.update_status', $booking->id) }}" method="POST">
@@ -133,7 +133,7 @@
         <!-- Catat Pembayaran -->
         <div class="card animate-fade-in-up delay-3">
             <div class="card-header">
-                <h3 class="section-title" style="font-size: var(--text-lg);">Catat Pembayaran</h3>
+                <h3 class="section-title text-lg">Catat Pembayaran</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.bookings.store_payment', $booking->id) }}" method="POST" enctype="multipart/form-data">
@@ -164,12 +164,4 @@
     </div>
 
 </div>
-
-@push('styles')
-<style>
-    @media (max-width: 1024px) {
-        [style*="grid-template-columns: 2fr 1fr"] { grid-template-columns: 1fr !important; }
-    }
-</style>
-@endpush
 @endsection

@@ -6,7 +6,7 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Tambah Foto Galeri</h3>
+        <h3 class="section-title text-lg">Tambah Foto Galeri</h3>
         <a href="{{ route('admin.galleries.index') }}" class="btn btn-ghost btn-sm">← Kembali</a>
     </div>
     <div class="card-body">
@@ -21,7 +21,7 @@
                 <label class="form-label">Keterangan / Caption (Opsional)</label>
                 <input type="text" name="caption" class="form-input" placeholder="Cth: Jamaah di Masjidil Haram">
             </div>
-            <div style="margin-top: var(--space-8);">
+            <div class="mt-8">
                 <button type="submit" class="btn btn-primary btn-lg">Simpan Foto</button>
             </div>
         </form>

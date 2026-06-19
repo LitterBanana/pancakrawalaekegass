@@ -6,11 +6,11 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Konversi Prospek ke Booking</h3>
+        <h3 class="section-title text-lg">Konversi Prospek ke Booking</h3>
         <a href="{{ route('admin.dashboard') }}" class="btn btn-ghost btn-sm">Batal</a>
     </div>
     <div class="card-body">
-        <div style="background: var(--color-info-bg); border: 1px solid var(--color-info-border); padding: var(--space-4); border-radius: var(--radius-xl); margin-bottom: var(--space-6); color: var(--color-info);">
+        <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl mb-6 text-blue-700">
             <strong>Data dari Inquiry:</strong> {{ $inquiry->name }} ({{ $inquiry->phone }})
         </div>
 
@@ -31,7 +31,7 @@
                 </select>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div class="form-group">
                     <label class="form-label">Tipe Kamar</label>
                     <select name="room_type" class="form-select" required>
@@ -51,18 +51,10 @@
                 <textarea name="notes" class="form-textarea" rows="3" placeholder="Contoh: Jamaah req kursi roda, dll"></textarea>
             </div>
 
-            <div style="margin-top: var(--space-8);">
+            <div class="mt-8">
                 <button type="submit" class="btn btn-primary btn-full btn-lg">Buat Pesanan & Tagihan</button>
             </div>
         </form>
     </div>
 </div>
-
-@push('styles')
-<style>
-    @media (max-width: 768px) {
-        [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-    }
-</style>
-@endpush
 @endsection

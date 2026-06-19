@@ -6,7 +6,7 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Tambah Destinasi Baru</h3>
+        <h3 class="section-title text-lg">Tambah Destinasi Baru</h3>
         <a href="{{ route('admin.destinations.index') }}" class="btn btn-ghost btn-sm">← Kembali</a>
     </div>
     <div class="card-body">
@@ -37,7 +37,7 @@
                 <label class="form-label">Deskripsi Singkat</label>
                 <textarea name="description" rows="4" class="form-textarea" placeholder="Ceritakan sedikit tentang tempat ini..."></textarea>
             </div>
-            <div style="margin-top: var(--space-8);">
+            <div class="mt-8">
                 <button type="submit" class="btn btn-primary btn-lg">Simpan Destinasi</button>
             </div>
         </form>

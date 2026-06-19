@@ -13,34 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                    colors: {
-                        'fi': {
-                            'primary': '#8B1A1A',
-                            'primary-hover': '#6B1010',
-                            'primary-50': '#fef2f2',
-                            'primary-100': '#fee2e2',
-                            'primary-200': '#fecaca',
-                            'surface': '#ffffff',
-                            'border': '#e5e7eb',
-                            'bg': '#f9fafb',
-                            'text-main': '#111827',
-                            'text-muted': '#6b7280',
-                            'text-secondary': '#4b5563',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS via Vite -->
+    @vite(['resources/css/app.css'])
 
     @stack('styles')
 </head>

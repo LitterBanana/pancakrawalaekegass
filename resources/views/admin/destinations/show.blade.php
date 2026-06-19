@@ -6,56 +6,48 @@
 @section('content')
 <div class="card animate-fade-in-up">
     <div class="card-header">
-        <h3 class="section-title" style="font-size: var(--text-lg);">Detail Destinasi</h3>
-        <div style="display: flex; gap: var(--space-2);">
+        <h3 class="section-title text-lg">Detail Destinasi</h3>
+        <div class="flex gap-2">
             <a href="{{ route('admin.destinations.edit', $destination->id) }}" class="btn btn-ghost btn-sm">Edit</a>
             <a href="{{ route('admin.destinations.index') }}" class="btn btn-ghost btn-sm">← Kembali</a>
         </div>
     </div>
     <div class="card-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6);">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-                <h4 style="font-size: var(--text-lg); margin-bottom: var(--space-4);">Informasi Destinasi</h4>
-                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <h4 class="text-lg mb-4">Informasi Destinasi</h4>
+                <div class="flex flex-col gap-3">
                     <div>
-                        <div class="form-hint" style="margin-bottom: 2px;">Nama Destinasi</div>
-                        <p class="font-semibold" style="margin: 0;">{{ $destination->name }}</p>
+                        <div class="form-hint mb-0.5">Nama Destinasi</div>
+                        <p class="font-semibold m-0">{{ $destination->name }}</p>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: 2px;">Lokasi</div>
-                        <p style="margin: 0;">{{ $destination->location }}</p>
+                        <div class="form-hint mb-0.5">Lokasi</div>
+                        <p class="m-0">{{ $destination->location }}</p>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: 2px;">Rating</div>
-                        <p style="margin: 0; color: var(--color-warning);">@for($i=0; $i<$destination->rating; $i++) ★ @endfor <span class="text-muted" style="font-size: var(--text-xs);">({{ $destination->rating }})</span></p>
+                        <div class="form-hint mb-0.5">Rating</div>
+                        <p class="m-0 text-amber-600">@for($i=0; $i<$destination->rating; $i++) ★ @endfor <span class="text-muted text-xs">({{ $destination->rating }})</span></p>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: 2px;">Deskripsi</div>
-                        <p style="margin: 0;">{{ $destination->description }}</p>
+                        <div class="form-hint mb-0.5">Deskripsi</div>
+                        <p class="m-0">{{ $destination->description }}</p>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: 2px;">Dibuat Pada</div>
-                        <p style="margin: 0;">{{ $destination->created_at->format('d M Y, H:i') }}</p>
+                        <div class="form-hint mb-0.5">Dibuat Pada</div>
+                        <p class="m-0">{{ $destination->created_at->format('d M Y, H:i') }}</p>
                     </div>
                     <div>
-                        <div class="form-hint" style="margin-bottom: 2px;">Diupdate Pada</div>
-                        <p style="margin: 0;">{{ $destination->updated_at->format('d M Y, H:i') }}</p>
+                        <div class="form-hint mb-0.5">Diupdate Pada</div>
+                        <p class="m-0">{{ $destination->updated_at->format('d M Y, H:i') }}</p>
                     </div>
                 </div>
             </div>
             <div>
-                <h4 style="font-size: var(--text-lg); margin-bottom: var(--space-4);">Gambar Destinasi</h4>
-                <img src="{{ asset('assets/images/' . $destination->image) }}" alt="{{ $destination->name }}" style="width: 100%; height: 256px; object-fit: cover; border-radius: var(--radius-xl); border: 1px solid var(--color-border);">
+                <h4 class="text-lg mb-4">Gambar Destinasi</h4>
+                <img src="{{ asset('assets/images/' . $destination->image) }}" alt="{{ $destination->name }}" class="w-full h-64 object-cover rounded-xl border border-gray-200">
             </div>
         </div>
     </div>
 </div>
-
-@push('styles')
-<style>
-    @media (max-width: 768px) {
-        [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-    }
-</style>
-@endpush
 @endsection

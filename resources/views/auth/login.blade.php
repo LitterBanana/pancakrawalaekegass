@@ -10,41 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS (CDN for preview, replace with your local Vite setup in production) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        display: ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        maroon: {
-                            primary: '#800000', // Warna maroon yang lebih solid dan elegan
-                            800: '#5c0000',
-                        },
-                        dark: {
-                            bg: '#0a1628'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS via Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <style>
-        /* Mengatasi warna biru bawaan autofill browser */
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover, 
-        input:-webkit-autofill:focus, 
-        input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 30px white inset !important;
-            -webkit-text-fill-color: #1f2937 !important;
-            transition: background-color 5000s ease-in-out 0s;
-        }
-    </style>
+    <!-- Autofill styles moved to app.css -->
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 antialiased selection:bg-maroon-primary selection:text-white overflow-hidden">
 
