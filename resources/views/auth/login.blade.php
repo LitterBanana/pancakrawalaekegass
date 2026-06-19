@@ -63,9 +63,6 @@
             <!-- Content -->
             <div class="relative z-10 flex flex-col justify-end p-12 lg:p-20 w-full">
                 <div class="max-w-xl">
-                    <div class="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-4xl mb-8 border border-white/20 shadow-2xl">
-                        🕋
-                    </div>
                     <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight font-display tracking-tight">
                         Hijrah Madani Istiqomah <br>
                         <span class="text-maroon-primary bg-white px-3 py-1 rounded-lg mt-2 inline-block">Tour Travel</span>
@@ -90,14 +87,14 @@
                 <!-- Mobile Logo -->
                 <div class="lg:hidden text-center mb-8">
                     <div class="w-16 h-16 bg-maroon-primary rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-lg shadow-maroon-primary/30">
-                        🕋
+                        <ion-icon name="compass-outline" class="text-white"></ion-icon>
                     </div>
                     <h2 class="text-2xl font-extrabold text-gray-900 font-display tracking-tight">HMI Tour Travel</h2>
                 </div>
 
                 <!-- Header Text -->
                 <div class="mb-10 text-center lg:text-left">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-3 font-display">Selamat Datang! 👋</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-3 font-display">Selamat Datang! <ion-icon name="sparkles" class="text-maroon-primary align-middle"></ion-icon></h2>
                     <p class="text-gray-500 font-light">Masuk ke dashboard admin untuk mengelola sistem.</p>
                 </div>
 

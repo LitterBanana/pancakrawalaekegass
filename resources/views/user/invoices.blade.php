@@ -2,153 +2,84 @@
 
 @section('title', 'Travel Invoices — HMI Tour Travel')
 @section('description', 'Travel Invoices - HMI Tour Travel')
-
-@section('page_styles')
-  <style>
-    .invoices-container { max-width: var(--max-width); margin: 0 auto; }
-    .invoice-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); flex-wrap: wrap; }
-    .invoice-search { position: relative; flex: 1; max-width: 360px; }
-    .invoice-search .search-icon { position: absolute; left: var(--space-4); top: 50%; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; font-size: var(--text-sm); }
-    .invoice-search .form-input { padding-left: var(--space-10); }
-    .invoice-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-bottom: var(--space-6); }
-    .invoice-stat-card { background: var(--color-surface); border-radius: var(--radius-xl); padding: var(--space-5); border: 1px solid var(--color-border-light); display: flex; align-items: center; gap: var(--space-4); }
-    .invoice-stat-icon { width: 44px; height: 44px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: var(--text-lg); flex-shrink: 0; }
-    .invoice-stat-info h4 { font-size: var(--text-lg); font-weight: var(--font-bold); margin-bottom: 0; }
-    .invoice-stat-info p { font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: 0; }
-    .invoice-list { display: flex; flex-direction: column; gap: var(--space-4); }
-    .invoice-card { background: var(--color-surface); border-radius: var(--radius-2xl); border: 1px solid var(--color-border-light); box-shadow: var(--shadow-sm); transition: var(--transition-base); overflow: hidden; }
-    .invoice-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary-200); }
-    .invoice-card-main { padding: var(--space-5) var(--space-6); display: flex; align-items: center; gap: var(--space-5); cursor: pointer; }
-    .invoice-card-icon { width: 48px; height: 48px; border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; font-size: var(--text-xl); flex-shrink: 0; }
-    .invoice-card-icon.paid { background: var(--color-success-bg); color: var(--color-success); }
-    .invoice-card-icon.unpaid { background: var(--color-warning-bg); color: var(--color-warning); }
-    .invoice-card-info { flex: 1; min-width: 0; }
-    .invoice-card-id { font-size: var(--text-sm); font-weight: var(--font-bold); color: var(--color-text); margin-bottom: 2px; }
-    .invoice-card-tour { font-size: var(--text-xs); color: var(--color-text-secondary); }
-    .invoice-card-meta { display: flex; align-items: center; gap: var(--space-6); flex-shrink: 0; }
-    .invoice-card-amount { text-align: right; }
-    .invoice-amount-label { font-size: var(--text-xs); color: var(--color-text-muted); }
-    .invoice-amount-value { font-size: var(--text-base); font-weight: var(--font-bold); color: var(--color-text); }
-    .invoice-card-actions { display: flex; gap: var(--space-2); }
-    .invoice-detail { display: none; padding: 0 var(--space-6) var(--space-6); border-top: 1px solid var(--color-border-light); animation: fadeIn 0.3s ease; }
-    .invoice-detail.visible { display: block; }
-    .invoice-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); padding-top: var(--space-5); }
-    .invoice-detail-section h5 { font-size: var(--text-sm); font-weight: var(--font-semibold); color: var(--color-text); margin-bottom: var(--space-3); padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-border-light); }
-    .detail-row { display: flex; justify-content: space-between; padding: var(--space-2) 0; font-size: var(--text-sm); }
-    .detail-label { color: var(--color-text-secondary); }
-    .detail-value { font-weight: var(--font-medium); color: var(--color-text); }
-    .payment-history-list { margin-top: var(--space-3); }
-    .payment-history-item { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); background: var(--color-bg); border-radius: var(--radius-lg); margin-bottom: var(--space-2); font-size: var(--text-sm); }
-    .payment-history-item:last-child { margin-bottom: 0; }
-    .payment-history-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .payment-history-dot.verified { background: var(--color-success); }
-    .payment-history-dot.pending { background: var(--color-warning); }
-    .payment-history-info { flex: 1; }
-    .payment-history-amount { font-weight: var(--font-semibold); }
-    @media print {
-      .app-layout { display: block; }
-      .sidebar, .sidebar-overlay, .top-header, .page-footer, .invoice-toolbar, .invoice-stats, .tabs, .invoice-card-actions, .btn, .toast-container { display: none !important; }
-      .main-wrapper { margin-left: 0; }
-      .main-content { padding: 0; }
-      .invoice-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; margin-bottom: 16px; }
-      .invoice-detail { display: block !important; }
-      .print-header { display: block !important; text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #8B1A1A; }
-      .print-header h1 { font-size: 24px; color: #8B1A1A; margin-bottom: 4px; }
-      .print-header p { font-size: 14px; color: #666; }
-      .print-footer { display: block !important; margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; text-align: center; font-size: 12px; color: #888; }
-    }
-    .print-header, .print-footer { display: none; }
-  </style>
-@endsection
+@section('page-title', 'Travel Invoices')
 
 @section('page_scripts')
-  <script src="{{ asset('assets/js/invoices.js') }}"></script>
+  <script>
+    function toggleInvoiceDetail(btn) {
+        const detail = btn.closest('.invoice-card').querySelector('.invoice-detail');
+        detail.classList.toggle('hidden');
+    }
+  </script>
 @endsection
 
 @section('content')
-  <div class="invoices-container">
+  <div class="max-w-[1200px] mx-auto">
 
     <!-- Print Header (only visible when printing) -->
-    <div class="print-header">
-      <h1>HMI Tour Travel — Travel Invoices</h1>
-      <p>Cetak Invoice Pembayaran Tour</p>
+    <div class="hidden print:block text-center mb-6 pb-4 border-b-2 border-[#8B1A1A]">
+      <h1 class="text-2xl text-[#8B1A1A] mb-1 font-bold">HMI Tour Travel — Travel Invoices</h1>
+      <p class="text-sm text-gray-600">Cetak Invoice Pembayaran Tour</p>
     </div>
 
     <!-- Invoice Stats -->
-    <section class="invoice-stats animate-fade-in-up" aria-label="Statistik invoice">
-      <div class="invoice-stat-card">
-        <div class="invoice-stat-icon" style="background: var(--color-info-bg); color: var(--color-info);">📋</div>
-        <div class="invoice-stat-info">
-          <h4 id="totalInvoices">{{ $totalInvoices }}</h4>
-          <p>Total Invoice</p>
-        </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 animate-fade-in-up print:hidden" aria-label="Statistik invoice">
+      <div class="bg-white rounded-2xl p-5 border border-gray-200">
+        <p class="text-xs text-gray-500 m-0 mb-1">Total Invoice</p>
+        <h4 class="text-2xl font-bold m-0" id="totalInvoices">{{ $totalInvoices }}</h4>
       </div>
-      <div class="invoice-stat-card">
-        <div class="invoice-stat-icon" style="background: var(--color-success-bg); color: var(--color-success);">✅</div>
-        <div class="invoice-stat-info">
-          <h4 id="paidInvoices">{{ $paidInvoices }}</h4>
-          <p>Sudah Lunas</p>
-        </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-200">
+        <p class="text-xs text-gray-500 m-0 mb-1">Sudah Lunas</p>
+        <h4 class="text-2xl font-bold m-0" id="paidInvoices">{{ $paidInvoices }}</h4>
       </div>
-      <div class="invoice-stat-card">
-        <div class="invoice-stat-icon" style="background: var(--color-warning-bg); color: var(--color-warning);">⏳</div>
-        <div class="invoice-stat-info">
-          <h4 id="unpaidInvoices">{{ $unpaidInvoices }}</h4>
-          <p>Belum Lunas</p>
-        </div>
+      <div class="bg-white rounded-2xl p-5 border border-gray-200">
+        <p class="text-xs text-gray-500 m-0 mb-1">Belum Lunas</p>
+        <h4 class="text-2xl font-bold m-0" id="unpaidInvoices">{{ $unpaidInvoices }}</h4>
       </div>
     </section>
 
     <!-- Filter Tabs & Search -->
-    <section aria-label="Filter dan pencarian invoice">
-      <div class="invoice-toolbar">
-        <div class="tabs">
-          <a href="{{ route('user.invoices', ['status' => 'all']) }}" class="tab-btn {{ !request('status') || request('status') === 'all' ? 'active' : '' }}" style="text-decoration: none;">Semua</a>
-          <a href="{{ route('user.invoices', ['status' => 'sudah_lunas']) }}" class="tab-btn {{ request('status') === 'sudah_lunas' ? 'active' : '' }}" style="text-decoration: none;">✅ Sudah Lunas</a>
-          <a href="{{ route('user.invoices', ['status' => 'belum_lunas']) }}" class="tab-btn {{ request('status') === 'belum_lunas' ? 'active' : '' }}" style="text-decoration: none;">⏳ Belum Lunas</a>
+    <section aria-label="Filter dan pencarian invoice" class="print:hidden">
+      <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-6">
+        <div class="flex gap-1 bg-gray-100 p-1 rounded-xl overflow-x-auto">
+          <a href="{{ route('user.invoices', ['status' => 'all']) }}" class="flex-1 min-w-[100px] text-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all whitespace-nowrap {{ !request('status') || request('status') === 'all' ? 'bg-white text-[#8B1A1A] shadow-sm font-semibold' : 'text-gray-500 hover:text-gray-900' }}">Semua</a>
+          <a href="{{ route('user.invoices', ['status' => 'sudah_lunas']) }}" class="flex-1 min-w-[130px] text-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all whitespace-nowrap {{ request('status') === 'sudah_lunas' ? 'bg-white text-[#8B1A1A] shadow-sm font-semibold' : 'text-gray-500 hover:text-gray-900' }}">Sudah Lunas</a>
+          <a href="{{ route('user.invoices', ['status' => 'belum_lunas']) }}" class="flex-1 min-w-[130px] text-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all whitespace-nowrap {{ request('status') === 'belum_lunas' ? 'bg-white text-[#8B1A1A] shadow-sm font-semibold' : 'text-gray-500 hover:text-gray-900' }}">Belum Lunas</a>
         </div>
-        <form class="invoice-search" action="{{ route('user.invoices') }}" method="GET">
+        <form class="relative flex-1 max-w-[360px] w-full" action="{{ route('user.invoices') }}" method="GET">
           @if(request('status'))
             <input type="hidden" name="status" value="{{ request('status') }}">
           @endif
-          <span class="search-icon">🔍</span>
-          <input type="text" name="keyword" value="{{ request('keyword') }}" class="form-input" placeholder="Cari invoice..."
-            aria-label="Cari invoice berdasarkan ID atau nama paket">
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          </span>
+          <input type="text" name="keyword" value="{{ request('keyword') }}" class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#8B1A1A] focus:ring-2 focus:ring-red-100 transition-all" placeholder="Cari invoice..." aria-label="Cari invoice berdasarkan ID atau nama paket">
         </form>
       </div>
     </section>
 
     <!-- Invoice List -->
-    <section id="invoiceList" class="invoice-list animate-fade-in-up" aria-label="Daftar invoice">
+    <section id="invoiceList" class="flex flex-col gap-4 animate-fade-in-up" aria-label="Daftar invoice">
       @forelse($payments as $payment)
-        <div class="invoice-card">
-            <div class="invoice-card-main">
-                <div class="invoice-card-icon {{ $payment->status === 'sudah_lunas' ? 'paid' : ($payment->status === 'belum_lunas' ? 'unpaid' : '') }}" style="background: {{ $payment->status === 'ditolak' ? 'var(--color-danger-bg)' : '' }}; color: {{ $payment->status === 'ditolak' ? 'var(--color-danger)' : '' }}">
-                    @if($payment->status === 'sudah_lunas')
-                        ✅
-                    @elseif($payment->status === 'belum_lunas')
-                        ⏳
-                    @else
-                        ❌
-                    @endif
+        <div class="invoice-card bg-white rounded-2xl border border-gray-200 shadow-sm transition-all hover:shadow-md hover:border-red-200 overflow-hidden print:border print:border-gray-300 print:shadow-none print:mb-4 print:break-inside-avoid">
+            <div class="p-5 md:px-6 flex flex-wrap md:flex-nowrap items-center gap-4 cursor-pointer" onclick="toggleInvoiceDetail(this)">
+                <div class="flex-1 min-w-0 w-full md:w-auto">
+                    <div class="text-sm font-bold text-gray-900 mb-0.5">{{ $payment->invoice_number }}</div>
+                    <div class="text-xs text-gray-500 truncate">{{ $payment->booking->package->name ?? 'Paket Terhapus' }}</div>
                 </div>
-                <div class="invoice-card-info">
-                    <div class="invoice-card-id">{{ $payment->invoice_number }}</div>
-                    <div class="invoice-card-tour">{{ $payment->booking->package->name ?? 'Paket Terhapus' }}</div>
-                </div>
-                <div class="invoice-card-meta">
-                    <div class="invoice-card-amount">
-                        <div class="invoice-amount-label">Jumlah Pembayaran</div>
-                        <div class="invoice-amount-value">Rp {{ number_format($payment->amount, 0, ',', '.') }}</div>
+                <div class="flex items-center gap-6 shrink-0 w-full md:w-auto justify-between md:justify-end mt-4 md:mt-0">
+                    <div class="text-left md:text-right">
+                        <div class="text-xs text-gray-500">Jumlah Pembayaran</div>
+                        <div class="text-base font-bold text-gray-900">Rp {{ number_format($payment->amount, 0, ',', '.') }}</div>
                     </div>
-                </div>
-                <div class="invoice-card-actions">
-                    <a href="{{ route('user.invoices.print', $payment->id) }}" target="_blank" class="btn btn-ghost btn-sm" aria-label="Cetak invoice" style="text-decoration:none;">🖨️ Cetak</a>
-                    <button class="btn btn-primary btn-sm btn-detail" onclick="this.closest('.invoice-card').querySelector('.invoice-detail').classList.toggle('visible')">Detail</button>
+                    <div class="flex gap-2 print:hidden">
+                        <a href="{{ route('user.invoices.print', $payment->id) }}" target="_blank" class="px-3 py-1.5 text-sm font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-1" aria-label="Cetak invoice" onclick="event.stopPropagation()">Cetak</a>
+                        <button class="px-3 py-1.5 text-sm font-medium text-white bg-[#8B1A1A] hover:bg-red-800 rounded-lg transition-colors" onclick="event.stopPropagation(); toggleInvoiceDetail(this)">Detail</button>
+                    </div>
                 </div>
             </div>
             
-            <div class="invoice-detail">
+            <div class="invoice-detail hidden print:block px-6 pb-6 pt-2 border-t border-gray-100 bg-gray-50/50">
                 @php
                     $booking   = $payment->booking;
                     $pkg       = $booking->package ?? null;
@@ -156,7 +87,6 @@
                     $usdRate   = $booking->usd_rate ?? 15800;
                     $addons    = is_array($booking->addons) ? $booking->addons : (json_decode($booking->addons, true) ?? []);
 
-                    // Definisi add-on: key => [label, harga IDR per orang]
                     $addonDefs = [
                         'paspor'         => ['label' => 'Pembuatan E-Paspor Express', 'price_idr' => 1500000],
                         'bisnis_class'   => ['label' => 'Upgrade Bisnis Class',        'price_idr' => 8000000],
@@ -164,186 +94,187 @@
                         'vaksin'         => ['label' => 'Vaksin',                        'price_idr' => 350000],
                     ];
 
-                    // Hitung total add-ons
                     $totalAddons = 0;
                     foreach ($addonDefs as $key => $def) {
                         $qty = $addons[$key] ?? 0;
                         $totalAddons += $qty * $def['price_idr'];
                     }
 
-                    // Total paket = harga kamar × jumlah orang
                     $hargaKamar   = $price->price ?? 0;
                     $totalPaket   = $hargaKamar * ($booking->jumlah_orang ?? 1);
-                    $grandTotal   = $booking->total_price; // pakai total_price booking yg sudah dikunci
+                    $grandTotal   = $booking->total_price;
                     $sisa         = $booking->sisa_tagihan ?? max(0, $grandTotal - ($booking->sudah_dibayar ?? 0));
                 @endphp
 
-                {{-- ═══ BAGIAN 1: INFO PEMBAYARAN & TAGIHAN ═══ --}}
-                <div class="invoice-detail-grid" style="padding-top: var(--space-5);">
-                    <div class="invoice-detail-section">
-                        <h5>Informasi Pembayaran</h5>
-                        <div class="detail-row">
-                            <span class="detail-label">Status</span>
-                            <span class="detail-value">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                    <div>
+                        <h5 class="text-sm font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-200">Informasi Pembayaran</h5>
+                        <div class="flex justify-between py-1.5 text-sm">
+                            <span class="text-gray-500">Status</span>
+                            <span class="font-medium">
                                 @if($payment->status === 'sudah_lunas')
-                                    <span style="color: var(--color-success)">✅ Lunas (Diverifikasi)</span>
+                                    <span class="text-emerald-600">Lunas (Diverifikasi)</span>
                                 @elseif($payment->status === 'belum_lunas')
-                                    <span style="color: var(--color-warning)">⏳ Pending (Menunggu Verifikasi)</span>
+                                    <span class="text-amber-600">Pending (Menunggu Verifikasi)</span>
                                 @else
-                                    <span style="color: var(--color-danger)">❌ Ditolak</span>
+                                    <span class="text-red-600">Ditolak</span>
                                 @endif
                             </span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Metode</span>
-                            <span class="detail-value">{{ ucfirst($payment->payment_method) }} {{ $payment->bank_name ? '('.strtoupper($payment->bank_name).')' : '' }}</span>
+                        <div class="flex justify-between py-1.5 text-sm">
+                            <span class="text-gray-500">Metode</span>
+                            <span class="font-medium text-gray-900">{{ ucfirst($payment->payment_method) }} {{ $payment->bank_name ? '('.strtoupper($payment->bank_name).')' : '' }}</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Tanggal & Waktu</span>
-                            <span class="detail-value">
+                        <div class="flex justify-between py-1.5 text-sm">
+                            <span class="text-gray-500">Tanggal & Waktu</span>
+                            <span class="font-medium text-gray-900">
                                 {{ \Carbon\Carbon::parse($payment->created_at)->timezone('Asia/Jakarta')->format('d M Y, H:i') }} WIB
                             </span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Jumlah Bayar Ini</span>
-                            <span class="detail-value" style="font-weight:700;color:var(--color-primary)">
+                        <div class="flex justify-between py-1.5 text-sm mt-1">
+                            <span class="text-gray-500">Jumlah Bayar Ini</span>
+                            <span class="font-bold text-[#8B1A1A]">
                                 Rp {{ number_format($payment->amount, 0, ',', '.') }}
                             </span>
                         </div>
                     </div>
 
-                    <div class="invoice-detail-section">
-                        <h5>Status Tagihan</h5>
-                        <div class="detail-row">
-                            <span class="detail-label">Total Tagihan</span>
-                            <span class="detail-value">Rp {{ number_format($grandTotal, 0, ',', '.') }}</span>
+                    <div>
+                        <h5 class="text-sm font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-200">Status Tagihan</h5>
+                        <div class="flex justify-between py-1.5 text-sm">
+                            <span class="text-gray-500">Total Tagihan</span>
+                            <span class="font-medium text-gray-900">Rp {{ number_format($grandTotal, 0, ',', '.') }}</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Sudah Dibayar <small style="color:var(--color-text-muted);font-weight:400">(verified)</small></span>
-                            <span class="detail-value" style="color: var(--color-success)">
+                        <div class="flex justify-between py-1.5 text-sm">
+                            <span class="text-gray-500">Sudah Dibayar <small class="text-gray-400 font-normal">(verified)</small></span>
+                            <span class="font-medium text-emerald-600">
                                 Rp {{ number_format($booking->sudah_dibayar ?? 0, 0, ',', '.') }}
                             </span>
                         </div>
                         @if(($booking->pending_verifikasi ?? 0) > 0)
-                        <div class="detail-row">
-                            <span class="detail-label">Menunggu Verifikasi</span>
-                            <span class="detail-value" style="color: var(--color-warning)">
+                        <div class="flex justify-between py-1.5 text-sm">
+                            <span class="text-gray-500">Menunggu Verifikasi</span>
+                            <span class="font-medium text-amber-600">
                                 Rp {{ number_format($booking->pending_verifikasi, 0, ',', '.') }}
                             </span>
                         </div>
                         @endif
-                        <div class="detail-row" style="border-top:2px solid var(--color-border);margin-top:var(--space-2);padding-top:var(--space-2);">
-                            <span class="detail-label" style="font-weight:600;color:var(--color-text)">Sisa Tagihan</span>
-                            <span class="detail-value" style="font-weight:700;color:{{ $sisa == 0 ? 'var(--color-success)' : 'var(--color-primary)' }}">
-                                @if($sisa == 0) ✅ Lunas @else Rp {{ number_format($sisa, 0, ',', '.') }} @endif
+                        <div class="flex justify-between py-2.5 mt-2 border-t-2 border-gray-200">
+                            <span class="font-semibold text-gray-900">Sisa Tagihan</span>
+                            <span class="font-bold {{ $sisa == 0 ? 'text-emerald-600' : 'text-[#8B1A1A]' }}">
+                                @if($sisa == 0) Lunas @else Rp {{ number_format($sisa, 0, ',', '.') }} @endif
                             </span>
                         </div>
                         @if(($booking->pending_verifikasi ?? 0) > 0)
-                        <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-3);line-height:1.5;">
+                        <p class="text-xs text-gray-500 mt-2 italic leading-relaxed">
                             ℹ️ Sisa tagihan akan berkurang setelah admin memverifikasi pembayaran.
                         </p>
                         @endif
                     </div>
                 </div>
 
-                {{-- ═══ BAGIAN 2: RINCIAN PAKET ═══ --}}
-                <div style="margin-top:var(--space-5);border-top:1px solid var(--color-border-light);padding-top:var(--space-4);">
-                    <h5 style="font-size:var(--text-sm);font-weight:var(--font-semibold);margin-bottom:var(--space-3);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-border-light);">
-                        🕌 Rincian Paket
+                {{-- RINCIAN PAKET --}}
+                <div class="mt-6 border-t border-gray-200 pt-5">
+                    <h5 class="text-sm font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-100">
+                        Rincian Paket
                     </h5>
-                    <table style="width:100%;border-collapse:collapse;font-size:var(--text-xs);">
-                        <thead>
-                            <tr style="background:var(--color-bg);text-align:left;">
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;">Deskripsi</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:center;">Jenis Kamar</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:center;">Pax</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:right;">Harga/Pax (IDR)</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:right;">Harga/Pax (USD)</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:right;">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-top:1px solid var(--color-border-light);">
-                                <td style="padding:var(--space-3);">
-                                    <div style="font-weight:600;color:var(--color-text);">{{ $pkg->name ?? 'Paket Umrah' }}</div>
-                                    <div style="color:var(--color-text-muted);margin-top:2px;">{{ $pkg->category->name ?? '-' }} • {{ $pkg ? \Carbon\Carbon::parse($pkg->departure_date)->format('d M Y') : '-' }}</div>
-                                </td>
-                                <td style="padding:var(--space-3);text-align:center;">
-                                    <span style="background:var(--color-primary-50);color:var(--color-primary);padding:2px 8px;border-radius:var(--radius-full);font-weight:600;">
-                                        {{ $price->type ?? '-' }}
-                                    </span>
-                                </td>
-                                <td style="padding:var(--space-3);text-align:center;font-weight:600;">{{ $booking->jumlah_orang ?? 1 }}</td>
-                                <td style="padding:var(--space-3);text-align:right;">Rp {{ number_format($hargaKamar, 0, ',', '.') }}</td>
-                                <td style="padding:var(--space-3);text-align:right;">$ {{ number_format(round($hargaKamar / $usdRate, 0), 0, ',', '.') }}</td>
-                                <td style="padding:var(--space-3);text-align:right;font-weight:700;">Rp {{ number_format($totalPaket, 0, ',', '.') }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left">
+                            <thead class="bg-gray-100 text-gray-600 uppercase">
+                                <tr>
+                                    <th class="px-3 py-2 font-semibold rounded-tl-lg">Deskripsi</th>
+                                    <th class="px-3 py-2 font-semibold text-center">Jenis Kamar</th>
+                                    <th class="px-3 py-2 font-semibold text-center">Pax</th>
+                                    <th class="px-3 py-2 font-semibold text-right">Harga/Pax (IDR)</th>
+                                    <th class="px-3 py-2 font-semibold text-right">Harga/Pax (USD)</th>
+                                    <th class="px-3 py-2 font-semibold text-right rounded-tr-lg">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100 bg-white">
+                                    <td class="px-3 py-3">
+                                        <div class="font-semibold text-gray-900">{{ $pkg->name ?? 'Paket Umrah' }}</div>
+                                        <div class="text-gray-500 mt-1">{{ $pkg->category->name ?? '-' }} • {{ $pkg ? \Carbon\Carbon::parse($pkg->departure_date)->format('d M Y') : '-' }}</div>
+                                    </td>
+                                    <td class="px-3 py-3 text-center">
+                                        <span class="bg-red-50 text-[#8B1A1A] px-2.5 py-1 rounded-full font-semibold border border-red-100">
+                                            {{ $price->type ?? '-' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-3 py-3 text-center font-semibold">{{ $booking->jumlah_orang ?? 1 }}</td>
+                                    <td class="px-3 py-3 text-right">Rp {{ number_format($hargaKamar, 0, ',', '.') }}</td>
+                                    <td class="px-3 py-3 text-right">$ {{ number_format(round($hargaKamar / $usdRate, 0), 0, ',', '.') }}</td>
+                                    <td class="px-3 py-3 text-right font-bold text-gray-900">Rp {{ number_format($totalPaket, 0, ',', '.') }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                {{-- ═══ BAGIAN 3: ADD-ONS / TAMBAHAN ═══ --}}
-                <div style="margin-top:var(--space-5);border-top:1px solid var(--color-border-light);padding-top:var(--space-4);">
-                    <h5 style="font-size:var(--text-sm);font-weight:var(--font-semibold);margin-bottom:var(--space-3);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-border-light);">
-                        ➕ Layanan Tambahan (Add-On)
+                {{-- ADD-ONS --}}
+                <div class="mt-6 border-t border-gray-200 pt-5">
+                    <h5 class="text-sm font-semibold text-gray-900 mb-3 pb-2 border-b border-gray-100">
+                        Layanan Tambahan (Add-On)
                     </h5>
-                    <table style="width:100%;border-collapse:collapse;font-size:var(--text-xs);">
-                        <thead>
-                            <tr style="background:var(--color-bg);text-align:left;">
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;width:32px;"></th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;">Layanan</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:right;">Harga/item (IDR)</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:right;">Harga/item (USD)</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:center;">Qty</th>
-                                <th style="padding:var(--space-2) var(--space-3);color:var(--color-text-muted);font-weight:600;text-align:right;">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($addonDefs as $key => $def)
-                            @php
-                                $qty      = $addons[$key] ?? 0;
-                                $subtotal = $qty * $def['price_idr'];
-                                $checked  = $qty > 0;
-                            @endphp
-                            <tr style="border-top:1px solid var(--color-border-light);{{ !$checked ? 'opacity:0.45;' : '' }}">
-                                <td style="padding:var(--space-3);text-align:center;">
-                                    @if($checked)
-                                        <span style="color:var(--color-success);font-size:14px;">✅</span>
-                                    @else
-                                        <span style="color:var(--color-text-muted);font-size:14px;">☐</span>
-                                    @endif
-                                </td>
-                                <td style="padding:var(--space-3);font-weight:{{ $checked ? '600' : '400' }};color:var(--color-text);">{{ $def['label'] }}</td>
-                                <td style="padding:var(--space-3);text-align:right;">Rp {{ number_format($def['price_idr'], 0, ',', '.') }}</td>
-                                <td style="padding:var(--space-3);text-align:right;">$ {{ number_format(round($def['price_idr'] / $usdRate, 0), 0, ',', '.') }}</td>
-                                <td style="padding:var(--space-3);text-align:center;font-weight:600;">{{ $qty }}</td>
-                                <td style="padding:var(--space-3);text-align:right;font-weight:{{ $checked ? '700' : '400' }};color:{{ $checked ? 'var(--color-text)' : 'var(--color-text-muted)' }};">
-                                    {{ $checked ? 'Rp '.number_format($subtotal, 0, ',', '.') : '-' }}
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left">
+                            <thead class="bg-gray-100 text-gray-600 uppercase">
+                                <tr>
+                                    <th class="px-3 py-2 font-semibold w-8 rounded-tl-lg"></th>
+                                    <th class="px-3 py-2 font-semibold">Layanan</th>
+                                    <th class="px-3 py-2 font-semibold text-right">Harga/item (IDR)</th>
+                                    <th class="px-3 py-2 font-semibold text-right">Harga/item (USD)</th>
+                                    <th class="px-3 py-2 font-semibold text-center">Qty</th>
+                                    <th class="px-3 py-2 font-semibold text-right rounded-tr-lg">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($addonDefs as $key => $def)
+                                @php
+                                    $qty      = $addons[$key] ?? 0;
+                                    $subtotal = $qty * $def['price_idr'];
+                                    $checked  = $qty > 0;
+                                @endphp
+                                <tr class="border-b border-gray-100 {{ $checked ? 'bg-white' : 'bg-gray-50/50 opacity-60' }}">
+                                    <td class="px-3 py-2.5 text-center">
+                                        @if($checked)
+                                            <span class="text-emerald-500 text-sm">✓</span>
+                                        @else
+                                            <span class="text-gray-300 text-sm">-</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-3 py-2.5 font-medium {{ $checked ? 'text-gray-900 font-semibold' : 'text-gray-500' }}">{{ $def['label'] }}</td>
+                                    <td class="px-3 py-2.5 text-right">Rp {{ number_format($def['price_idr'], 0, ',', '.') }}</td>
+                                    <td class="px-3 py-2.5 text-right">$ {{ number_format(round($def['price_idr'] / $usdRate, 0), 0, ',', '.') }}</td>
+                                    <td class="px-3 py-2.5 text-center font-semibold">{{ $qty }}</td>
+                                    <td class="px-3 py-2.5 text-right font-bold {{ $checked ? 'text-gray-900' : 'text-gray-400 font-normal' }}">
+                                        {{ $checked ? 'Rp '.number_format($subtotal, 0, ',', '.') : '-' }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                {{-- ═══ BAGIAN 4: TOTAL AKHIR ═══ --}}
-                <div style="margin-top:var(--space-5);border-top:2px solid var(--color-border);padding-top:var(--space-4);display:flex;justify-content:flex-end;">
-                    <div style="min-width:320px;">
-                        <div style="display:flex;justify-content:space-between;padding:var(--space-2) 0;font-size:var(--text-xs);color:var(--color-text-secondary);">
+                {{-- TOTAL AKHIR --}}
+                <div class="mt-6 border-t-2 border-gray-200 pt-5 flex justify-end">
+                    <div class="w-full max-w-sm">
+                        <div class="flex justify-between py-1.5 text-xs text-gray-500">
                             <span>Total Paket ({{ $booking->jumlah_orang ?? 1 }} pax)</span>
-                            <span>Rp {{ number_format($totalPaket, 0, ',', '.') }}</span>
+                            <span class="font-medium text-gray-900">Rp {{ number_format($totalPaket, 0, ',', '.') }}</span>
                         </div>
                         @if($totalAddons > 0)
-                        <div style="display:flex;justify-content:space-between;padding:var(--space-2) 0;font-size:var(--text-xs);color:var(--color-text-secondary);">
+                        <div class="flex justify-between py-1.5 text-xs text-gray-500">
                             <span>Total Add-On</span>
-                            <span>Rp {{ number_format($totalAddons, 0, ',', '.') }}</span>
+                            <span class="font-medium text-gray-900">Rp {{ number_format($totalAddons, 0, ',', '.') }}</span>
                         </div>
                         @endif
-                        <div style="display:flex;justify-content:space-between;padding:var(--space-3) 0;margin-top:var(--space-2);border-top:2px solid var(--color-primary);font-size:var(--text-base);font-weight:700;color:var(--color-primary);">
+                        <div class="flex justify-between py-3 mt-2 border-t-2 border-[#8B1A1A] text-base font-bold text-[#8B1A1A]">
                             <span>TOTAL INVOICE</span>
                             <span>Rp {{ number_format($grandTotal, 0, ',', '.') }}</span>
                         </div>
-                        <div style="display:flex;justify-content:space-between;padding:var(--space-1) 0;font-size:var(--text-xs);color:var(--color-text-muted);">
+                        <div class="flex justify-between py-1 text-xs text-gray-500">
                             <span>Dalam USD (kurs ~{{ number_format($usdRate, 0, ',', '.') }})</span>
                             <span>≈ $ {{ number_format(round($grandTotal / $usdRate, 0), 0, ',', '.') }}</span>
                         </div>
@@ -352,15 +283,16 @@
             </div>
         </div>
       @empty
-        <div class="text-center py-12 bg-white rounded-2xl border border-gray-200">
-            <h3 class="text-gray-500 font-medium">Tidak ada invoice ditemukan.</h3>
+        <div class="text-center py-16 bg-white rounded-2xl border border-gray-200">
+            <h3 class="text-lg font-bold text-gray-900 mb-1">Tidak Ada Invoice</h3>
+            <p class="text-sm text-gray-500 m-0">Anda belum memiliki riwayat invoice.</p>
         </div>
       @endforelse
     </section>
 
     <!-- Print Footer (only visible when printing) -->
-    <div class="print-footer">
-      <p>Dicetak oleh sistem HMI Tour Travel | © 2024 HMI Tour Travel</p>
+    <div class="hidden print:block mt-10 pt-4 border-t border-gray-300 text-center text-xs text-gray-500">
+      <p>Dicetak oleh sistem HMI Tour Travel | &copy; 2024 HMI Tour Travel</p>
     </div>
 
   </div>

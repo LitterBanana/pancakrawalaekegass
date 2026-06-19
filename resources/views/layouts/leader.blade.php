@@ -42,560 +42,79 @@
         }
     </script>
 
-    <style>
-        /* ── CSS Custom Properties (Design System) ── */
-        :root {
-            --color-fi-primary: #8B1A1A;
-            --color-fi-primary-hover: #6B1010;
-            --color-fi-primary-50: #fef2f2;
-            --color-fi-primary-100: #fee2e2;
-            --color-fi-primary-200: #fecaca;
-            --color-fi-surface: #ffffff;
-            --color-fi-border: #e5e7eb;
-            --color-fi-bg: #f9fafb;
-            --color-fi-text-main: #111827;
-            --color-fi-text-muted: #6b7280;
-            --color-fi-text-secondary: #4b5563;
-
-            --sidebar-width: 260px;
-            --header-height: 64px;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: var(--color-fi-bg);
-            color: var(--color-fi-text-main);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-
-        /* ── Sidebar ── */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: var(--color-fi-surface);
-            border-right: 1px solid var(--color-fi-border);
-            z-index: 40;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar-brand {
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--color-fi-border);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .sidebar-brand-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 0.5rem;
-            background: var(--color-fi-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            font-size: 0.875rem;
-            flex-shrink: 0;
-        }
-
-        .sidebar-brand-text {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--color-fi-primary);
-            line-height: 1.2;
-        }
-
-        .sidebar-brand-sub {
-            font-size: 0.7rem;
-            color: var(--color-fi-text-muted);
-            font-weight: 400;
-        }
-
-        .sidebar-nav {
-            flex: 1;
-            padding: 1rem 0.75rem;
-            overflow-y: auto;
-        }
-
-        .sidebar-section-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-fi-text-muted);
-            padding: 0.5rem 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.625rem 0.75rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--color-fi-text-secondary);
-            text-decoration: none;
-            transition: all 0.15s ease;
-            margin-bottom: 2px;
-        }
-
-        .sidebar-link:hover {
-            background: var(--color-fi-bg);
-            color: var(--color-fi-text-main);
-        }
-
-        .sidebar-link.active {
-            background: var(--color-fi-primary-50);
-            color: var(--color-fi-primary);
-            font-weight: 600;
-        }
-
-        .sidebar-link-icon {
-            width: 20px;
-            text-align: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .sidebar-footer {
-            padding: 1rem 1rem;
-            border-top: 1px solid var(--color-fi-border);
-        }
-
-        .sidebar-user {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-        }
-
-        .sidebar-user-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--color-fi-primary-100);
-            color: var(--color-fi-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.875rem;
-            flex-shrink: 0;
-        }
-
-        .sidebar-user-info {
-            min-width: 0;
-        }
-
-        .sidebar-user-name {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--color-fi-text-main);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .sidebar-user-role {
-            font-size: 0.7rem;
-            color: var(--color-fi-text-muted);
-        }
-
-        /* ── Main Content ── */
-        .main-wrapper {
-            margin-left: var(--sidebar-width);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ── Top Header ── */
-        .top-header {
-            height: var(--header-height);
-            background: var(--color-fi-surface);
-            border-bottom: 1px solid var(--color-fi-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 1.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 30;
-        }
-
-        .header-left h1 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: var(--color-fi-text-main);
-            margin: 0;
-        }
-
-        .header-left p {
-            font-size: 0.8rem;
-            color: var(--color-fi-text-muted);
-            margin: 0;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .btn-logout {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--color-fi-text-muted);
-            background: transparent;
-            border: 1px solid var(--color-fi-border);
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.15s ease;
-        }
-
-        .btn-logout:hover {
-            background: var(--color-fi-primary-50);
-            color: var(--color-fi-primary);
-            border-color: var(--color-fi-primary-200);
-        }
-
-        /* ── Content Area ── */
-        .main-content {
-            flex: 1;
-            padding: 1.5rem;
-            max-width: 1400px;
-            width: 100%;
-        }
-
-        /* ── Mobile Toggle ── */
-        .sidebar-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            color: var(--color-fi-text-main);
-        }
-
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 35;
-        }
-
-        /* ── Animations ── */
-        .animate-fade-in-up {
-            animation: fadeInUp 0.4s ease forwards;
-        }
-
-        .delay-1 {
-            animation-delay: 0.1s;
-            opacity: 0;
-        }
-
-        .delay-2 {
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
-
-        .delay-3 {
-            animation-delay: 0.3s;
-            opacity: 0;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .sidebar-overlay.open {
-                display: block;
-            }
-
-            .sidebar-toggle {
-                display: block;
-            }
-
-            .main-wrapper {
-                margin-left: 0;
-            }
-        }
-
-        /* ── Flash Message ── */
-        .flash-success {
-            background: #ecfdf5;
-            border: 1px solid #a7f3d0;
-            color: #065f46;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .flash-error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #991b1b;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* ── Shared Card / Table / Button Components ── */
-        .card {
-            background: var(--color-fi-surface, #ffffff);
-            border-radius: 0.75rem;
-            border: 1px solid var(--color-fi-border, #e5e7eb);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--color-fi-border, #e5e7eb);
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .table-container {
-            overflow-x: auto;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .data-table thead {
-            background: var(--color-fi-bg, #f9fafb);
-        }
-
-        .data-table th {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-fi-text-muted, #6b7280);
-            border-bottom: 1px solid var(--color-fi-border, #e5e7eb);
-        }
-
-        .data-table td {
-            padding: 0.875rem 1rem;
-            font-size: 0.875rem;
-            color: var(--color-fi-text-secondary, #4b5563);
-            border-bottom: 1px solid var(--color-fi-border, #e5e7eb);
-            vertical-align: middle;
-        }
-
-        .data-table tbody tr:hover {
-            background: var(--color-fi-bg, #f9fafb);
-        }
-
-        .data-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            text-decoration: none;
-            border: 1px solid transparent;
-            font-size: 0.875rem;
-            padding: 0.5rem 1rem;
-            line-height: 1.5;
-        }
-
-        .btn-sm {
-            font-size: 0.8rem;
-            padding: 0.375rem 0.75rem;
-        }
-
-        .btn-primary {
-            background: var(--color-fi-primary, #8B1A1A);
-            color: white;
-            border-color: var(--color-fi-primary, #8B1A1A);
-        }
-
-        .btn-primary:hover {
-            background: var(--color-fi-primary-hover, #6B1010);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--color-fi-text-muted, #6b7280);
-            border-color: var(--color-fi-border, #e5e7eb);
-        }
-
-        .btn-ghost:hover {
-            background: var(--color-fi-bg, #f9fafb);
-            color: var(--color-fi-text-main, #111827);
-        }
-
-        /* Badges */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .badge-info {
-            background: #eff6ff;
-            color: #1e40af;
-        }
-
-        .badge-success {
-            background: #ecfdf5;
-            color: #065f46;
-        }
-
-        .badge-warning {
-            background: #fffbeb;
-            color: #92400e;
-        }
-
-        .badge-danger {
-            background: #fef2f2;
-            color: #991b1b;
-        }
-    </style>
-
     @stack('styles')
 </head>
 
-<body>
+<body class="font-sans bg-gray-50 text-gray-900 m-0 p-0 min-h-screen">
     <!-- Sidebar Overlay (mobile) -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
     <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-brand">
+    <aside class="fixed top-0 left-0 w-[260px] h-screen bg-white border-r border-gray-200 z-50 flex flex-col transition-transform duration-300 -translate-x-full lg:translate-x-0" id="sidebar">
+        <div class="px-6 py-5 border-b border-gray-200 flex items-center gap-3">
             <a href="{{ url('/') }}">
-                <img src="{{ asset('assets/images/side-logo.png') }}" alt="Logo HMI Tour" style="max-width: 150px; height: auto;">
+                <img src="{{ asset('assets/images/side-logo.png') }}" alt="Logo HMI Tour" class="max-w-[150px] h-auto">
             </a>
         </div>
 
-        <nav class="sidebar-nav">
-            <div class="sidebar-section-label">Menu Utama</div>
+        <nav class="flex-1 px-3 py-4 overflow-y-auto">
+            <div class="text-[0.7rem] font-bold uppercase tracking-widest text-gray-500 px-3 py-2 mt-2">Menu Utama</div>
 
             <a href="{{ route('leader.dashboard') }}"
-                class="sidebar-link {{ request()->routeIs('leader.dashboard') ? 'active' : '' }}">
-                <span class="sidebar-link-icon">🏠</span>
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 mb-0.5 {{ request()->routeIs('leader.dashboard') ? 'bg-red-50 text-[#8B1A1A] font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 Dashboard
             </a>
 
             <a href="{{ route('leader.members.index') }}"
-                class="sidebar-link {{ request()->routeIs('leader.members.*') ? 'active' : '' }}">
-                <span class="sidebar-link-icon">👥</span>
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 mb-0.5 {{ request()->routeIs('leader.members.*') ? 'bg-red-50 text-[#8B1A1A] font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 Anggota Tim
             </a>
 
             <a href="{{ route('leader.reports.index') }}"
-                class="sidebar-link {{ request()->routeIs('leader.reports.index') ? 'active' : '' }}">
-                <span class="sidebar-link-icon">📊</span>
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 mb-0.5 {{ request()->routeIs('leader.reports.index') ? 'bg-red-50 text-[#8B1A1A] font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 Laporan Penjualan
             </a>
 
             <a href="{{ route('leader.reports.crud') }}"
-                class="sidebar-link {{ request()->routeIs('leader.reports.crud') ? 'active' : '' }}">
-                <span class="sidebar-link-icon">📈</span>
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 mb-0.5 {{ request()->routeIs('leader.reports.crud') ? 'bg-red-50 text-[#8B1A1A] font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                 Analitik
             </a>
 
             <a href="{{ route('leader.invoices.index') }}"
-                class="sidebar-link {{ request()->routeIs('leader.invoices.*') ? 'active' : '' }}">
-                <span class="sidebar-link-icon">🧾</span>
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 mb-0.5 {{ request()->routeIs('leader.invoices.*') ? 'bg-red-50 text-[#8B1A1A] font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                 Invoice Downline
             </a>
 
 
-            <div class="sidebar-section-label">Akun</div>
+            <div class="text-[0.7rem] font-bold uppercase tracking-widest text-gray-500 px-3 py-2 mt-2">Akun</div>
 
             <a href="{{ route('leader.profile') }}"
-                class="sidebar-link {{ request()->routeIs('leader.profile') ? 'active' : '' }}">
-                <span class="sidebar-link-icon">👤</span>
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 mb-0.5 {{ request()->routeIs('leader.profile') ? 'bg-red-50 text-[#8B1A1A] font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' }}">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 Profil Saya
             </a>
 
         </nav>
 
-        <div class="sidebar-footer">
-            <div class="sidebar-user">
-                <div class="sidebar-user-avatar">
+        <div class="p-4 border-t border-gray-200">
+            <div class="flex items-center gap-3 p-2 rounded-lg">
+                <div class="w-9 h-9 rounded-full bg-red-100 text-[#8B1A1A] flex items-center justify-center font-bold text-sm shrink-0">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
-                <div class="sidebar-user-info">
-                    <div class="sidebar-user-name">{{ Auth::user()->name }}</div>
-                    <div class="sidebar-user-role">Leader</div>
+                <div class="min-w-0">
+                    <div class="text-sm font-semibold text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">{{ Auth::user()->name }}</div>
+                    <div class="text-[0.7rem] text-gray-500">Leader</div>
                 </div>
             </div>
-            <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+            <form action="{{ route('logout') }}" method="POST" class="m-0 mt-2">
                 @csrf
-                <button type="submit" class="sidebar-link" style="border:none;background:none;cursor:pointer;font:inherit;width:100%;margin-top:0.5rem;">
-                    <span class="sidebar-link-icon">🚪</span>
+                <button type="submit" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-150 border-none bg-transparent cursor-pointer font-inherit">
+                    <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                     Keluar
                 </button>
             </form>
@@ -603,34 +122,42 @@
     </aside>
 
     <!-- Main Wrapper -->
-    <div class="main-wrapper">
+    <div class="lg:ml-[260px] min-h-screen flex flex-col">
         <!-- Top Header -->
-        <header class="top-header">
-            <div class="header-left" style="display:flex;align-items:center;gap:0.75rem;">
-                <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        <header class="h-[64px] bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-30">
+            <div class="flex items-center gap-3">
+                <button class="lg:hidden bg-transparent border-none text-xl cursor-pointer p-2 text-gray-900" onclick="toggleSidebar()">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
                 <div>
-                    <h1>@yield('page-title', 'Dashboard')</h1>
-                    <p>@yield('page-description', '')</p>
+                    <h1 class="text-lg font-bold text-gray-900 m-0">@yield('page-title', 'Dashboard')</h1>
+                    <p class="text-sm text-gray-500 m-0 hidden sm:block">@yield('page-description', '')</p>
                 </div>
             </div>
-            <div class="header-right">
+            <div class="flex items-center gap-3">
                 @if(Auth::user()->referral_code)
-                    <div
-                        style="font-size:0.75rem;background:var(--color-fi-primary-50);color:var(--color-fi-primary);padding:0.375rem 0.75rem;border-radius:0.375rem;font-weight:600;font-family:monospace;">
-                        🔗 {{ Auth::user()->referral_code }}
+                    <div class="text-xs bg-red-50 text-[#8B1A1A] px-3 py-1.5 rounded-md font-semibold font-mono flex items-center gap-2">
+                        <svg class="w-4 h-4 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        {{ Auth::user()->referral_code }}
                     </div>
                 @endif
             </div>
         </header>
 
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="flex-1 p-6 w-full max-w-full overflow-x-hidden">
             @if(session('success'))
-                <div class="flash-success">✅ {{ session('success') }}</div>
+                <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-lg text-sm mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    {{ session('success') }}
+                </div>
             @endif
 
             @if(session('error'))
-                <div class="flash-error">❌ {{ session('error') }}</div>
+                <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    {{ session('error') }}
+                </div>
             @endif
 
             @yield('content')
@@ -641,13 +168,24 @@
 
     <script>
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('sidebarOverlay').classList.toggle('open');
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            
+            const overlay = document.getElementById('sidebarOverlay');
+            if (overlay.classList.contains('hidden')) {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('block');
+            } else {
+                overlay.classList.add('hidden');
+                overlay.classList.remove('block');
+            }
         }
 
         function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('open');
+            document.getElementById('sidebar').classList.add('-translate-x-full');
+            
+            const overlay = document.getElementById('sidebarOverlay');
+            overlay.classList.add('hidden');
+            overlay.classList.remove('block');
         }
     </script>
 </body>

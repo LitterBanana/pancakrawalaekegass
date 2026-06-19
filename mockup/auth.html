@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Auth (Login & Register)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Cell bar placeholder */
+    .bar {
+      height: 14px;
+      background: #F0F2F5;
+      border-radius: 4px;
+    }
+    .bar-lg { height: 44px; border-radius: 10px; }
+    .bar-md { height: 20px; }
+    .bar-sm { height: 10px; }
+    .bar-xs { height: 8px; }
+    .bar-w50 { width: 50%; }
+    .bar-w60 { width: 60%; }
+    .bar-w70 { width: 70%; }
+    .bar-w80 { width: 80%; }
+    .bar-w40 { width: 40%; }
+    .bar-w30 { width: 30%; }
+    .bar-accent { background: #8B1A1A; }
+    .bar-muted { background: #E5E7EB; }
+
+    /* ===== Page wrapper ===== */
+    .page {
+      margin-bottom: 60px;
+    }
+    .page-title {
+      text-align: center;
+      padding: 40px 20px 20px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    /* ===== Auth Layout (Split) ===== */
+    .auth-layout {
+      display: flex;
+      min-height: 600px;
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      border: 2px dashed #ccc;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      position: relative;
+    }
+    .auth-layout > .box-label {
+      top: -10px;
+      left: 20px;
+    }
+
+    /* Hero Side */
+    .auth-hero {
+      width: 50%;
+      background: #1a1a2e;
+      border-right: 2px dashed #555;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+      line-height: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-bar {
+      height: 14px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .hero-bar-lg {
+      height: 28px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .hero-bar-accent {
+      display: inline-block;
+      height: 28px;
+      background: #8B1A1A;
+      border-radius: 6px;
+      padding: 0 16px;
+      margin-bottom: 10px;
+    }
+    .hero-tag {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    /* Form Side */
+    .auth-form-side {
+      width: 50%;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Form elements */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label-bar {
+      height: 10px;
+      width: 80px;
+      background: #E5E7EB;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+    .form-input-placeholder {
+      height: 48px;
+      border: 1.5px dashed #ccc;
+      border-radius: 10px;
+      background: #FAFAFA;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 10px;
+    }
+    .form-icon-box {
+      width: 20px;
+      height: 20px;
+      border: 1.5px dashed #ccc;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .form-input-bar {
+      flex: 1;
+      height: 10px;
+      background: #E5E7EB;
+      border-radius: 3px;
+    }
+    .form-btn-placeholder {
+      height: 52px;
+      border: 2px dashed #8B1A1A;
+      border-radius: 12px;
+      background: #FEF2F2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 8px;
+    }
+
+    /* Tabs */
+    .tabs-placeholder {
+      display: flex;
+      border-bottom: 2px dashed #ddd;
+      margin-bottom: 28px;
+    }
+    .tab-item {
+      padding: 10px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #999;
+      border-bottom: 2px solid transparent;
+    }
+    .tab-item.active {
+      color: #8B1A1A;
+      border-bottom-color: #8B1A1A;
+    }
+
+    /* Mobile logo */
+    .mobile-logo-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 11px;
+      color: #999;
+      background: #FAFAFA;
+    }
+
+    /* Footer text */
+    .auth-footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 10px;
+      color: #bbb;
+    }
+
+    /* Section divider */
+    .section-divider {
+      text-align: center;
+      padding: 48px 20px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '— ';
+    }
+
+    /* Hint / Note */
+    .hint-bar {
+      height: 8px;
+      width: 70%;
+      background: #F0F2F5;
+      border-radius: 3px;
+      margin-top: 6px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .auth-hero { display: none; }
+      .auth-form-side { width: 100%; padding: 32px 24px; }
+      .auth-layout { max-width: 100%; margin: 0 16px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================== -->
+  <!-- PAGE 1: LOGIN                  -->
+  <!-- ============================== -->
+  <div class="page">
+    <div class="page-title">Halaman Login</div>
+    <div class="page-subtitle">Layout split: Hero (kiri) + Form Login (kanan)</div>
+
+    <div class="auth-layout">
+      <span class="box-label">Auth Page - Login</span>
+
+      <!-- Hero Side (Kiri) -->
+      <div class="auth-hero">
+        <div class="hero-bg-label">
+          Background Image<br>
+          (Foto Ka'bah / Umrah)
+        </div>
+        <div class="hero-content">
+          <div class="hero-tag">Hero Content</div>
+          <div class="hero-bar-lg" style="width: 85%;"></div>
+          <div class="hero-bar-lg" style="width: 60%;"></div>
+          <div class="hero-bar-accent"></div>
+          <div style="height: 16px;"></div>
+          <div class="hero-bar" style="width: 90%;"></div>
+          <div class="hero-bar" style="width: 75%;"></div>
+        </div>
+      </div>
+
+      <!-- Form Side (Kanan) -->
+      <div class="auth-form-side">
+
+        <!-- Mobile Logo (hidden on desktop) -->
+        <div class="mobile-logo-box" style="display: none;">Logo + Brand Name (mobile only)</div>
+
+        <!-- Header -->
+        <div class="box" style="padding: 20px; margin-bottom: 24px; border-color: transparent; background: transparent;">
+          <div class="bar bar-md bar-w60" style="margin-bottom: 8px; background: #333; height: 22px; border-radius: 5px; opacity: 0.15;"></div>
+          <div class="bar bar-sm bar-w80" style="background: #ddd;"></div>
+        </div>
+
+        <!-- Tabs: Login / Register -->
+        <div class="tabs-placeholder">
+          <div class="tab-item active">Login</div>
+          <div class="tab-item">Register</div>
+        </div>
+
+        <!-- Form: Login -->
+        <div style="position: relative;">
+          <span class="box-label" style="top: -8px; left: 0; background: #fff; color: #999; font-size: 9px;">Login Form</span>
+
+          <!-- Email -->
+          <div class="form-group">
+            <div class="form-label-bar"></div>
+            <div class="form-input-placeholder">
+              <div class="form-icon-box"></div>
+              <div class="form-input-bar" style="width: 60%;"></div>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <div class="form-label-bar" style="width: 70px;"></div>
+            <div class="form-input-placeholder">
+              <div class="form-icon-box"></div>
+              <div class="form-input-bar" style="width: 40%;"></div>
+              <div class="form-icon-box" style="margin-left: auto;"></div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-btn-placeholder">Masuk ke Sistem</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="auth-footer">&copy; 2026 HMI Tour Travel</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================== -->
+  <!-- PAGE 2: REGISTER               -->
+  <!-- ============================== -->
+  <div class="section-divider">Halaman Berikutnya</div>
+
+  <div class="page">
+    <div class="page-title">Halaman Register</div>
+    <div class="page-subtitle">Layout split: Hero (kiri) + Form Register (kanan)</div>
+
+    <div class="auth-layout">
+      <span class="box-label">Auth Page - Register</span>
+
+      <!-- Hero Side (Kiri) -->
+      <div class="auth-hero">
+        <div class="hero-bg-label">
+          Background Image<br>
+          (Foto Ka'bah / Umrah)
+        </div>
+        <div class="hero-content">
+          <div class="hero-tag">Hero Content</div>
+          <div class="hero-bar-lg" style="width: 85%;"></div>
+          <div class="hero-bar-lg" style="width: 60%;"></div>
+          <div class="hero-bar-accent"></div>
+          <div style="height: 16px;"></div>
+          <div class="hero-bar" style="width: 90%;"></div>
+          <div class="hero-bar" style="width: 75%;"></div>
+        </div>
+      </div>
+
+      <!-- Form Side (Kanan) -->
+      <div class="auth-form-side">
+
+        <!-- Header -->
+        <div style="margin-bottom: 24px;">
+          <div class="bar bar-md bar-w60" style="margin-bottom: 8px; background: #333; height: 22px; border-radius: 5px; opacity: 0.15;"></div>
+          <div class="bar bar-sm bar-w80" style="background: #ddd;"></div>
+        </div>
+
+        <!-- Tabs: Login / Register -->
+        <div class="tabs-placeholder">
+          <div class="tab-item">Login</div>
+          <div class="tab-item active">Register</div>
+        </div>
+
+        <!-- Form: Register -->
+        <div style="position: relative;">
+          <span class="box-label" style="top: -8px; left: 0; background: #fff; color: #999; font-size: 9px;">Register Form</span>
+
+          <!-- Nama Lengkap -->
+          <div class="form-group">
+            <div class="form-label-bar" style="width: 100px;"></div>
+            <div class="form-input-placeholder">
+              <div class="form-icon-box"></div>
+              <div class="form-input-bar" style="width: 55%;"></div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <div class="form-label-bar" style="width: 45px;"></div>
+            <div class="form-input-placeholder">
+              <div class="form-icon-box"></div>
+              <div class="form-input-bar" style="width: 60%;"></div>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <div class="form-label-bar" style="width: 70px;"></div>
+            <div class="form-input-placeholder">
+              <div class="form-icon-box"></div>
+              <div class="form-input-bar" style="width: 40%;"></div>
+              <div class="form-icon-box" style="margin-left: auto;"></div>
+            </div>
+          </div>
+
+          <!-- Konfirmasi Password -->
+          <div class="form-group">
+            <div class="form-label-bar" style="width: 130px;"></div>
+            <div class="form-input-placeholder">
+              <div class="form-icon-box"></div>
+              <div class="form-input-bar" style="width: 40%;"></div>
+            </div>
+          </div>
+
+          <!-- Kode Referral -->
+          <div class="form-group">
+            <div class="form-label-bar" style="width: 150px;"></div>
+            <div class="form-input-placeholder">
+              <div class="form-icon-box"></div>
+              <div class="form-input-bar" style="width: 65%;"></div>
+            </div>
+            <div class="hint-bar"></div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-btn-placeholder">Daftar Akun</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="auth-footer">&copy; 2026 HMI Tour Travel</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 40px;"></div>
+
+</body>
+</html>

@@ -83,22 +83,18 @@
 @section('content')
     <div class="payment-dashboard-grid animate-fade-in-up">
         <div class="stat-card payment-summary-card">
-            <div class="stat-card-icon success" style="font-size: 1.75rem;">💰</div>
             <div class="stat-card-label">Total Pemasukan</div>
             <div class="stat-card-value" style="color: var(--color-success);">IDR {{ number_format($totalPemasukan, 0, ',', '.') }}</div>
         </div>
         <div class="stat-card payment-summary-card">
-            <div class="stat-card-icon primary" style="font-size: 1.75rem;">📊</div>
             <div class="stat-card-label">Total Transaksi</div>
             <div class="stat-card-value">{{ $totalTransaksi }}</div>
         </div>
         <div class="stat-card payment-summary-card">
-            <div class="stat-card-icon info" style="font-size: 1.75rem;">📅</div>
             <div class="stat-card-label">Pembayaran Bulan Ini</div>
             <div class="stat-card-value">{{ $paymentsThisMonth }}</div>
         </div>
         <div class="stat-card payment-summary-card">
-            <div class="stat-card-icon warning" style="font-size: 1.75rem;">⏳</div>
             <div class="stat-card-label">Belum Lunas</div>
             <div class="stat-card-value">{{ $pendingPayments }}</div>
         </div>

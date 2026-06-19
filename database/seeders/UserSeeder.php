@@ -10,12 +10,12 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        // User::create([
-        //     'name' => 'Admin HMI Tour', 
-        //     'email' => '',
-        //     'password' => Hash::make('rahasia123'),
-        //     'role' => 'admin',
-        // ]);
+        User::create([
+            'name' => 'Admin HMI Tour', 
+            'email' => 'adminjusuf@hmitour.site',
+            'password' => Hash::make('jusuf123'),
+            'role' => 'admin',
+        ]);
         user::create([
             'name' => 'Radit',
             'email'=> 'raditLeader@hmitour.site',

@@ -120,7 +120,7 @@
       <img src="{{ asset('img/Umroh bareng ibu dan zahro.jpeg') }}" alt="Umroh bersama HMI Tour Travel" class="login-hero-img">
       <div class="login-hero-overlay">
         <div class="login-hero-overlay-content">
-          <div class="login-hero-logo" aria-hidden="true">🕌</div>
+
           <h1>Hijrah Madani Istiqomah Tour Travel</h1>
           <p>Perjalanan ibadah yang penuh berkah bersama HMI Tour Travel</p>
         </div>

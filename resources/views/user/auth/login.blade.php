@@ -6,7 +6,7 @@
 @section('content')
   <!-- Mobile Logo (only shows on mobile) -->
   <div class="login-mobile-logo">
-    <div class="logo-icon" aria-hidden="true">🕌</div>
+
     <h2>HMI Tour Travel</h2>
   </div>
 

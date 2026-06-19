@@ -4,208 +4,52 @@
 @section('page-title', 'Invoice Downline')
 @section('page-description', 'Rekap komisi Anda berdasarkan downline yang telah melunasi pembayaran')
 
-@push('styles')
-<style>
-    /* ── Stat Grid ── */
-    .inv-stat-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.25rem;
-        margin-bottom: 1.5rem;
-    }
 
-    @media (max-width: 1024px) { .inv-stat-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px)  { .inv-stat-grid { grid-template-columns: 1fr; } }
-
-    .inv-stat-card {
-        background: var(--color-fi-surface);
-        border-radius: 0.75rem;
-        border: 1px solid var(--color-fi-border);
-        box-shadow: 0 1px 2px rgba(0,0,0,.05);
-        padding: 1.25rem 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: box-shadow .15s ease;
-    }
-
-    .inv-stat-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); }
-
-    .inv-stat-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 0.625rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.25rem;
-        flex-shrink: 0;
-    }
-
-    .inv-stat-icon.green  { background: #ecfdf5; }
-    .inv-stat-icon.blue   { background: #eff6ff; }
-    .inv-stat-icon.yellow { background: #fffbeb; }
-    .inv-stat-icon.red    { background: var(--color-fi-primary-50); }
-
-    .inv-stat-label {
-        font-size: 0.72rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: var(--color-fi-text-muted);
-        margin-bottom: 0.2rem;
-    }
-
-    .inv-stat-value {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--color-fi-text-main);
-        line-height: 1.2;
-    }
-
-    .inv-stat-value.revenue {
-        font-size: 1.1rem;
-        color: var(--color-fi-primary);
-    }
-
-    /* ── Filter Bar ── */
-    .filter-bar {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
-    }
-
-    .filter-input {
-        flex: 1;
-        min-width: 200px;
-        padding: 0.5rem 0.875rem;
-        border: 1px solid var(--color-fi-border);
-        border-radius: 0.5rem;
-        font-size: 0.875rem;
-        font-family: inherit;
-        color: var(--color-fi-text-main);
-        background: var(--color-fi-surface);
-        outline: none;
-        transition: border-color .15s ease;
-    }
-
-    .filter-input:focus { border-color: var(--color-fi-primary); }
-
-    /* ── Month Section ── */
-    .month-section {
-        margin-bottom: 2rem;
-    }
-
-    .month-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 1.5rem;
-        background: var(--color-fi-bg);
-        border-bottom: 1px solid var(--color-fi-border);
-    }
-
-    .month-label {
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--color-fi-text-main);
-    }
-
-    .month-total {
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: var(--color-fi-primary);
-    }
-
-    /* ── Empty State ── */
-    .empty-state {
-        text-align: center;
-        padding: 3rem 1.5rem;
-        color: var(--color-fi-text-muted);
-    }
-
-    .empty-state-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-
-    .empty-state h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--color-fi-text-main);
-        margin-bottom: 0.25rem;
-    }
-
-    /* ── Commission per-person ── */
-    .commission-rate {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.375rem;
-        background: #ecfdf5;
-        color: #065f46;
-        padding: 0.25rem 0.625rem;
-        border-radius: 9999px;
-        font-size: 0.72rem;
-        font-weight: 600;
-    }
-</style>
-@endpush
 
 @section('content')
 
 {{-- Stat Cards --}}
-<div class="inv-stat-grid animate-fade-in-up">
-    <div class="inv-stat-card">
-        <div class="inv-stat-icon red">💰</div>
-        <div>
-            <div class="inv-stat-label">Total Komisi</div>
-            <div class="inv-stat-value revenue">Rp {{ number_format($totalCommission, 0, ',', '.') }}</div>
-        </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6 animate-fade-in-up">
+    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#8B1A1A]">
+        <div class="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Total Komisi</div>
+        <div class="text-2xl font-bold text-[#8B1A1A] font-sans">Rp {{ number_format($totalCommission, 0, ',', '.') }}</div>
     </div>
-    <div class="inv-stat-card">
-        <div class="inv-stat-icon green">👥</div>
-        <div>
-            <div class="inv-stat-label">Total Jamaah</div>
-            <div class="inv-stat-value">{{ $totalPeople }}</div>
-        </div>
+    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#8B1A1A]">
+        <div class="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Total Jamaah</div>
+        <div class="text-2xl font-bold text-gray-900 font-sans">{{ $totalPeople }}</div>
     </div>
-    <div class="inv-stat-card">
-        <div class="inv-stat-icon blue">📋</div>
-        <div>
-            <div class="inv-stat-label">Booking Lunas</div>
-            <div class="inv-stat-value">{{ $totalBookings }}</div>
-        </div>
+    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#8B1A1A]">
+        <div class="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Booking Lunas</div>
+        <div class="text-2xl font-bold text-gray-900 font-sans">{{ $totalBookings }}</div>
     </div>
-    <div class="inv-stat-card">
-        <div class="inv-stat-icon yellow">📅</div>
-        <div>
-            <div class="inv-stat-label">Periode</div>
-            <div class="inv-stat-value" style="font-size:1rem;">{{ $totalMonths }} Bulan</div>
-        </div>
+    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#8B1A1A]">
+        <div class="text-xs font-medium uppercase tracking-wider text-gray-500 mb-1">Periode</div>
+        <div class="text-xl font-bold text-gray-900 font-sans">{{ $totalMonths }} Bulan</div>
     </div>
 </div>
 
 {{-- Main Card --}}
-<div class="card animate-fade-in-up delay-1">
-    <div class="card-header">
-        <h3 style="font-size:0.9rem;font-weight:600;margin:0;color:var(--color-fi-text-main);">
-            🧾 Invoice Komisi Downline
+<div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden animate-fade-in-up delay-1">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h3 class="text-base font-semibold text-gray-900 m-0">
+            Invoice Komisi Downline
         </h3>
-        <span class="commission-rate">💰 Rp 200.000 / orang</span>
+        <span class="inline-flex items-center bg-emerald-50 text-emerald-800 px-3 py-1 rounded-full text-xs font-semibold border border-emerald-200">Rp 200.000 / orang</span>
     </div>
 
     {{-- Filter --}}
-    <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--color-fi-border);">
+    <div class="p-4 md:px-6 border-b border-gray-200">
         <form method="GET" action="{{ route('leader.invoices.index') }}">
-            <div class="filter-bar">
+            <div class="flex items-center gap-3 flex-wrap">
                 <input
                     type="text"
                     name="keyword"
                     value="{{ request('keyword') }}"
                     placeholder="Cari nama jamaah atau paket..."
-                    class="filter-input">
-                <button type="submit" class="btn btn-primary btn-sm">🔍 Cari</button>
+                    class="flex-1 min-w-[200px] px-3.5 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-[#8B1A1A] transition-colors">
+                <button type="submit" class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-[#8B1A1A] rounded-lg hover:bg-[#6B1010] transition-colors">Cari</button>
                 @if(request('keyword'))
-                    <a href="{{ route('leader.invoices.index') }}" class="btn btn-ghost btn-sm">✕ Reset</a>
+                    <a href="{{ route('leader.invoices.index') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-gray-600 bg-transparent border border-gray-200 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">Reset</a>
                 @endif
             </div>
         </form>
@@ -218,47 +62,47 @@
                 $monthTotal    = $items->sum('commission');
                 $monthPeople   = $items->sum('jumlah_orang');
             @endphp
-            <div class="month-section">
-                <div class="month-header">
+            <div class="mb-8">
+                <div class="flex items-center justify-between px-6 py-4 bg-gray-50 border-b border-gray-200">
                     <div>
-                        <span class="month-label">📅 {{ $monthLabel }}</span>
-                        <span style="font-size:0.8rem;color:var(--color-fi-text-muted);margin-left:0.5rem;">
+                        <span class="text-base font-bold text-gray-900">{{ $monthLabel }}</span>
+                        <span class="text-sm text-gray-500 ml-2">
                             ({{ $monthPeople }} orang, {{ $items->count() }} booking)
                         </span>
                     </div>
-                    <span class="month-total">Rp {{ number_format($monthTotal, 0, ',', '.') }}</span>
+                    <span class="text-sm font-bold text-[#8B1A1A]">Rp {{ number_format($monthTotal, 0, ',', '.') }}</span>
                 </div>
 
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse text-left">
+                        <thead class="bg-gray-50">
                             <tr>
-                                <th>#</th>
-                                <th>Jamaah</th>
-                                <th>Paket</th>
-                                <th>Tipe Kamar</th>
-                                <th style="text-align:center;">Jumlah Orang</th>
-                                <th>Tgl. Lunas</th>
-                                <th style="text-align:right;">Komisi</th>
+                                <th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">#</th>
+                                <th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">Jamaah</th>
+                                <th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">Paket</th>
+                                <th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">Tipe Kamar</th>
+                                <th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200 text-center">Jumlah Orang</th>
+                                <th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">Tgl. Lunas</th>
+                                <th class="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200 text-right">Komisi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-gray-200">
                             @foreach($items as $idx => $item)
-                                <tr>
-                                    <td style="color:var(--color-fi-text-muted);font-size:0.8rem;">{{ $idx + 1 }}</td>
-                                    <td>
-                                        <div style="font-weight:600;color:var(--color-fi-text-main);">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-6 py-4 text-sm text-gray-500">{{ $idx + 1 }}</td>
+                                    <td class="px-6 py-4">
+                                        <div class="font-medium text-sm text-gray-900">
                                             {{ $item['user']->name ?? '—' }}
                                         </div>
-                                        <div style="font-size:0.75rem;color:var(--color-fi-text-muted);">
+                                        <div class="text-xs text-gray-500">
                                             {{ $item['user']->email ?? '' }}
                                         </div>
                                     </td>
-                                    <td>{{ $item['package']->name ?? '—' }}</td>
-                                    <td style="text-transform:capitalize;">{{ $item['price_type'] }}</td>
-                                    <td style="text-align:center;font-weight:600;">{{ $item['jumlah_orang'] }}</td>
-                                    <td style="font-size:0.82rem;">{{ $item['lunas_date']->format('d M Y') }}</td>
-                                    <td style="text-align:right;font-weight:700;color:#065f46;">
+                                    <td class="px-6 py-4 text-sm text-gray-600">{{ $item['package']->name ?? '—' }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600 capitalize">{{ $item['price_type'] }}</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-gray-900">{{ $item['jumlah_orang'] }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">{{ $item['lunas_date']->format('d M Y') }}</td>
+                                    <td class="px-6 py-4 text-sm text-right font-bold text-emerald-700">
                                         Rp {{ number_format($item['commission'], 0, ',', '.') }}
                                     </td>
                                 </tr>
@@ -269,10 +113,9 @@
             </div>
         @endforeach
     @else
-        <div class="empty-state">
-            <div class="empty-state-icon">📋</div>
-            <h3>Belum Ada Invoice Komisi</h3>
-            <p style="font-size:0.875rem;">
+        <div class="text-center py-12 px-6 text-gray-500">
+            <h3 class="text-lg font-semibold text-gray-900 mb-1">Belum Ada Invoice Komisi</h3>
+            <p class="text-sm">
                 @if(request('keyword'))
                     Tidak ada data yang cocok dengan pencarian Anda.
                 @else

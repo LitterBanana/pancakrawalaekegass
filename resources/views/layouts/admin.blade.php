@@ -8,10 +8,12 @@
   <title>@yield('title', 'HMI Tour Admin')</title>
 
   <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
   @stack('styles')
 
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕌</text></svg>">
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z'/><circle cx='12' cy='10' r='3'/></svg>">
 </head>
 
 <body>
@@ -29,7 +31,7 @@
       <header class="top-header">
         <div class="header-left">
           <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu navigasi">
-            ☰
+            <i data-lucide="menu"></i>
           </button>
           <div class="page-title-section">
             <h1>@yield('page_title', 'Dashboard')</h1>
@@ -48,8 +50,8 @@
       <main class="main-content">
         @if(session('success'))
           <div class="card" style="background: var(--color-success-bg); border-color: var(--color-success-border); margin-bottom: var(--space-6);">
-            <div class="card-body" style="padding: var(--space-4) var(--space-6); color: var(--color-success); font-weight: 600;">
-              ✅ {{ session('success') }}
+            <div class="card-body" style="padding: var(--space-4) var(--space-6); color: var(--color-success); font-weight: 600; display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="check-circle-2" style="width: 20px; height: 20px;"></i> {{ session('success') }}
             </div>
           </div>
         @endif
@@ -108,6 +110,9 @@
         if (window.innerWidth < 768) closeSidebar();
       });
     });
+
+    // Initialize Lucide Icons
+    lucide.createIcons();
   </script>
   @stack('scripts')
 </body>

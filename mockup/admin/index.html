@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Dashboard Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    .layout { display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-right: 2px dashed #ccc;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+    }
+    .sidebar-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: center;
+      padding: 16px;
+      border: 2px dashed #8B1A1A;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: #FEF2F2;
+    }
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 12px;
+      padding-left: 8px;
+    }
+    .sidebar-item {
+      padding: 10px 14px;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #555;
+      background: #FAFAFA;
+    }
+    .sidebar-item.active {
+      border-color: #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .sidebar-bottom {
+      margin-top: auto;
+      padding: 12px;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      background: #FAFAFA;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      margin-left: 240px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #fff;
+      border-bottom: 2px dashed #ccc;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-title { font-size: 16px; font-weight: 700; color: #333; }
+    .header-sub { font-size: 12px; color: #999; }
+    .header-avatar {
+      width: 36px; height: 36px;
+      border: 2px dashed #ccc;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: #999;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 12px;
+      padding: 24px;
+      background: #fff;
+      position: relative;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Welcome Banner */
+    .welcome-box {
+      border-color: #8B1A1A;
+      background: linear-gradient(135deg, #FEF2F2, #fff);
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .welcome-box .box-label { color: #8B1A1A; }
+    .welcome-text {
+      font-size: 14px;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 20px 16px;
+      background: #fff;
+      text-align: center;
+    }
+    .stat-box-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .stat-box-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: #555;
+    }
+    .stat-box:nth-child(1) { border-color: #059669; }
+    .stat-box:nth-child(1) .stat-box-value { color: #059669; }
+    .stat-box:nth-child(2) { border-color: #8B1A1A; }
+    .stat-box:nth-child(2) .stat-box-value { color: #8B1A1A; }
+    .stat-box:nth-child(3) { border-color: #D97706; }
+    .stat-box:nth-child(3) .stat-box-value { color: #D97706; }
+    .stat-box:nth-child(4) { border-color: #2563EB; }
+    .stat-box:nth-child(4) .stat-box-value { color: #2563EB; }
+
+    /* Table Placeholder */
+    .table-placeholder {
+      width: 100%;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table-head {
+      background: #F7F8FA;
+      display: flex;
+      padding: 10px 16px;
+      gap: 8px;
+    }
+    .table-head span {
+      flex: 1;
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .table-row {
+      display: flex;
+      padding: 12px 16px;
+      gap: 8px;
+      border-top: 1px dashed #eee;
+    }
+    .table-row span {
+      flex: 1;
+      font-size: 12px;
+      color: #aaa;
+    }
+    .table-row .cell-bar {
+      flex: 1;
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 4px;
+    }
+
+    /* Card Header */
+    .box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px dashed #eee;
+    }
+    .box-header-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #333;
+    }
+    .box-header-action {
+      font-size: 11px;
+      color: #999;
+      border: 1px dashed #ccc;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* Quick Actions */
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .quick-box {
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      background: #FAFAFA;
+    }
+    .quick-box-icon {
+      width: 36px; height: 36px;
+      border: 1.5px dashed #ccc;
+      border-radius: 8px;
+      margin: 0 auto 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: #bbb;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 16px 32px;
+      border-top: 2px dashed #ccc;
+      text-align: center;
+      font-size: 11px;
+      color: #bbb;
+      background: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .stats-grid, .quick-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .content { padding: 20px 16px; }
+      .header { padding: 12px 16px; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">LOGO + BRAND</div>
+
+    <div class="sidebar-label">Utama</div>
+    <div class="sidebar-item active">Dashboard</div>
+
+    <div class="sidebar-label">Transaksi</div>
+    <div class="sidebar-item">Pesanan</div>
+    <div class="sidebar-item">Pembayaran</div>
+    <div class="sidebar-item">Invoice</div>
+
+    <div class="sidebar-label">Produk & Layanan</div>
+    <div class="sidebar-item">Paket</div>
+    <div class="sidebar-item">Destinasi</div>
+    <div class="sidebar-item">Hotel</div>
+
+    <div class="sidebar-label">Konten</div>
+    <div class="sidebar-item">Galeri</div>
+
+    <div class="sidebar-bottom">User Info + Logout</div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div>
+        <div class="header-title">Dashboard</div>
+        <div class="header-sub">Kelola seluruh operasional HMI Tour</div>
+      </div>
+      <div class="header-avatar">AD</div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- Welcome Banner -->
+      <div class="welcome-box box">
+        <span class="box-label">Welcome Banner</span>
+        <span class="welcome-text">Halo, Admin! — Kelola operasional HMI Tour di sini.</span>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-box-title">Total Kas Masuk</div>
+          <div class="stat-box-value">IDR xxx</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title">Total Bookings</div>
+          <div class="stat-box-value">xx</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title">Menunggu Bayar</div>
+          <div class="stat-box-value">xx</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title">Pesanan Tertunda</div>
+          <div class="stat-box-value">xx</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="box">
+        <span class="box-label">Aksi Cepat</span>
+        <div class="quick-grid">
+          <div class="quick-box">
+            <div class="quick-box-icon">icon</div>
+            Tambah Jamaah
+          </div>
+          <div class="quick-box">
+            <div class="quick-box-icon">icon</div>
+            Buat Paket
+          </div>
+          <div class="quick-box">
+            <div class="quick-box-icon">icon</div>
+            Buat Invoice
+          </div>
+          <div class="quick-box">
+            <div class="quick-box-icon">icon</div>
+            Lihat Laporan
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabel: User & Leader -->
+      <div class="box">
+        <span class="box-label">Daftar User & Leader Referral</span>
+        <div class="box-header">
+          <span class="box-header-title">Tabel User</span>
+          <span class="box-header-action">Pagination</span>
+        </div>
+        <div class="table-placeholder">
+          <div class="table-head">
+            <span>Nama</span>
+            <span>Email</span>
+            <span>Role</span>
+            <span>Kode Referral</span>
+            <span>Aksi</span>
+          </div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+        </div>
+      </div>
+
+      <!-- Tabel: Prospek Calon Jamaah -->
+      <div class="box">
+        <span class="box-label">Prospek Calon Jamaah</span>
+        <div class="box-header">
+          <span class="box-header-title">Tabel Prospek</span>
+          <span class="box-header-action">Filter Status</span>
+        </div>
+        <div class="table-placeholder">
+          <div class="table-head">
+            <span>Waktu</span>
+            <span>Calon Jamaah</span>
+            <span>Minat Paket</span>
+            <span>Status</span>
+            <span>Aksi</span>
+          </div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+        </div>
+      </div>
+
+      <!-- Tabel: Riwayat Pesanan -->
+      <div class="box">
+        <span class="box-label">Riwayat Pesanan Terbaru</span>
+        <div class="box-header">
+          <span class="box-header-title">Tabel Pesanan</span>
+          <span class="box-header-action">Lihat Semua</span>
+        </div>
+        <div class="table-placeholder">
+          <div class="table-head">
+            <span>Waktu</span>
+            <span>Jamaah</span>
+            <span>Paket</span>
+            <span>Total</span>
+            <span>Status</span>
+            <span>Aksi</span>
+          </div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+          <div class="table-row"><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span><span class="cell-bar"></span></div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      &copy; 2026 HMI Tour Travel - Admin Panel
+    </footer>
+
+  </div>
+</div>
+
+</body>
+</html>

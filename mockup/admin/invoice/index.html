@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Invoice Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cell-bar {
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    /* ===== Page Section ===== */
+    .page-section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .page-section + .page-section {
+      border-top: 3px dashed #ddd;
+    }
+    .page-number {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    /* Layout with sidebar hint */
+    .layout-hint {
+      display: flex;
+      gap: 20px;
+      min-height: 500px;
+    }
+    .sidebar-hint {
+      width: 200px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sidebar-hint-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: center;
+      padding: 12px;
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      background: #FEF2F2;
+      margin-bottom: 8px;
+    }
+    .sidebar-hint-item {
+      padding: 8px 12px;
+      border: 1px dashed #ddd;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #777;
+      background: #FAFAFA;
+    }
+    .sidebar-hint-item.active {
+      border-color: #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header hint */
+    .header-hint {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 14px 20px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-hint-title { font-size: 14px; font-weight: 700; color: #333; }
+    .header-hint-sub { font-size: 10px; color: #999; }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .stat-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+      text-align: center;
+    }
+    .stat-box-title {
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .stat-box-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #555;
+    }
+    .stat-box:nth-child(1) { border-color: #333; }
+    .stat-box:nth-child(2) { border-color: #059669; }
+    .stat-box:nth-child(2) .stat-box-value { color: #059669; }
+    .stat-box:nth-child(3) { border-color: #2563EB; }
+    .stat-box:nth-child(3) .stat-box-value { color: #2563EB; }
+    .stat-box:nth-child(4) { border-color: #D97706; }
+
+    /* Card */
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1.5px dashed #eee;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .card-head-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+    }
+    .card-head-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .filter-box {
+      border: 1.5px dashed #ccc;
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 10px;
+      color: #999;
+      background: #FAFAFA;
+    }
+    .btn-box {
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      background: #FEF2F2;
+    }
+    .btn-box-ghost {
+      border: 1.5px dashed #ccc;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      background: #FAFAFA;
+    }
+
+    /* Table Placeholder */
+    .table-placeholder {
+      width: 100%;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table-head {
+      background: #F7F8FA;
+      display: flex;
+      padding: 10px 14px;
+      gap: 6px;
+    }
+    .table-head span {
+      flex: 1;
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .table-row {
+      display: flex;
+      padding: 12px 14px;
+      gap: 6px;
+      border-top: 1px dashed #eee;
+      align-items: center;
+    }
+    .cell-badge {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .cell-badge-inner {
+      border: 1px dashed #ccc;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 8px;
+      font-weight: 600;
+      color: #999;
+    }
+    .cell-badge-inner.success { border-color: #059669; color: #059669; }
+    .cell-badge-inner.warning { border-color: #D97706; color: #D97706; }
+    .cell-badge-inner.danger { border-color: #DC2626; color: #DC2626; }
+    .cell-actions {
+      flex: 1;
+      display: flex;
+      gap: 4px;
+    }
+    .cell-action {
+      border: 1px dashed #ccc;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 8px;
+      color: #999;
+    }
+
+    /* ===== Detail Page ===== */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .detail-section {
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      position: relative;
+    }
+    .detail-section-label {
+      position: absolute;
+      top: -9px;
+      left: 12px;
+      background: #fff;
+      padding: 0 6px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #555;
+      text-transform: uppercase;
+    }
+    .detail-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+    .detail-label {
+      font-size: 10px;
+      color: #999;
+      width: 80px;
+      flex-shrink: 0;
+    }
+    .detail-value {
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 3px;
+      flex: 1;
+    }
+
+    /* Total section */
+    .total-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 2px dashed #ddd;
+      margin-top: 16px;
+    }
+    .total-label {
+      font-size: 10px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+    .total-value {
+      height: 24px;
+      width: 140px;
+      background: #F0F2F5;
+      border-radius: 5px;
+    }
+    .total-btn {
+      border: 2px dashed #8B1A1A;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8B1A1A;
+      background: #FEF2F2;
+    }
+
+    /* ===== Print Page ===== */
+    .print-page {
+      max-width: 700px;
+      margin: 0 auto;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      background: #fff;
+      padding: 32px;
+      position: relative;
+    }
+    .print-header {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 2px dashed #ddd;
+      margin-bottom: 20px;
+    }
+    .print-brand {
+      font-size: 22px;
+      font-weight: 700;
+      color: #333;
+    }
+    .print-meta {
+      text-align: right;
+      font-size: 10px;
+      color: #999;
+      line-height: 2;
+    }
+    .print-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .print-info-block {
+      border: 1.5px dashed #ddd;
+      border-radius: 6px;
+      padding: 14px;
+      flex: 1;
+      margin: 0 4px;
+      position: relative;
+    }
+    .print-info-label {
+      position: absolute;
+      top: -8px;
+      left: 10px;
+      background: #fff;
+      padding: 0 6px;
+      font-size: 8px;
+      font-weight: 600;
+      color: #555;
+      text-transform: uppercase;
+    }
+    .print-info-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .print-info-row-label {
+      font-size: 9px;
+      color: #999;
+      width: 60px;
+      flex-shrink: 0;
+    }
+    .print-info-row-value {
+      height: 10px;
+      background: #F0F2F5;
+      border-radius: 3px;
+      flex: 1;
+    }
+    .print-table {
+      width: 100%;
+      border: 1.5px dashed #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .print-table-head {
+      background: #F7F8FA;
+      display: flex;
+      padding: 10px 14px;
+    }
+    .print-table-head span {
+      flex: 1;
+      font-size: 9px;
+      font-weight: 600;
+      color: #777;
+      text-transform: uppercase;
+    }
+    .print-table-head span:last-child { text-align: right; }
+    .print-table-row {
+      display: flex;
+      padding: 12px 14px;
+      border-top: 1px dashed #eee;
+      align-items: center;
+    }
+    .print-table-row span { flex: 1; }
+    .print-table-row span:last-child { text-align: right; }
+    .print-total {
+      display: flex;
+      justify-content: flex-end;
+      padding: 12px 14px;
+      border-top: 2px dashed #ddd;
+    }
+    .print-total-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+      margin-right: 20px;
+    }
+    .print-total-value {
+      height: 16px;
+      width: 100px;
+      background: #F0F2F5;
+      border-radius: 3px;
+    }
+    .print-footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 9px;
+      color: #bbb;
+      line-height: 2;
+    }
+    .print-actions {
+      text-align: center;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .notes-box {
+      border: 1.5px dashed #2563EB;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-top: 16px;
+      position: relative;
+      background: #EFF6FF;
+    }
+    .notes-label {
+      position: absolute;
+      top: -8px;
+      left: 10px;
+      background: #EFF6FF;
+      padding: 0 6px;
+      font-size: 8px;
+      font-weight: 600;
+      color: #2563EB;
+      text-transform: uppercase;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .layout-hint { flex-direction: column; }
+      .sidebar-hint { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .detail-grid { grid-template-columns: 1fr; }
+      .print-info { flex-direction: column; gap: 10px; }
+      .print-info-block { margin: 0; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================ -->
+  <!-- PAGE 1: DAFTAR INVOICE (INDEX)   -->
+  <!-- ================================ -->
+  <div class="page-section">
+    <div class="page-number">Halaman 1 dari 3</div>
+    <div class="page-title">Daftar Invoice</div>
+    <div class="page-subtitle">Layout: Sidebar Admin + Header + Stats + Tabel Invoice</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar Hint -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR ADMIN</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item">Pesanan</div>
+        <div class="sidebar-hint-item">Pembayaran</div>
+        <div class="sidebar-hint-item active">Invoice</div>
+        <div class="sidebar-hint-item">Paket</div>
+        <div class="sidebar-hint-item">Destinasi</div>
+        <div class="sidebar-hint-item">Hotel</div>
+        <div class="sidebar-hint-item">Galeri</div>
+      </div>
+
+      <!-- Main Area -->
+      <div class="main-area">
+        <!-- Header -->
+        <div class="header-hint">
+          <div>
+            <div class="header-hint-title">Invoice</div>
+            <div class="header-hint-sub">Kelola seluruh invoice</div>
+          </div>
+          <div style="width:30px;height:30px;border:1.5px dashed #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#999;">AD</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-box-title">Total Invoice</div>
+            <div class="stat-box-value">xx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Total Pendapatan</div>
+            <div class="stat-box-value">IDR xxx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Invoice Bulan Ini</div>
+            <div class="stat-box-value">xx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Rata-rata Invoice</div>
+            <div class="stat-box-value">IDR xxx</div>
+          </div>
+        </div>
+
+        <!-- Invoice Table -->
+        <div class="box" style="padding: 20px;">
+          <span class="box-label">Daftar Invoice</span>
+          <div class="card-head">
+            <span class="card-head-title">Daftar Invoice</span>
+            <div class="card-head-actions">
+              <div class="filter-box">Filter Status</div>
+              <div class="btn-box">Filter</div>
+            </div>
+          </div>
+          <div class="table-placeholder">
+            <div class="table-head">
+              <span>No Invoice</span>
+              <span>Tanggal</span>
+              <span>Jamaah</span>
+              <span>Paket</span>
+              <span>Jumlah</span>
+              <span>Status</span>
+              <span>Aksi</span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar" style="max-width:70px;"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner success">Lunas</span></span>
+              <span class="cell-actions"><span class="cell-action">Detail</span><span class="cell-action">Cetak</span></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar" style="max-width:70px;"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner warning">Pending</span></span>
+              <span class="cell-actions"><span class="cell-action">Detail</span><span class="cell-action">Cetak</span></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar" style="max-width:70px;"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner success">Lunas</span></span>
+              <span class="cell-actions"><span class="cell-action">Detail</span><span class="cell-action">Cetak</span></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar" style="max-width:70px;"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner danger">Batal</span></span>
+              <span class="cell-actions"><span class="cell-action">Detail</span><span class="cell-action">Cetak</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================ -->
+  <!-- PAGE 2: DETAIL INVOICE (SHOW)    -->
+  <!-- ================================ -->
+  <div class="page-section">
+    <div class="page-number">Halaman 2 dari 3</div>
+    <div class="page-title">Detail Invoice</div>
+    <div class="page-subtitle">Layout: Sidebar Admin + Card Detail (max-width: 900px)</div>
+
+    <div style="max-width: 760px; margin: 0 auto;">
+      <div class="box" style="padding: 24px;">
+        <span class="box-label">Detail Invoice #INV-xxx</span>
+
+        <!-- Card Header -->
+        <div class="card-head">
+          <span class="card-head-title">Invoice #INV-xxx</span>
+          <div class="btn-box-ghost">&larr; Kembali</div>
+        </div>
+
+        <!-- Info Grid: Jamaah + Paket -->
+        <div class="detail-grid">
+          <div class="detail-section">
+            <span class="detail-section-label">Informasi Jamaah</span>
+            <div class="detail-row">
+              <span class="detail-label">Nama</span>
+              <div class="detail-value" style="width: 70%;"></div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Telepon</span>
+              <div class="detail-value" style="width: 55%;"></div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Email</span>
+              <div class="detail-value" style="width: 65%;"></div>
+            </div>
+          </div>
+          <div class="detail-section">
+            <span class="detail-section-label">Detail Paket</span>
+            <div class="detail-row">
+              <span class="detail-label">Paket</span>
+              <div class="detail-value" style="width: 60%;"></div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Jml Orang</span>
+              <div class="detail-value" style="width: 30%;"></div>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Tgl Booking</span>
+              <div class="detail-value" style="width: 50%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Riwayat Pembayaran -->
+        <div class="box" style="padding: 16px; border-color: #ddd;">
+          <span class="box-label" style="color: #555;">Riwayat Pembayaran</span>
+          <div class="table-placeholder" style="margin-top: 8px;">
+            <div class="table-head">
+              <span>Tanggal</span>
+              <span>Jumlah</span>
+              <span>Metode</span>
+              <span>Status</span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner success">Lunas</span></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner warning">Pending</span></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner success">Lunas</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total + Download -->
+        <div class="total-section">
+          <div>
+            <div class="total-label">Total Pembayaran</div>
+            <div class="total-value"></div>
+          </div>
+          <div class="total-btn">Download Invoice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================ -->
+  <!-- PAGE 3: CETAK / PRINT INVOICE    -->
+  <!-- ================================ -->
+  <div class="page-section">
+    <div class="page-number">Halaman 3 dari 3</div>
+    <div class="page-title">Cetak Invoice</div>
+    <div class="page-subtitle">Layout: Standalone print page (tanpa sidebar)</div>
+
+    <!-- Print Actions -->
+    <div class="print-actions">
+      <div class="btn-box">Cetak PDF / Print</div>
+      <div class="btn-box-ghost">Kembali</div>
+    </div>
+
+    <div class="print-page">
+      <span class="box-label">Invoice Print View</span>
+
+      <!-- Print Header -->
+      <div class="print-header">
+        <div class="print-brand">HMI Tour</div>
+        <div class="print-meta">
+          Invoice #: xxx<br>
+          Tanggal: dd mm yyyy<br>
+          Status: <span class="cell-badge-inner success" style="font-size: 9px;">Lunas</span>
+        </div>
+      </div>
+
+      <!-- Info: Pemesan + Tujuan -->
+      <div class="print-info">
+        <div class="print-info-block">
+          <span class="print-info-label">Pemesan</span>
+          <div class="print-info-row">
+            <span class="print-info-row-label">Nama</span>
+            <div class="print-info-row-value"></div>
+          </div>
+          <div class="print-info-row">
+            <span class="print-info-row-label">Email</span>
+            <div class="print-info-row-value"></div>
+          </div>
+          <div class="print-info-row">
+            <span class="print-info-row-label">Telepon</span>
+            <div class="print-info-row-value"></div>
+          </div>
+        </div>
+        <div class="print-info-block">
+          <span class="print-info-label">Tujuan Pembayaran</span>
+          <div class="print-info-row">
+            <span class="print-info-row-label">Kepada</span>
+            <div class="print-info-row-value" style="width: 60%;"></div>
+          </div>
+          <div class="print-info-row">
+            <span class="print-info-row-label">Bagian</span>
+            <div class="print-info-row-value" style="width: 50%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item Table -->
+      <div class="print-table">
+        <div class="print-table-head">
+          <span>Deskripsi Paket</span>
+          <span>Jumlah</span>
+        </div>
+        <div class="print-table-row">
+          <span>
+            <div class="cell-bar" style="width: 70%; margin-bottom: 6px;"></div>
+            <div class="cell-bar" style="width: 45%; height: 8px;"></div>
+            <div class="cell-bar" style="width: 35%; height: 8px; margin-top: 4px;"></div>
+          </span>
+          <span><div class="cell-bar" style="width: 80px; margin-left: auto;"></div></span>
+        </div>
+        <div class="print-table-row">
+          <span>
+            <div class="cell-bar" style="width: 50%;"></div>
+          </span>
+          <span><div class="cell-bar" style="width: 80px; margin-left: auto;"></div></span>
+        </div>
+        <div class="print-total">
+          <span class="print-total-label">Sisa Tagihan:</span>
+          <div class="print-total-value"></div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div class="notes-box">
+        <span class="notes-label">Catatan</span>
+        <div class="cell-bar" style="width: 80%; margin-top: 4px;"></div>
+        <div class="cell-bar" style="width: 55%; margin-top: 6px;"></div>
+      </div>
+
+      <!-- Print Footer -->
+      <div class="print-footer">
+        Terima kasih telah mempercayakan perjalanan Anda bersama HMI Tour Travel.<br>
+        Invoice ini sah sebagai bukti pembayaran yang diterbitkan oleh sistem komputer.
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 40px;"></div>
+
+</body>
+</html>

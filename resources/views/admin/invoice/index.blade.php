@@ -6,22 +6,18 @@
 @section('content')
     <div class="stats-grid animate-fade-in-up">
         <div class="stat-card">
-            <div class="stat-card-icon primary" style="font-size: 1.75rem;">📋</div>
             <div class="stat-card-label">Total Invoice</div>
             <div class="stat-card-value">{{ $totalInvoices }}</div>
         </div>
         <div class="stat-card">
-            <div class="stat-card-icon success" style="font-size: 1.75rem;">💰</div>
             <div class="stat-card-label">Total Pendapatan</div>
             <div class="stat-card-value" style="color: var(--color-success);">IDR {{ number_format($totalRevenue, 0, ',', '.') }}</div>
         </div>
         <div class="stat-card">
-            <div class="stat-card-icon info" style="font-size: 1.75rem;">📅</div>
             <div class="stat-card-label">Invoice Bulan Ini</div>
             <div class="stat-card-value">{{ $invoicesThisMonth }}</div>
         </div>
         <div class="stat-card">
-            <div class="stat-card-icon warning" style="font-size: 1.75rem;">📈</div>
             <div class="stat-card-label">Rata-rata Invoice</div>
             <div class="stat-card-value">IDR {{ number_format($averageInvoice, 0, ',', '.') }}</div>
         </div>

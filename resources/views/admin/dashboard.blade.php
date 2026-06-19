@@ -9,46 +9,27 @@
     <section class="welcome-banner animate-fade-in-up" aria-label="Banner selamat datang">
       <div class="welcome-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-6);">
         <div>
-            <h2>Halo, Admin! 👋</h2>
+            <h2>Halo, Admin!</h2>
             <p>Kelola seluruh operasional sistem HMI Tour & Travel di sini.</p>
         </div>
-
-        <form action="{{ route('admin.user.access') }}" method="POST" style="display: flex; gap: var(--space-2); margin: 0; background: rgba(255,255,255,0.2); padding: var(--space-2); border-radius: var(--radius-lg); backdrop-filter: blur(8px);">
-            @csrf
-            <input
-                type="text"
-                name="referral_code"
-                placeholder="Akses Dashboard URL Kode..."
-                class="form-input"
-                style="width: 250px; border: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);"
-                required
-            >
-            <button type="submit" class="btn btn-secondary" style="border-color: white; color: white; background: rgba(255,255,255,0.2);">
-                🔍
-            </button>
-        </form>
       </div>
     </section>
 
     <!-- Stats Grid -->
     <section class="stats-grid animate-fade-in-up delay-1" aria-label="Statistik Admin">
         <div class="stat-card">
-            <div class="stat-card-icon success" style="font-size: 1.75rem;">💰</div>
             <div class="stat-card-label">Total Uang Kas Masuk</div>
             <div class="stat-card-value" style="color: var(--color-success);">IDR {{ number_format($totalRevenue, 0, ',', '.') }}</div>
         </div>
         <div class="stat-card">
-            <div class="stat-card-icon primary" style="font-size: 1.75rem;">📋</div>
             <div class="stat-card-label">Total Transaksi Bookings</div>
             <div class="stat-card-value">{{ $totalBookings }}</div>
         </div>
         <div class="stat-card">
-            <div class="stat-card-icon warning" style="font-size: 1.75rem;">⏳</div>
             <div class="stat-card-label">Menunggu Pembayaran</div>
             <div class="stat-card-value" style="color: var(--color-warning);">{{ $pendingPayments }}</div>
         </div>
         <div class="stat-card">
-            <div class="stat-card-icon info" style="font-size: 1.75rem;">🕋</div>
             <div class="stat-card-label">Pemesanan Tertunda</div>
             <div class="stat-card-value">{{ $pendingBookings }}</div>
         </div>
@@ -109,7 +90,7 @@
                                     @csrf
                                     <input type="hidden" name="referral_code" value="{{ $user->referral_code }}">
                                     <button type="submit" class="btn btn-secondary btn-sm">
-                                        🚀 Akses Dashboard
+                                        Akses Dashboard
                                     </button>
                                 </form>
                             </td>
@@ -120,7 +101,7 @@
             </div>
             @else
             <div class="card-body text-center" style="padding: var(--space-12);">
-                <div style="font-size: 2rem; margin-bottom: var(--space-3);">👥</div>
+
                 <p class="text-muted" style="margin: 0;">Belum ada user dengan kode referral.</p>
             </div>
             @endif

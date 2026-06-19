@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Dashboard User</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    .layout { display: flex; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Bars */
+    .bar { height: 14px; background: #F0F2F5; border-radius: 4px; }
+    .bar-lg { height: 44px; border-radius: 10px; }
+    .bar-md { height: 20px; }
+    .bar-sm { height: 10px; }
+    .bar-xs { height: 8px; }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      border-right: 2px dashed #ccc;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+    }
+    .sidebar-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: center;
+      padding: 14px;
+      border: 2px dashed #8B1A1A;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background: #FEF2F2;
+    }
+    .sidebar-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 12px;
+      padding-left: 8px;
+    }
+    .sidebar-item {
+      padding: 9px 14px;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #555;
+      background: #FAFAFA;
+    }
+    .sidebar-item.active {
+      border-color: #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .sidebar-bottom {
+      margin-top: auto;
+      padding: 10px;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      background: #FAFAFA;
+    }
+
+    /* ===== Main ===== */
+    .main {
+      flex: 1;
+      margin-left: 220px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #fff;
+      border-bottom: 2px dashed #ccc;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-title { font-size: 15px; font-weight: 700; color: #333; }
+    .header-sub { font-size: 11px; color: #999; }
+    .header-avatar {
+      width: 34px; height: 34px;
+      border: 2px dashed #ccc;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: #999;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 14px 28px;
+      border-top: 2px dashed #ccc;
+      text-align: center;
+      font-size: 10px;
+      color: #bbb;
+      background: #fff;
+    }
+
+    /* ===== Welcome Banner ===== */
+    .welcome-box {
+      border-color: #8B1A1A;
+      background: linear-gradient(135deg, #FEF2F2, #fff);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .welcome-text {
+      font-size: 13px;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .welcome-sub {
+      font-size: 11px;
+      color: #999;
+      margin-top: 4px;
+    }
+    .welcome-btn {
+      border: 2px dashed #8B1A1A;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8B1A1A;
+      background: #FEF2F2;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ===== Stats Grid ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .stat-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 18px 14px;
+      background: #fff;
+      text-align: center;
+    }
+    .stat-box-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat-box-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #555;
+    }
+    .stat-box:nth-child(1) { border-color: #333; }
+    .stat-box:nth-child(1) .stat-box-value { color: #333; }
+    .stat-box:nth-child(2) { border-color: #059669; }
+    .stat-box:nth-child(2) .stat-box-value { color: #059669; }
+    .stat-box:nth-child(3) { border-color: #DC2626; }
+    .stat-box:nth-child(3) .stat-box-value { color: #DC2626; }
+    .stat-box:nth-child(4) { border-color: #D97706; }
+
+    /* Badge placeholder */
+    .badge-placeholder {
+      display: inline-block;
+      border: 1.5px dashed #D97706;
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #D97706;
+    }
+
+    /* ===== Quick Actions ===== */
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .quick-box {
+      border: 1.5px dashed #ddd;
+      border-radius: 10px;
+      padding: 18px 14px;
+      text-align: center;
+      font-size: 12px;
+      color: #555;
+      font-weight: 600;
+      background: #fff;
+    }
+    .quick-box-sub {
+      font-size: 10px;
+      color: #999;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+    .quick-box:nth-child(1) { border-color: #8B1A1A; }
+    .quick-box:nth-child(2) { border-color: #2563EB; }
+    .quick-box:nth-child(3) { border-color: #059669; }
+
+    /* ===== Two Column Grid ===== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Card header */
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1.5px dashed #eee;
+    }
+    .card-head-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+    }
+    .card-head-action {
+      font-size: 10px;
+      color: #999;
+      border: 1px dashed #ccc;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    /* Progress Bar placeholder */
+    .progress-track {
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 65%;
+      background: #8B1A1A;
+      border-radius: 20px;
+      opacity: 0.3;
+    }
+    .progress-percent {
+      font-size: 26px;
+      font-weight: 700;
+      color: #8B1A1A;
+    }
+    .progress-sub {
+      font-size: 11px;
+      color: #999;
+    }
+    .progress-details {
+      display: flex;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    .progress-detail-item {
+      flex: 1;
+    }
+    .progress-detail-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .progress-detail-value {
+      height: 14px;
+      background: #F0F2F5;
+      border-radius: 4px;
+      width: 80%;
+    }
+
+    /* Transaction list */
+    .tx-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed #eee;
+    }
+    .tx-item:last-child { border-bottom: none; }
+    .tx-left { display: flex; flex-direction: column; gap: 3px; }
+    .tx-bar { height: 12px; background: #F0F2F5; border-radius: 3px; }
+    .tx-bar-sm { height: 8px; background: #F0F2F5; border-radius: 3px; }
+    .tx-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .tx-badge {
+      display: inline-block;
+      border: 1px dashed #ccc;
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 8px;
+      font-weight: 600;
+      color: #999;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .content { padding: 16px; }
+      .header { padding: 12px 16px; }
+      .quick-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">HMI Tour<br><span style="font-size:10px;font-weight:400;color:#999;">Payment System</span></div>
+
+    <div class="sidebar-label">Menu Utama</div>
+    <div class="sidebar-item active">Dashboard</div>
+    <div class="sidebar-item">Bayar Sekarang</div>
+    <div class="sidebar-item">Travel Invoices</div>
+
+    <div class="sidebar-label">Akun</div>
+    <div class="sidebar-item">Profil Saya</div>
+
+    <div class="sidebar-bottom">Logout</div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div>
+        <div class="header-title">Dashboard</div>
+        <div class="header-sub">Pantau pembayaran tour Anda</div>
+      </div>
+      <div class="header-avatar">US</div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- Welcome Banner -->
+      <div class="welcome-box box">
+        <span class="box-label">Welcome Banner</span>
+        <div>
+          <div class="welcome-text">Halo, User!</div>
+          <div class="welcome-sub">Pantau progress pembayaran tour Anda dan lakukan pembayaran dengan mudah.</div>
+        </div>
+        <div class="welcome-btn">Bayar Sekarang</div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-box-title">Total Tagihan</div>
+          <div class="stat-box-value">Rp xxx</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title">Sudah Dibayar</div>
+          <div class="stat-box-value">Rp xxx</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title">Sisa Tagihan</div>
+          <div class="stat-box-value">Rp xxx</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-title">Status</div>
+          <div style="margin-top: 4px;">
+            <span class="badge-placeholder">Belum Lunas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="box" style="padding: 20px;">
+        <span class="box-label">Aksi Cepat</span>
+        <div class="quick-grid">
+          <div class="quick-box">
+            Bayar Sekarang
+            <div class="quick-box-sub">Lakukan pembayaran cicilan tour</div>
+          </div>
+          <div class="quick-box">
+            Travel Invoices
+            <div class="quick-box-sub">Lihat & cetak invoice pembayaran</div>
+          </div>
+          <div class="quick-box">
+            Profil Saya
+            <div class="quick-box-sub">Kelola informasi akun Anda</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two Column: Progress + Transaksi -->
+      <div class="two-col">
+
+        <!-- Progress Pembayaran -->
+        <div class="box" style="padding: 20px;">
+          <span class="box-label">Progress Pembayaran</span>
+          <div class="card-head">
+            <span class="card-head-title">Progress Pembayaran</span>
+            <span class="card-head-action">Aktif</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="progress-percent">xx%</span>
+            <span class="progress-sub">terbayar</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+          <div class="progress-details">
+            <div class="progress-detail-item">
+              <div class="progress-detail-label">Dibayar</div>
+              <div class="progress-detail-value"></div>
+            </div>
+            <div class="progress-detail-item">
+              <div class="progress-detail-label">Total</div>
+              <div class="progress-detail-value"></div>
+            </div>
+            <div class="progress-detail-item">
+              <div class="progress-detail-label">Sisa</div>
+              <div class="progress-detail-value"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transaksi Terbaru -->
+        <div class="box" style="padding: 20px;">
+          <span class="box-label">Transaksi Terbaru</span>
+          <div class="card-head">
+            <span class="card-head-title">Transaksi Terbaru</span>
+            <span class="card-head-action">Lihat Semua</span>
+          </div>
+
+          <div class="tx-item">
+            <div class="tx-left">
+              <div class="tx-bar" style="width: 120px;"></div>
+              <div class="tx-bar-sm" style="width: 80px;"></div>
+            </div>
+            <div class="tx-right">
+              <div class="tx-bar" style="width: 90px;"></div>
+              <span class="tx-badge">Terverifikasi</span>
+            </div>
+          </div>
+
+          <div class="tx-item">
+            <div class="tx-left">
+              <div class="tx-bar" style="width: 100px;"></div>
+              <div class="tx-bar-sm" style="width: 70px;"></div>
+            </div>
+            <div class="tx-right">
+              <div class="tx-bar" style="width: 85px;"></div>
+              <span class="tx-badge">Pending</span>
+            </div>
+          </div>
+
+          <div class="tx-item">
+            <div class="tx-left">
+              <div class="tx-bar" style="width: 110px;"></div>
+              <div class="tx-bar-sm" style="width: 75px;"></div>
+            </div>
+            <div class="tx-right">
+              <div class="tx-bar" style="width: 80px;"></div>
+              <span class="tx-badge">Terverifikasi</span>
+            </div>
+          </div>
+
+          <div class="tx-item">
+            <div class="tx-left">
+              <div class="tx-bar" style="width: 95px;"></div>
+              <div class="tx-bar-sm" style="width: 65px;"></div>
+            </div>
+            <div class="tx-right">
+              <div class="tx-bar" style="width: 75px;"></div>
+              <span class="tx-badge">Ditolak</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      &copy; 2026 HMI Tour Travel - Payment System
+    </footer>
+
+  </div>
+</div>
+
+</body>
+</html>
