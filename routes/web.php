@@ -78,12 +78,22 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/bookings/{id}/payments', [BookingOrderController::class, 'storePayment'])->name('admin.bookings.store_payment');
 
     // 5b. Riwayat Semua Pembayaran
+    Route::get('/payments/create', [PaymentController::class, 'create'])->name('admin.payments.create');
+    Route::post('/payments', [PaymentController::class, 'store'])->name('admin.payments.store');
+    Route::get('/payments/{id}/edit', [PaymentController::class, 'edit'])->name('admin.payments.edit');
+    Route::put('/payments/{id}', [PaymentController::class, 'update'])->name('admin.payments.update');
+    Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->name('admin.payments.destroy');
     Route::get('/payments', [PaymentController::class, 'index'])->name('admin.payments.index');
     Route::post('/payments/{id}/status', [PaymentController::class, 'updateStatus'])->name('admin.payments.updateStatus');
     Route::get('/payments/export', [PaymentController::class, 'export'])->name('admin.payments.export');
     Route::get('/payments/export/pdf', [PaymentController::class, 'exportPdf'])->name('admin.payments.export_pdf');
 
     // 5c. Invoice Dashboard
+    Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('admin.invoice.create');
+    Route::post('/invoice', [InvoiceController::class, 'store'])->name('admin.invoice.store');
+    Route::get('/invoice/{id}/edit', [InvoiceController::class, 'edit'])->name('admin.invoice.edit');
+    Route::put('/invoice/{id}', [InvoiceController::class, 'update'])->name('admin.invoice.update');
+    Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy'])->name('admin.invoice.destroy');
     Route::get('/invoice', [InvoiceController::class, 'index'])->name('admin.invoice.index');
     Route::get('/invoice/{id}', [InvoiceController::class, 'show'])->name('admin.invoice.show');
     Route::get('/invoice/{id}/print', [InvoiceController::class, 'print'])->name('admin.invoice.print');
@@ -110,11 +120,12 @@ Route::middleware(['auth', 'leader'])->prefix('leader')->group(function () {
     // Dashboard Utama Leader
     Route::get('/dashboard', [LeaderDashboardController::class, 'index'])->name('leader.dashboard');
 
-    // Halaman Leader dengan struktur fungsi/index + fungsi/crud_lain
+    // Halaman Leader dengan struktur fungsi/index + fungsi/manage dll
     Route::get('/members', [LeaderDashboardController::class, 'members'])->name('leader.members.index');
-    Route::get('/members/crud', [LeaderDashboardController::class, 'membersCrud'])->name('leader.members.crud');
+    Route::get('/members/manage', [LeaderDashboardController::class, 'membersManage'])->name('leader.members.manage');
     Route::get('/reports', [LeaderDashboardController::class, 'reports'])->name('leader.reports.index');
-    Route::get('/reports/crud', [LeaderDashboardController::class, 'reportsCrud'])->name('leader.reports.crud');
+    Route::get('/reports/analytics', [LeaderDashboardController::class, 'reportsAnalytics'])->name('leader.reports.analytics');
+    Route::get('/reports/export', [LeaderDashboardController::class, 'reportsExport'])->name('leader.reports.export');
 
     // Generate ulang kode referral
     Route::post('/referral/regenerate', [LeaderDashboardController::class, 'regenerateReferral'])->name('leader.referral.regenerate');

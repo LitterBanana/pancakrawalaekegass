@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Payment;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\Package;
+use App\Models\PackagePrice;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 class InvoiceController extends Controller
 {
     /**
@@ -95,5 +99,122 @@ class InvoiceController extends Controller
     public function download($id)
     {
         return redirect()->route('admin.invoice.print', $id);
+    }
+
+    public function create()
+    {
+        $users = User::orderBy('name')->get();
+        $packages = Package::with('prices')->get();
+        return view('admin.invoice.create', compact('users', 'packages'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'nullable|exists:users,id',
+            'customer_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required_without:user_id|nullable|email|unique:users,email',
+            'package_id' => 'required|exists:packages,id',
+            'package_price_id' => 'required|exists:package_prices,id',
+            'jumlah_orang' => 'required|integer|min:1',
+            'status' => 'required|in:pending,dicicil,paid,cancel',
+        ], [
+            'email.required_without' => 'Email wajib diisi jika Anda membuat pengguna baru.',
+            'email.unique' => 'Email sudah terdaftar di sistem, silakan pilih user yang sudah ada.',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $userId = $request->user_id;
+
+            if (empty($userId)) {
+                $user = User::create([
+                    'name' => $request->customer_name,
+                    'email' => $request->email,
+                    'password' => Hash::make('password123'),
+                    'role' => 'user',
+                    'referral_code' => User::generateReferralCode(),
+                ]);
+                $userId = $user->id;
+            } else {
+                $user = User::find($userId);
+            }
+
+            $packagePrice = PackagePrice::findOrFail($request->package_price_id);
+            $totalPrice = $packagePrice->price * $request->jumlah_orang;
+
+            $booking = Booking::create([
+                'user_id' => $userId,
+                'package_id' => $request->package_id,
+                'package_price_id' => $request->package_price_id,
+                'customer_name' => $request->customer_name,
+                'phone' => $request->phone,
+                'email' => $request->email ?? ($user->email ?? null),
+                'jumlah_orang' => $request->jumlah_orang,
+                'total_price' => $totalPrice,
+                'status' => $request->status,
+                'addons' => json_encode([]),
+                'usd_rate' => 15000, 
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('admin.invoice.index')->with('success', 'Invoice berhasil dibuat.');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Gagal membuat invoice: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function edit($id)
+    {
+        $invoice = Booking::findOrFail($id);
+        $users = User::orderBy('name')->get();
+        $packages = Package::with('prices')->get();
+
+        return view('admin.invoice.edit', compact('invoice', 'users', 'packages'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $invoice = Booking::findOrFail($id);
+
+        $request->validate([
+            'customer_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'package_id' => 'required|exists:packages,id',
+            'package_price_id' => 'required|exists:package_prices,id',
+            'jumlah_orang' => 'required|integer|min:1',
+            'status' => 'required|in:pending,dicicil,paid,cancel',
+        ]);
+
+        $packagePrice = PackagePrice::findOrFail($request->package_price_id);
+        $totalPrice = $packagePrice->price * $request->jumlah_orang;
+
+        $invoice->update([
+            'package_id' => $request->package_id,
+            'package_price_id' => $request->package_price_id,
+            'customer_name' => $request->customer_name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'jumlah_orang' => $request->jumlah_orang,
+            'total_price' => $totalPrice,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('admin.invoice.index')->with('success', 'Invoice berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $invoice = Booking::findOrFail($id);
+        
+        $invoice->payments()->delete();
+        $invoice->delete();
+
+        return redirect()->route('admin.invoice.index')->with('success', 'Invoice berhasil dihapus.');
     }
 }

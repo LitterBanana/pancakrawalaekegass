@@ -20,14 +20,14 @@
     <div class="flex min-h-screen">
         
         <!-- ================= HERO SIDE (Kiri) ================= -->
-        <section class="hidden lg:flex lg:w-1/2 relative bg-dark-bg overflow-hidden group">
+        <section class="hidden lg:flex lg:w-1/2 relative bg-slate-900 overflow-hidden group">
             <!-- Gambar Background (Diganti URL Unsplash untuk preview, ganti dengan asset lokal Anda) -->
             <img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=1400&auto=format&fit=crop" 
                  alt="Umroh HMI Tour" 
                  class="absolute inset-0 w-full h-full object-center opacity-100 mix-blend-overlay group-hover:scale-105 transition-transform duration-1000 ease-in-out">
             
             <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-bg/95 via-dark-bg/50 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent"></div>
             
             <!-- Content -->
             <div class="relative z-10 flex flex-col justify-end p-12 lg:p-20 w-full">

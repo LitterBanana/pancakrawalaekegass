@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.user')
 
 @section('title', 'Dashboard — HMI Tour Travel')
 @section('description', 'Dashboard HMI Tour Travel - Pantau pembayaran tour Anda')

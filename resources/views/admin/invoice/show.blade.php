@@ -41,7 +41,7 @@
                             <tbody>
                                 @forelse($invoice->payments as $payment)
                                     <tr>
-                                        <td>{{ $payment->payment_date->format('d M Y') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d M Y') }}</td>
                                         <td>IDR {{ number_format($payment->amount, 0, ',', '.') }}</td>
                                         <td>{{ ucfirst($payment->payment_method) }} {{ $payment->bank_name ? '('.$payment->bank_name.')' : '' }}</td>
                                         <td>

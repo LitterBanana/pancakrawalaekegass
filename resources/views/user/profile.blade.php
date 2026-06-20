@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.user')
 
 @section('title', 'Profil Saya — HMI Tour Travel')
 @section('description', 'Profil Anggota - HMI Tour Travel')

@@ -25,7 +25,7 @@
     <div class="flex min-h-screen">
         <!-- Sidebar Container -->
         <div id="sidebarContainer" class="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col">
-            @include('user.partials.sidebar')
+            @include('layouts.partials.user_sidebar')
         </div>
 
         <!-- Main Content -->

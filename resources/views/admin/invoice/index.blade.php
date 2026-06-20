@@ -26,14 +26,17 @@
     <div class="card animate-fade-in-up delay-1">
         <div class="card-header">
             <h3 class="section-title text-lg">Daftar Invoice</h3>
-            <form action="{{ route('admin.invoice.index') }}" method="GET" class="flex gap-2 m-0">
-                <select name="status" class="form-select w-auto text-xs px-3 py-2 pr-8">
-                    <option value="">Semua Status</option>
-                    <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Lunas</option>
-                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                </select>
-                <button type="submit" class="btn btn-primary btn-sm">Filter</button>
-            </form>
+            <div class="flex items-center gap-3">
+                <form action="{{ route('admin.invoice.index') }}" method="GET" class="flex gap-2 m-0 items-center">
+                    <select name="status" class="form-select w-auto text-xs px-3 py-2 pr-8">
+                        <option value="">Semua Status</option>
+                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Lunas</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+                </form>
+                <a href="{{ route('admin.invoice.create') }}" class="btn btn-secondary btn-sm">Tambah Invoice</a>
+            </div>
         </div>
         <div class="table-container">
             <table class="data-table">
@@ -62,9 +65,15 @@
                                 @else <span class="badge badge-danger">Batal</span> @endif
                             </td>
                             <td>
-                                <div class="flex gap-2">
+                                <div class="flex gap-2 items-center">
                                     <a href="{{ route('admin.invoice.show', $invoice->id) }}" class="btn btn-ghost btn-sm">Detail</a>
-                                    <a href="{{ route('admin.invoice.print', $invoice->id) }}" target="_blank" class="btn btn-secondary btn-sm">Cetak</a>
+                                    <a href="{{ route('admin.invoice.edit', $invoice->id) }}" class="btn btn-ghost btn-sm">Edit</a>
+                                    <a href="{{ route('admin.invoice.print', $invoice->id) }}" target="_blank" class="btn btn-ghost btn-sm">Cetak</a>
+                                    <form action="{{ route('admin.invoice.destroy', $invoice->id) }}" method="POST" class="m-0" onsubmit="return confirm('Yakin ingin menghapus invoice ini? Data pembayaran terkait juga akan terhapus.')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

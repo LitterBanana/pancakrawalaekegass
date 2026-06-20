@@ -24,7 +24,7 @@
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Sidebar -->
-    @include('admin.partials.sidebar')
+    @include('layouts.partials.admin_sidebar')
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">

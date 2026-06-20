@@ -1,4 +1,4 @@
-@extends('user.layouts.app')
+@extends('layouts.user')
 
 @section('title', 'Travel Invoices — HMI Tour Travel')
 @section('description', 'Travel Invoices - HMI Tour Travel')

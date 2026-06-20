@@ -30,6 +30,7 @@
                 <p class="m-0 text-gray-500">Kelola semua permintaan pembayaran jamaah dengan filter cepat dan ekspor laporan.</p>
             </div>
             <div class="flex flex-wrap gap-3">
+                <a href="{{ route('admin.payments.create') }}" class="btn btn-primary btn-sm">Tambah Pembayaran</a>
                 <a href="{{ route('admin.payments.export', request()->all()) }}" class="btn btn-success btn-sm">Export Excel</a>
                 <a href="{{ route('admin.payments.export_pdf', request()->all()) }}" target="_blank" class="btn btn-secondary btn-sm">Export PDF</a>
             </div>
@@ -104,8 +105,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="flex gap-3 flex-wrap justify-end">
+                                    <div class="flex gap-2 items-center justify-end">
                                         <a href="{{ route('admin.bookings.show', $payment->booking_id) }}" class="btn btn-ghost btn-sm">Detail</a>
+                                        <a href="{{ route('admin.payments.edit', $payment->id) }}" class="btn btn-ghost btn-sm">Edit</a>
+                                        <form action="{{ route('admin.payments.destroy', $payment->id) }}" method="POST" class="m-0" onsubmit="return confirm('Yakin ingin menghapus pembayaran ini? Status pesanan akan otomatis disesuaikan.')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
 
                                         @if($payment->status === 'belum_lunas')
                                             <form action="{{ route('admin.payments.updateStatus', $payment->id) }}" method="POST" class="m-0">

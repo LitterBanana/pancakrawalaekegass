@@ -70,14 +70,14 @@ class LeaderDashboardController extends Controller
         return view('leader.members.index', compact('leader', 'members'));
     }
 
-    public function membersCrud()
+    public function membersManage()
     {
         $leader = Auth::user();
 
         // Gunakan paginate agar view bisa memanggil ->total()
         $members = $leader->referrals()->latest()->paginate(15);
 
-        return view('leader.members.crud', compact('leader', 'members'));
+        return view('leader.members.manage', compact('leader', 'members'));
     }
 
     public function reports()
@@ -141,7 +141,7 @@ class LeaderDashboardController extends Controller
         ));
     }
 
-    public function reportsCrud()
+    public function reportsAnalytics()
     {
         $leader = Auth::user();
 
@@ -205,7 +205,12 @@ class LeaderDashboardController extends Controller
             ->take(5)
             ->values();
 
-        return view('leader.reports.crud', compact('monthlyData', 'topDownlines'));
+        return view('leader.reports.analytics', compact('monthlyData', 'topDownlines'));
+    }
+
+    public function reportsExport()
+    {
+        return view('leader.reports.export');
     }
 
     /**
@@ -330,7 +335,7 @@ class LeaderDashboardController extends Controller
         $totalBookings   = $commissionItems->count();
         $totalMonths     = $groupedByMonth->count();
 
-        return view('leader.invoices', compact(
+        return view('leader.invoices.index', compact(
             'leader',
             'groupedByMonth',
             'totalCommission',

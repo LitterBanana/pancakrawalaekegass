@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Profil Leader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cell-bar {
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    /* Page Section */
+    .page-section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    /* Layout with sidebar hint */
+    .layout-hint {
+      display: flex;
+      gap: 20px;
+      min-height: 480px;
+    }
+    .sidebar-hint {
+      width: 200px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sidebar-hint-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: center;
+      padding: 12px;
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      background: #FEF2F2;
+      margin-bottom: 8px;
+    }
+    .sidebar-hint-item {
+      padding: 8px 12px;
+      border: 1px dashed #ddd;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #777;
+      background: #FAFAFA;
+    }
+    .sidebar-hint-item.active {
+      border-color: #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .sidebar-hint-label {
+      font-size: 8px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+      padding-left: 6px;
+    }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Profile Header Box */
+    .profile-header-box {
+      border: 2px dashed #8B1A1A;
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+    .profile-cover {
+      height: 100px;
+      background: #FCE7F3;
+      border-bottom: 1.5px dashed #ccc;
+    }
+    .profile-info {
+      padding: 0 24px 20px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+      margin-top: -30px;
+    }
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      background: #fff;
+      border: 2px dashed #8B1A1A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #8B1A1A;
+      position: relative;
+      z-index: 10;
+    }
+    .profile-details {
+      flex: 1;
+      padding-bottom: 4px;
+    }
+    .profile-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .profile-badge {
+      border: 1px dashed #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .profile-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+      color: #777;
+    }
+
+    /* Ribbon Stats */
+    .ribbon-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      background: #FAFAFA;
+      border: 1.5px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .ribbon-item {
+      text-align: center;
+      border-right: 1px dashed #ddd;
+    }
+    .ribbon-item:last-child {
+      border-right: none;
+    }
+    .ribbon-val {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+    }
+    .ribbon-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Two Columns */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Common Card */
+    .card-head {
+      display: flex;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1.5px dashed #eee;
+    }
+    .card-head-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    /* List Rows */
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed #f0f0f0;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-label {
+      font-size: 11px;
+      color: #999;
+    }
+    .info-value {
+      font-size: 11px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* Referral Box */
+    .ref-box {
+      border: 1.5px dashed #8B1A1A;
+      background: #FEF2F2;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .ref-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .ref-input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .ref-input {
+      flex: 1;
+      border: 1px dashed #ccc;
+      background: #fff;
+      border-radius: 4px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #333;
+    }
+    .ref-btn {
+      border: 1px dashed #8B1A1A;
+      border-radius: 4px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      background: #fff;
+    }
+
+    /* Booking Section */
+    .booking-cover {
+      background: #FCE7F3;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1.5px dashed #ccc;
+    }
+    .booking-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #8B1A1A;
+      margin-bottom: 4px;
+    }
+    .booking-sub {
+      font-size: 10px;
+      color: #777;
+    }
+    .booking-badge {
+      display: inline-block;
+      margin-top: 8px;
+      border: 1px dashed #059669;
+      background: #ECFDF5;
+      color: #059669;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    /* Progress bar */
+    .prog-section {
+      margin-top: 16px;
+    }
+    .prog-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+    .prog-track {
+      height: 8px;
+      background: #F0F2F5;
+      border-radius: 4px;
+    }
+    .prog-bar {
+      height: 100%;
+      width: 60%;
+      background: #8B1A1A;
+      border-radius: 4px;
+    }
+
+    /* Small Stats inside Booking */
+    .b-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .b-stat-box {
+      border: 1px dashed #ddd;
+      background: #FAFAFA;
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .layout-hint { flex-direction: column; }
+      .sidebar-hint { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .profile-info { flex-direction: column; align-items: center; text-align: center; margin-top: -35px; }
+      .profile-name { justify-content: center; flex-wrap: wrap; }
+      .profile-meta { justify-content: center; }
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================== -->
+  <!-- PAGE: PROFIL LEADER                -->
+  <!-- ================================== -->
+  <div class="page-section">
+    <div class="page-title">Profil Saya (Leader)</div>
+    <div class="page-subtitle">Layout: Sidebar Leader + Profil Header + Ribbon Stats + Grid 2 Kolom (Info Akun & Booking)</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR LEADER</div>
+        <div class="sidebar-hint-label">Menu Utama</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item">Anggota Tim</div>
+        <div class="sidebar-hint-item">Laporan Penjualan</div>
+        <div class="sidebar-hint-item">Analitik</div>
+        <div class="sidebar-hint-item">Invoice Downline</div>
+        <div class="sidebar-hint-label">Akun</div>
+        <div class="sidebar-hint-item active">Profil Saya</div>
+      </div>
+
+      <!-- Main -->
+      <div class="main-area">
+
+        <!-- 1. Profile Header Box -->
+        <div class="profile-header-box">
+          <div class="profile-cover"></div>
+          <div class="profile-info">
+            <div class="profile-avatar">AA</div>
+            <div class="profile-details">
+              <div class="profile-name">
+                Nama Leader Lengkap <span class="profile-badge">Leader</span>
+              </div>
+              <div class="profile-meta">
+                <span>email@example.com</span>
+                <span>•</span>
+                <span>HMI-001</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Ribbon Stats -->
+        <div class="ribbon-stats">
+          <div class="ribbon-item">
+            <div class="ribbon-val">xx</div>
+            <div class="ribbon-label">Total Downline</div>
+          </div>
+          <div class="ribbon-item">
+            <div class="ribbon-val">xx</div>
+            <div class="ribbon-label">Booking Aktif</div>
+          </div>
+          <div class="ribbon-item">
+            <div class="ribbon-val">dd mmm yyyy</div>
+            <div class="ribbon-label">Bergabung Sejak</div>
+          </div>
+        </div>
+
+        <!-- 3. Profile Grid -->
+        <div class="profile-grid">
+          
+          <!-- Column 1: Informasi Akun -->
+          <div class="box" style="padding: 20px;">
+            <span class="box-label">Data Akun</span>
+            <div class="card-head">
+              <span class="card-head-title">Informasi Akun</span>
+            </div>
+            
+            <div class="info-row">
+              <span class="info-label">Nama Lengkap</span>
+              <span class="info-value">Nama Leader Lengkap</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Email</span>
+              <span class="info-value">email@example.com</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Role</span>
+              <span class="profile-badge">Leader</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Bergabung</span>
+              <span class="info-value">dd mmm yyyy</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Direkrut Oleh</span>
+              <span class="info-value" style="color: #8B1A1A;">Nama Upline</span>
+            </div>
+
+            <!-- Referral Section -->
+            <div class="ref-box">
+              <div class="ref-label">Kode Referral Saya</div>
+              
+              <div class="ref-input-group">
+                <div class="ref-input" style="font-family: monospace;">REF-XXXXX</div>
+                <div class="ref-btn">Salin</div>
+              </div>
+              
+              <div class="ref-input-group">
+                <div class="ref-input" style="font-weight: 400; font-size: 11px;">https://domain.com/login?ref=REF...</div>
+                <div class="ref-btn">Link</div>
+              </div>
+
+              <div class="ref-btn" style="width: max-content; padding: 6px 12px; margin-top: 10px;">Generate Ulang</div>
+            </div>
+          </div>
+
+          <!-- Column 2: Info Paket / Booking Pribadi -->
+          <div class="box" style="padding: 20px;">
+            <span class="box-label">Booking Pribadi</span>
+            
+            <div class="booking-cover">
+              <div class="booking-title">Paket Umroh Reguler</div>
+              <div class="booking-sub">Keberangkatan: dd mmm yyyy</div>
+              <div class="booking-badge">Cicilan Berjalan</div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Jenis Paket</span>
+              <span class="info-value">Reguler</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Jenis Kamar</span>
+              <span class="info-value">Quad</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Jumlah Orang</span>
+              <span class="info-value">2 orang</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Total Tagihan</span>
+              <span class="info-value" style="color: #8B1A1A;">Rp xxx.xxx.xxx</span>
+            </div>
+
+            <!-- Progress -->
+            <div class="prog-section">
+              <div class="prog-header">
+                <span style="color: #999;">Progress Pembayaran</span>
+                <span style="color: #8B1A1A; font-weight: 700;">60%</span>
+              </div>
+              <div class="prog-track">
+                <div class="prog-bar"></div>
+              </div>
+            </div>
+
+            <div class="b-stats">
+              <div class="b-stat-box">
+                <div style="font-size: 8px; color: #999; text-transform: uppercase;">Sudah Dibayar</div>
+                <div style="font-size: 12px; font-weight: 700; color: #059669; margin-top: 4px;">Rp xxx</div>
+              </div>
+              <div class="b-stat-box">
+                <div style="font-size: 8px; color: #999; text-transform: uppercase;">Sisa Tagihan</div>
+                <div style="font-size: 12px; font-weight: 700; color: #DC2626; margin-top: 4px;">Rp xxx</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 40px;"></div>
+
+</body>
+</html>

@@ -89,7 +89,7 @@
                 </div>
                 <div class="text-gray-400 group-hover:text-[#8B1A1A] transition-colors text-xl font-bold">&rarr;</div>
             </a>
-            <a href="{{ route('leader.reports.crud') }}" class="group bg-white rounded-xl p-6 border border-gray-200 shadow-sm flex items-center justify-between cursor-pointer transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-[#8B1A1A] no-underline">
+            <a href="{{ route('leader.reports.analytics') }}" class="group bg-white rounded-xl p-6 border border-gray-200 shadow-sm flex items-center justify-between cursor-pointer transition-all duration-300 hover:shadow-md hover:-translate-y-1 hover:border-[#8B1A1A] no-underline">
                 <div class="text-left">
                     <div class="text-lg font-bold text-gray-900 mb-1">Analitik</div>
                     <p class="text-sm text-gray-500 mb-0">Lihat data laporan lebih detail</p>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Laporan & Analitik Leader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cell-bar {
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    /* Page Section */
+    .page-section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .page-section + .page-section {
+      border-top: 3px dashed #ddd;
+    }
+    .page-number {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    /* Layout with sidebar hint */
+    .layout-hint {
+      display: flex;
+      gap: 20px;
+      min-height: 480px;
+    }
+    .sidebar-hint {
+      width: 200px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sidebar-hint-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: center;
+      padding: 12px;
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      background: #FEF2F2;
+      margin-bottom: 8px;
+    }
+    .sidebar-hint-item {
+      padding: 8px 12px;
+      border: 1px dashed #ddd;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #777;
+      background: #FAFAFA;
+    }
+    .sidebar-hint-item.active {
+      border-color: #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header hint */
+    .header-hint {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 14px 20px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-hint-title { font-size: 14px; font-weight: 700; color: #333; }
+    .header-hint-sub { font-size: 10px; color: #999; }
+
+    /* Stats Grid */
+    .stats-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .stat-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+    }
+    .stat-box-title {
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .stat-box-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #555;
+    }
+    .stat-box:nth-child(1) { border-color: #8B1A1A; }
+    .stat-box:nth-child(1) .stat-box-value { color: #8B1A1A; }
+
+    /* Card head */
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1.5px dashed #eee;
+    }
+    .card-head-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+    }
+    .card-head-sub {
+      font-size: 10px;
+      color: #999;
+      margin-top: 2px;
+    }
+    .card-head-badge {
+      border: 1.5px dashed #059669;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #059669;
+      background: #ECFDF5;
+    }
+
+    /* Table Placeholder */
+    .table-placeholder {
+      width: 100%;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table-head {
+      background: #F7F8FA;
+      display: flex;
+      padding: 10px 14px;
+      gap: 6px;
+    }
+    .table-head span {
+      flex: 1;
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .table-row {
+      display: flex;
+      padding: 12px 14px;
+      gap: 6px;
+      border-top: 1px dashed #eee;
+      align-items: center;
+    }
+    .table-foot {
+      background: #F7F8FA;
+      display: flex;
+      padding: 14px;
+      gap: 6px;
+      border-top: 2px dashed #ddd;
+      align-items: center;
+    }
+    .table-foot-total-label {
+      flex: 3;
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+    }
+    .table-foot-total-val1 {
+      flex: 1;
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+      text-align: center;
+    }
+    .table-foot-empty {
+      flex: 1;
+    }
+    .table-foot-total-val2 {
+      flex: 1;
+      font-size: 12px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: right;
+    }
+
+    /* Bar Chart Placeholder */
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+    .chart-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chart-label {
+      width: 60px;
+      font-size: 10px;
+      color: #999;
+      text-align: right;
+    }
+    .chart-track {
+      flex: 1;
+      height: 24px;
+      background: #F0F2F5;
+      border-radius: 6px;
+      position: relative;
+    }
+    .chart-bar {
+      height: 100%;
+      border-radius: 6px;
+      background: rgba(139, 26, 26, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+    .chart-bar.blue { background: rgba(37, 99, 235, 0.4); }
+    .chart-val {
+      width: 80px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #555;
+      text-align: right;
+    }
+
+    /* Rank List */
+    .rank-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 8px;
+    }
+    .rank-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: #FAFAFA;
+      border: 1px dashed #eee;
+      border-radius: 8px;
+    }
+    .rank-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .rank-badge.rank-1 { background: #FEF3C7; color: #92400E; }
+    .rank-badge.rank-2 { background: #F3F4F6; color: #374151; }
+    .rank-badge.rank-3 { background: #FFEDD5; color: #9A3412; }
+    .rank-badge.rank-other { background: #F9FAFB; color: #6B7280; }
+    .rank-info { flex: 1; }
+    .rank-val {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8B1A1A;
+    }
+
+    /* Grid for Analitik */
+    .analitik-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .analitik-col-full { grid-column: span 2; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .layout-hint { flex-direction: column; }
+      .sidebar-hint { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .stats-grid-3 { grid-template-columns: 1fr; }
+      .analitik-grid { grid-template-columns: 1fr; }
+      .analitik-col-full { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================== -->
+  <!-- PAGE 1: LAPORAN PENJUALAN (INDEX)  -->
+  <!-- ================================== -->
+  <div class="page-section">
+    <div class="page-number">Halaman 1 dari 2</div>
+    <div class="page-title">Laporan Penjualan</div>
+    <div class="page-subtitle">Layout: Sidebar Leader + Header + 3 Stats + Tabel Komisi</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR LEADER</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item">Anggota Tim</div>
+        <div class="sidebar-hint-item active">Laporan Penjualan</div>
+        <div class="sidebar-hint-item">Analitik</div>
+        <div class="sidebar-hint-item">Invoice Downline</div>
+      </div>
+
+      <!-- Main -->
+      <div class="main-area">
+        <!-- Header -->
+        <div class="header-hint">
+          <div>
+            <div class="header-hint-title">Laporan Penjualan</div>
+            <div class="header-hint-sub">Ringkasan komisi dari downline yang sudah melunasi pembayaran</div>
+          </div>
+          <div style="width:30px;height:30px;border:1.5px dashed #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#999;">LR</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid-3">
+          <div class="stat-box">
+            <div class="stat-box-title">Total Komisi</div>
+            <div class="stat-box-value">Rp xxx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Komisi Bulan Ini</div>
+            <div class="stat-box-value">Rp xxx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Total Jamaah Lunas</div>
+            <div class="stat-box-value">xx</div>
+          </div>
+        </div>
+
+        <!-- Table: Rekap Komisi -->
+        <div class="box" style="padding: 20px;">
+          <span class="box-label">Tabel Komisi</span>
+          <div class="card-head">
+            <span class="card-head-title">Rekap Komisi per Booking</span>
+            <div class="card-head-badge">Rp 200.000 / orang</div>
+          </div>
+          <div class="table-placeholder">
+            <div class="table-head">
+              <span style="flex: 0.5;">#</span>
+              <span>Jamaah</span>
+              <span>Paket</span>
+              <span style="text-align: center;">Jumlah Orang</span>
+              <span>Tgl. Lunas</span>
+              <span style="text-align: right;">Komisi</span>
+            </div>
+            <div class="table-row">
+              <span style="flex: 0.5; font-size: 10px; color: #999;">1</span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span style="flex: 1; text-align: center; font-size: 11px; font-weight: 600;">2</span>
+              <span class="cell-bar"></span>
+              <span style="flex: 1; text-align: right; font-size: 11px; font-weight: 700; color: #059669;">Rp 400.000</span>
+            </div>
+            <div class="table-row">
+              <span style="flex: 0.5; font-size: 10px; color: #999;">2</span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span style="flex: 1; text-align: center; font-size: 11px; font-weight: 600;">1</span>
+              <span class="cell-bar"></span>
+              <span style="flex: 1; text-align: right; font-size: 11px; font-weight: 700; color: #059669;">Rp 200.000</span>
+            </div>
+            <div class="table-row">
+              <span style="flex: 0.5; font-size: 10px; color: #999;">3</span>
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span style="flex: 1; text-align: center; font-size: 11px; font-weight: 600;">3</span>
+              <span class="cell-bar"></span>
+              <span style="flex: 1; text-align: right; font-size: 11px; font-weight: 700; color: #059669;">Rp 600.000</span>
+            </div>
+            
+            <div class="table-foot">
+              <span class="table-foot-total-label">TOTAL</span>
+              <span class="table-foot-total-val1">6</span>
+              <span class="table-foot-empty"></span>
+              <span class="table-foot-total-val2">Rp 1.200.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================== -->
+  <!-- PAGE 2: ANALITIK (CRUD / CHART)    -->
+  <!-- ================================== -->
+  <div class="page-section">
+    <div class="page-number">Halaman 2 dari 2</div>
+    <div class="page-title">Analitik</div>
+    <div class="page-subtitle">Layout: Sidebar Leader + Header + Grid (Bar Chart Revenue, Bar Chart Anggota, Rank List)</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR LEADER</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item">Anggota Tim</div>
+        <div class="sidebar-hint-item">Laporan Penjualan</div>
+        <div class="sidebar-hint-item active">Analitik</div>
+        <div class="sidebar-hint-item">Invoice Downline</div>
+      </div>
+
+      <!-- Main -->
+      <div class="main-area">
+        <!-- Header -->
+        <div class="header-hint">
+          <div>
+            <div class="header-hint-title">Analitik</div>
+            <div class="header-hint-sub">Data performa tim dan tren referral</div>
+          </div>
+          <div style="width:30px;height:30px;border:1.5px dashed #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#999;">LR</div>
+        </div>
+
+        <div class="analitik-grid">
+          
+          <!-- Chart 1: Tren Revenue (Full Width) -->
+          <div class="box analitik-col-full" style="padding: 20px;">
+            <span class="box-label">Grafik Bar Horizontal</span>
+            <div class="card-head" style="border-bottom: 1px dashed #eee; padding-bottom: 12px;">
+              <div>
+                <div class="card-head-title">Tren Revenue 6 Bulan Terakhir</div>
+                <div class="card-head-sub">Total pembayaran terverifikasi dari downline per bulan</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <div class="chart-row">
+                <div class="chart-label">Jun</div>
+                <div class="chart-track"><div class="chart-bar" style="width: 80%;"></div></div>
+                <div class="chart-val">Rp 8.0M</div>
+              </div>
+              <div class="chart-row">
+                <div class="chart-label">Mei</div>
+                <div class="chart-track"><div class="chart-bar" style="width: 65%;"></div></div>
+                <div class="chart-val">Rp 6.5M</div>
+              </div>
+              <div class="chart-row">
+                <div class="chart-label">Apr</div>
+                <div class="chart-track"><div class="chart-bar" style="width: 40%;"></div></div>
+                <div class="chart-val">Rp 4.0M</div>
+              </div>
+              <div class="chart-row">
+                <div class="chart-label">Mar</div>
+                <div class="chart-track"><div class="chart-bar" style="width: 90%;"></div></div>
+                <div class="chart-val">Rp 9.0M</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart 2: Anggota Baru -->
+          <div class="box" style="padding: 20px;">
+            <span class="box-label">Grafik Bar Horizontal</span>
+            <div class="card-head" style="border-bottom: 1px dashed #eee; padding-bottom: 12px;">
+              <div>
+                <div class="card-head-title">Anggota Baru per Bulan</div>
+                <div class="card-head-sub">Tren pertumbuhan downline</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <div class="chart-row">
+                <div class="chart-label">Jun</div>
+                <div class="chart-track"><div class="chart-bar blue" style="width: 100%;"></div></div>
+                <div class="chart-val" style="width: 50px;">12 orang</div>
+              </div>
+              <div class="chart-row">
+                <div class="chart-label">Mei</div>
+                <div class="chart-track"><div class="chart-bar blue" style="width: 60%;"></div></div>
+                <div class="chart-val" style="width: 50px;">7 orang</div>
+              </div>
+              <div class="chart-row">
+                <div class="chart-label">Apr</div>
+                <div class="chart-track"><div class="chart-bar blue" style="width: 40%;"></div></div>
+                <div class="chart-val" style="width: 50px;">4 orang</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rank List: Top Downline -->
+          <div class="box" style="padding: 20px;">
+            <span class="box-label">List Top Leader</span>
+            <div class="card-head" style="border-bottom: 1px dashed #eee; padding-bottom: 12px;">
+              <div>
+                <div class="card-head-title">Top Downline</div>
+                <div class="card-head-sub">5 downline dengan pembayaran terbesar</div>
+              </div>
+            </div>
+            <div class="rank-list">
+              <div class="rank-item">
+                <div class="rank-badge rank-1">1</div>
+                <div class="rank-info">
+                  <div class="cell-bar" style="width: 80%; margin-bottom: 4px;"></div>
+                  <div class="cell-bar" style="width: 50%; height: 8px;"></div>
+                </div>
+                <div class="rank-val">Rp xxx</div>
+              </div>
+              <div class="rank-item">
+                <div class="rank-badge rank-2">2</div>
+                <div class="rank-info">
+                  <div class="cell-bar" style="width: 70%; margin-bottom: 4px;"></div>
+                  <div class="cell-bar" style="width: 40%; height: 8px;"></div>
+                </div>
+                <div class="rank-val">Rp xxx</div>
+              </div>
+              <div class="rank-item">
+                <div class="rank-badge rank-3">3</div>
+                <div class="rank-info">
+                  <div class="cell-bar" style="width: 85%; margin-bottom: 4px;"></div>
+                  <div class="cell-bar" style="width: 60%; height: 8px;"></div>
+                </div>
+                <div class="rank-val">Rp xxx</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 40px;"></div>
+
+</body>
+</html>

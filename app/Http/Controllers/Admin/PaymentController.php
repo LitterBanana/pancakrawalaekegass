@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
@@ -130,5 +132,134 @@ class PaymentController extends Controller
         ];
 
         return response()->stream($callback, 200, $headers);
+    }
+
+    public function create()
+    {
+        $bookings = Booking::with('user', 'package')->latest()->get();
+        return view('admin.payments.create', compact('bookings'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'booking_id' => 'required|exists:bookings,id',
+            'amount' => 'required|numeric|min:1',
+            'payment_date' => 'required|date',
+            'payment_method' => 'required|in:tunai,transfer',
+            'bank_name' => 'nullable|string|max:255',
+            'proof_of_payment' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'status' => 'required|in:belum_lunas,sudah_lunas,ditolak',
+            'notes' => 'nullable|string'
+        ]);
+
+        $booking = Booking::findOrFail($request->booking_id);
+
+        $imageName = null;
+        if ($request->hasFile('proof_of_payment')) {
+            $image = $request->file('proof_of_payment');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('assets/images/payments'), $imageName);
+        }
+
+        $payment = Payment::create([
+            'invoice_number'   => 'INV-' . date('Ymd') . '-' . strtoupper(Str::random(4)),
+            'booking_id'       => $booking->id,
+            'user_id'          => $booking->user_id,
+            'amount'           => $request->amount,
+            'payment_date'     => $request->payment_date,
+            'payment_method'   => $request->payment_method,
+            'bank_name'        => $request->bank_name,
+            'proof_of_payment' => $imageName,
+            'notes'            => $request->notes,
+            'status'           => $request->status,
+        ]);
+
+        $this->syncBookingStatus($booking);
+
+        return redirect()->route('admin.payments.index')->with('success', 'Pembayaran berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $payment = Payment::findOrFail($id);
+        $bookings = Booking::with('user', 'package')->latest()->get();
+        return view('admin.payments.edit', compact('payment', 'bookings'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $payment = Payment::findOrFail($id);
+        $oldBookingId = $payment->booking_id;
+
+        $request->validate([
+            'booking_id' => 'required|exists:bookings,id',
+            'amount' => 'required|numeric|min:1',
+            'payment_date' => 'required|date',
+            'payment_method' => 'required|in:tunai,transfer',
+            'bank_name' => 'nullable|string|max:255',
+            'proof_of_payment' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'status' => 'required|in:belum_lunas,sudah_lunas,ditolak',
+            'notes' => 'nullable|string'
+        ]);
+
+        $imageName = $payment->proof_of_payment;
+        if ($request->hasFile('proof_of_payment')) {
+            $image = $request->file('proof_of_payment');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('assets/images/payments'), $imageName);
+        }
+
+        $newBooking = Booking::findOrFail($request->booking_id);
+
+        $payment->update([
+            'booking_id'       => $newBooking->id,
+            'user_id'          => $newBooking->user_id,
+            'amount'           => $request->amount,
+            'payment_date'     => $request->payment_date,
+            'payment_method'   => $request->payment_method,
+            'bank_name'        => $request->bank_name,
+            'proof_of_payment' => $imageName,
+            'notes'            => $request->notes,
+            'status'           => $request->status,
+        ]);
+
+        $this->syncBookingStatus($newBooking);
+
+        if ($oldBookingId != $newBooking->id) {
+            $oldBooking = Booking::find($oldBookingId);
+            if ($oldBooking) {
+                $this->syncBookingStatus($oldBooking);
+            }
+        }
+
+        return redirect()->route('admin.payments.index')->with('success', 'Pembayaran berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $payment = Payment::findOrFail($id);
+        $booking = $payment->booking;
+        
+        $payment->delete();
+
+        if ($booking) {
+            $this->syncBookingStatus($booking);
+        }
+
+        return redirect()->route('admin.payments.index')->with('success', 'Pembayaran berhasil dihapus.');
+    }
+
+    private function syncBookingStatus($booking)
+    {
+        $totalPaid = $booking->payments()->where('status', 'sudah_lunas')->sum('amount');
+        
+        if ($totalPaid >= $booking->total_price) {
+            $booking->update(['status' => 'paid']);
+        } elseif ($totalPaid > 0) {
+            $booking->update(['status' => 'dicicil']);
+        } else {
+            $booking->update(['status' => 'pending']);
+        }
     }
 }

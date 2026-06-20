@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Invoice Leader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cell-bar {
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    /* Page Section */
+    .page-section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    /* Layout with sidebar hint */
+    .layout-hint {
+      display: flex;
+      gap: 20px;
+      min-height: 480px;
+    }
+    .sidebar-hint {
+      width: 200px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sidebar-hint-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: center;
+      padding: 12px;
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      background: #FEF2F2;
+      margin-bottom: 8px;
+    }
+    .sidebar-hint-item {
+      padding: 8px 12px;
+      border: 1px dashed #ddd;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #777;
+      background: #FAFAFA;
+    }
+    .sidebar-hint-item.active {
+      border-color: #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header hint */
+    .header-hint {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 14px 20px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-hint-title { font-size: 14px; font-weight: 700; color: #333; }
+    .header-hint-sub { font-size: 10px; color: #999; }
+
+    /* Stats Grid */
+    .stats-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .stat-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+    }
+    .stat-box-title {
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .stat-box-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #555;
+    }
+    .stat-box:nth-child(1) { border-color: #8B1A1A; }
+    .stat-box:nth-child(1) .stat-box-value { color: #8B1A1A; }
+
+    /* Card head */
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #eee;
+    }
+    .card-head-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+    }
+    .card-head-badge {
+      border: 1.5px dashed #059669;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #059669;
+      background: #ECFDF5;
+    }
+
+    /* Filter Box */
+    .filter-section {
+      padding: 12px 0;
+      border-bottom: 1px dashed #eee;
+      display: flex;
+      gap: 10px;
+    }
+    .filter-input {
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 11px;
+      color: #999;
+      flex: 1;
+      max-width: 250px;
+      background: #FAFAFA;
+    }
+    .filter-btn {
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8B1A1A;
+      background: #FEF2F2;
+    }
+
+    /* Month Group Header */
+    .month-header {
+      background: #F7F8FA;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed #ddd;
+      margin-top: 16px;
+      border-radius: 6px 6px 0 0;
+    }
+    .month-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #333;
+    }
+    .month-sub {
+      font-size: 10px;
+      color: #999;
+      margin-left: 8px;
+    }
+    .month-total {
+      font-size: 12px;
+      font-weight: 700;
+      color: #8B1A1A;
+    }
+
+    /* Table Placeholder */
+    .table-placeholder {
+      width: 100%;
+      border: 1.5px dashed #ddd;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      overflow: hidden;
+    }
+    .table-head {
+      background: #FAFAFA;
+      display: flex;
+      padding: 10px 14px;
+      gap: 6px;
+      border-bottom: 1px dashed #eee;
+    }
+    .table-head span {
+      flex: 1;
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .table-row {
+      display: flex;
+      padding: 12px 14px;
+      gap: 6px;
+      border-bottom: 1px dashed #eee;
+      align-items: center;
+    }
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .layout-hint { flex-direction: column; }
+      .sidebar-hint { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .stats-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .stats-grid-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================== -->
+  <!-- PAGE: INVOICE LEADER               -->
+  <!-- ================================== -->
+  <div class="page-section">
+    <div class="page-title">Invoice Downline (Leader)</div>
+    <div class="page-subtitle">Layout: Sidebar Leader + Header + 4 Stats + Tabel Komisi per Bulan</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR LEADER</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item">Anggota Tim</div>
+        <div class="sidebar-hint-item">Laporan Penjualan</div>
+        <div class="sidebar-hint-item">Analitik</div>
+        <div class="sidebar-hint-item active">Invoice Downline</div>
+      </div>
+
+      <!-- Main -->
+      <div class="main-area">
+        <!-- Header -->
+        <div class="header-hint">
+          <div>
+            <div class="header-hint-title">Invoice Downline</div>
+            <div class="header-hint-sub">Rekap komisi Anda berdasarkan downline yang telah melunasi pembayaran</div>
+          </div>
+          <div style="width:30px;height:30px;border:1.5px dashed #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#999;">LR</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid-4">
+          <div class="stat-box">
+            <div class="stat-box-title">Total Komisi</div>
+            <div class="stat-box-value">Rp xxx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Total Jamaah</div>
+            <div class="stat-box-value">xx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Booking Lunas</div>
+            <div class="stat-box-value">xx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Periode</div>
+            <div class="stat-box-value">x Bulan</div>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="box" style="padding: 20px;">
+          <span class="box-label">Data Invoice Komisi</span>
+          
+          <!-- Card Header -->
+          <div class="card-head">
+            <span class="card-head-title">Invoice Komisi Downline</span>
+            <div class="card-head-badge">Rp 200.000 / orang</div>
+          </div>
+
+          <!-- Filter -->
+          <div class="filter-section">
+            <div class="filter-input">Cari nama jamaah atau paket...</div>
+            <div class="filter-btn">Cari</div>
+          </div>
+
+          <!-- Grouped by Month 1 -->
+          <div>
+            <div class="month-header">
+              <div>
+                <span class="month-title">Bulan YYYY</span>
+                <span class="month-sub">(xx orang, x booking)</span>
+              </div>
+              <span class="month-total">Rp xxx</span>
+            </div>
+            <div class="table-placeholder">
+              <div class="table-head">
+                <span style="flex: 0.5;">#</span>
+                <span style="flex: 1.5;">Jamaah</span>
+                <span>Paket</span>
+                <span>Tipe Kamar</span>
+                <span style="text-align: center;">Jumlah Orang</span>
+                <span>Tgl. Lunas</span>
+                <span style="text-align: right;">Komisi</span>
+              </div>
+              
+              <!-- Row 1 -->
+              <div class="table-row">
+                <span style="flex: 0.5; font-size: 10px; color: #999;">1</span>
+                <span style="flex: 1.5;">
+                  <div class="cell-bar" style="width: 80%; margin-bottom: 4px;"></div>
+                  <div class="cell-bar" style="width: 60%; height: 8px;"></div>
+                </span>
+                <span class="cell-bar"></span>
+                <span style="font-size: 10px; color: #777;">Quad</span>
+                <span style="text-align: center; font-size: 11px; font-weight: 600; color: #333;">2</span>
+                <span class="cell-bar" style="width: 80%;"></span>
+                <span style="text-align: right; font-size: 11px; font-weight: 700; color: #059669;">Rp 400.000</span>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="table-row">
+                <span style="flex: 0.5; font-size: 10px; color: #999;">2</span>
+                <span style="flex: 1.5;">
+                  <div class="cell-bar" style="width: 70%; margin-bottom: 4px;"></div>
+                  <div class="cell-bar" style="width: 90%; height: 8px;"></div>
+                </span>
+                <span class="cell-bar"></span>
+                <span style="font-size: 10px; color: #777;">Double</span>
+                <span style="text-align: center; font-size: 11px; font-weight: 600; color: #333;">2</span>
+                <span class="cell-bar" style="width: 80%;"></span>
+                <span style="text-align: right; font-size: 11px; font-weight: 700; color: #059669;">Rp 400.000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grouped by Month 2 -->
+          <div>
+            <div class="month-header">
+              <div>
+                <span class="month-title">Bulan Sebelumnya YYYY</span>
+                <span class="month-sub">(xx orang, x booking)</span>
+              </div>
+              <span class="month-total">Rp xxx</span>
+            </div>
+            <div class="table-placeholder">
+              <div class="table-head">
+                <span style="flex: 0.5;">#</span>
+                <span style="flex: 1.5;">Jamaah</span>
+                <span>Paket</span>
+                <span>Tipe Kamar</span>
+                <span style="text-align: center;">Jumlah Orang</span>
+                <span>Tgl. Lunas</span>
+                <span style="text-align: right;">Komisi</span>
+              </div>
+              
+              <!-- Row 1 -->
+              <div class="table-row">
+                <span style="flex: 0.5; font-size: 10px; color: #999;">1</span>
+                <span style="flex: 1.5;">
+                  <div class="cell-bar" style="width: 90%; margin-bottom: 4px;"></div>
+                  <div class="cell-bar" style="width: 70%; height: 8px;"></div>
+                </span>
+                <span class="cell-bar"></span>
+                <span style="font-size: 10px; color: #777;">Triple</span>
+                <span style="text-align: center; font-size: 11px; font-weight: 600; color: #333;">3</span>
+                <span class="cell-bar" style="width: 80%;"></span>
+                <span style="text-align: right; font-size: 11px; font-weight: 700; color: #059669;">Rp 600.000</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 40px;"></div>
+
+</body>
+</html>

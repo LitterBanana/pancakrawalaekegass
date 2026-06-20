@@ -23,7 +23,7 @@ class UserPaymentController extends Controller
         $sudahDibayar = $activeBooking ? $activeBooking->payments()->where('status', 'sudah_lunas')->sum('amount') : 0;
         $sisaTagihan = max(0, $totalTagihan - $sudahDibayar);
 
-        return view('user.payment', compact('user', 'activeBooking', 'totalTagihan', 'sudahDibayar', 'sisaTagihan'), [
+        return view('user.payments.index', compact('user', 'activeBooking', 'totalTagihan', 'sudahDibayar', 'sisaTagihan'), [
             'pageTitle' => 'Form Pembayaran',
             'pageSubtitle' => 'Lakukan pembayaran tour Anda',
         ]);

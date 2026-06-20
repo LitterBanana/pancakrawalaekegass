@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - Member Leader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      position: relative;
+      background: #fff;
+    }
+    .box-label {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: #fff;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cell-bar {
+      height: 12px;
+      background: #F0F2F5;
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    /* Page Section */
+    .page-section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .page-section + .page-section {
+      border-top: 3px dashed #ddd;
+    }
+    .page-number {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8B1A1A;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .page-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .page-subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 32px;
+    }
+
+    /* Layout with sidebar hint */
+    .layout-hint {
+      display: flex;
+      gap: 20px;
+      min-height: 480px;
+    }
+    .sidebar-hint {
+      width: 200px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sidebar-hint-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8B1A1A;
+      text-align: center;
+      padding: 12px;
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      background: #FEF2F2;
+      margin-bottom: 8px;
+    }
+    .sidebar-hint-label {
+      font-size: 8px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 8px;
+      padding-left: 6px;
+    }
+    .sidebar-hint-item {
+      padding: 8px 12px;
+      border: 1px dashed #ddd;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #777;
+      background: #FAFAFA;
+    }
+    .sidebar-hint-item.active {
+      border-color: #8B1A1A;
+      background: #FEF2F2;
+      color: #8B1A1A;
+      font-weight: 600;
+    }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header hint */
+    .header-hint {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 14px 20px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-hint-title { font-size: 14px; font-weight: 700; color: #333; }
+    .header-hint-sub { font-size: 10px; color: #999; }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .stat-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 16px 12px;
+      background: #fff;
+    }
+    .stat-box-title {
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .stat-box-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #555;
+    }
+    .stat-box:nth-child(1) { border-color: #8B1A1A; }
+    .stat-box:nth-child(1) .stat-box-value { color: #8B1A1A; }
+    .stat-box:nth-child(2) { border-color: #059669; }
+    .stat-box:nth-child(2) .stat-box-value { color: #059669; }
+    .stat-box:nth-child(3) { border-color: #333; }
+    .stat-box:nth-child(4) { border-color: #2563EB; }
+
+    /* Card head */
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1.5px dashed #eee;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .card-head-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+    }
+    .btn-box {
+      border: 1.5px dashed #8B1A1A;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #8B1A1A;
+      background: #FEF2F2;
+    }
+    .btn-box-ghost {
+      border: 1.5px dashed #ccc;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      background: #FAFAFA;
+    }
+    .btn-box-disabled {
+      border: 1px dashed #ddd;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #ccc;
+      background: #FAFAFA;
+    }
+
+    /* Table Placeholder */
+    .table-placeholder {
+      width: 100%;
+      border: 1.5px dashed #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table-head {
+      background: #F7F8FA;
+      display: flex;
+      padding: 10px 14px;
+      gap: 6px;
+    }
+    .table-head span {
+      flex: 1;
+      font-size: 9px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+    }
+    .table-row {
+      display: flex;
+      padding: 12px 14px;
+      gap: 6px;
+      border-top: 1px dashed #eee;
+      align-items: center;
+    }
+    .cell-badge {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .cell-badge-inner {
+      border: 1px dashed #ccc;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 8px;
+      font-weight: 600;
+      color: #999;
+    }
+    .cell-badge-inner.blue { border-color: #2563EB; color: #2563EB; }
+    .cell-badge-inner.green { border-color: #059669; color: #059669; }
+    .cell-actions {
+      flex: 1;
+      display: flex;
+      gap: 4px;
+    }
+
+    /* Description text */
+    .desc-text {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .layout-hint { flex-direction: column; }
+      .sidebar-hint { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================== -->
+  <!-- PAGE 1: DAFTAR ANGGOTA (INDEX)     -->
+  <!-- ================================== -->
+  <div class="page-section">
+    <div class="page-number">Halaman 1 dari 2</div>
+    <div class="page-title">Daftar Anggota</div>
+    <div class="page-subtitle">Layout: Sidebar Leader + Header + Stats + Tabel Anggota Referral</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR LEADER</div>
+        <div class="sidebar-hint-label">Menu Utama</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item active">Anggota Tim</div>
+        <div class="sidebar-hint-item">Laporan Penjualan</div>
+        <div class="sidebar-hint-item">Analitik</div>
+        <div class="sidebar-hint-item">Invoice Downline</div>
+        <div class="sidebar-hint-label">Akun</div>
+        <div class="sidebar-hint-item">Profil Saya</div>
+      </div>
+
+      <!-- Main -->
+      <div class="main-area">
+        <!-- Header -->
+        <div class="header-hint">
+          <div>
+            <div class="header-hint-title">Daftar Anggota</div>
+            <div class="header-hint-sub">Kelola anggota referral dan downline Anda</div>
+          </div>
+          <div style="width:30px;height:30px;border:1.5px dashed #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#999;">LR</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-box-title">Total Anggota</div>
+            <div class="stat-box-value">xx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Anggota Aktif</div>
+            <div class="stat-box-value">xx</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Kode Referral</div>
+            <div class="stat-box-value" style="font-size:14px;font-family:monospace;">REF-XXXXX</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-title">Terakhir Bergabung</div>
+            <div class="stat-box-value" style="font-size:14px;">dd mmm yyyy</div>
+          </div>
+        </div>
+
+        <!-- Table: Daftar Anggota -->
+        <div class="box" style="padding: 20px;">
+          <span class="box-label">Daftar Anggota Referral</span>
+          <div class="card-head">
+            <span class="card-head-title">Daftar Anggota Referral</span>
+            <div class="btn-box">Kelola Anggota</div>
+          </div>
+          <div class="table-placeholder">
+            <div class="table-head">
+              <span>Nama</span>
+              <span>Email</span>
+              <span>Peran</span>
+              <span>Bergabung</span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-bar"></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-bar"></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">Leader</span></span>
+              <span class="cell-bar"></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-bar"></span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-bar"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================== -->
+  <!-- PAGE 2: CRUD / KELOLA ANGGOTA      -->
+  <!-- ================================== -->
+  <div class="page-section">
+    <div class="page-number">Halaman 2 dari 2</div>
+    <div class="page-title">CRUD Anggota</div>
+    <div class="page-subtitle">Layout: Sidebar Leader + Header + Tabel Manajemen Anggota (dengan aksi Edit/Hapus)</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR LEADER</div>
+        <div class="sidebar-hint-label">Menu Utama</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item active">Anggota Tim</div>
+        <div class="sidebar-hint-item">Laporan Penjualan</div>
+        <div class="sidebar-hint-item">Analitik</div>
+        <div class="sidebar-hint-item">Invoice Downline</div>
+        <div class="sidebar-hint-label">Akun</div>
+        <div class="sidebar-hint-item">Profil Saya</div>
+      </div>
+
+      <!-- Main -->
+      <div class="main-area">
+        <!-- Header -->
+        <div class="header-hint">
+          <div>
+            <div class="header-hint-title">CRUD Anggota</div>
+            <div class="header-hint-sub">Halaman manajemen anggota referral untuk leader</div>
+          </div>
+          <div style="width:30px;height:30px;border:1.5px dashed #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#999;">LR</div>
+        </div>
+
+        <!-- Table: Manajemen Anggota -->
+        <div class="box" style="padding: 20px;">
+          <span class="box-label">Manajemen Anggota</span>
+          <div class="card-head">
+            <span class="card-head-title">Manajemen Anggota</span>
+            <div class="btn-box-ghost">&larr; Kembali Ke Daftar</div>
+          </div>
+
+          <div class="desc-text">
+            Halaman CRUD ini menampilkan anggota referral Anda dengan struktur yang mudah dikembangkan: daftar anggota, detail, dan aksi manajemen.
+          </div>
+
+          <div class="table-placeholder">
+            <div class="table-head">
+              <span>Nama</span>
+              <span>Email</span>
+              <span>Peran</span>
+              <span>Status</span>
+              <span>Aksi</span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-badge"><span class="cell-badge-inner green">Aktif</span></span>
+              <span class="cell-actions">
+                <span class="btn-box-disabled">Edit</span>
+                <span class="btn-box-disabled">Hapus</span>
+              </span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-badge"><span class="cell-badge-inner green">Aktif</span></span>
+              <span class="cell-actions">
+                <span class="btn-box-disabled">Edit</span>
+                <span class="btn-box-disabled">Hapus</span>
+              </span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">Leader</span></span>
+              <span class="cell-badge"><span class="cell-badge-inner green">Aktif</span></span>
+              <span class="cell-actions">
+                <span class="btn-box-disabled">Edit</span>
+                <span class="btn-box-disabled">Hapus</span>
+              </span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-badge"><span class="cell-badge-inner green">Aktif</span></span>
+              <span class="cell-actions">
+                <span class="btn-box-disabled">Edit</span>
+                <span class="btn-box-disabled">Hapus</span>
+              </span>
+            </div>
+            <div class="table-row">
+              <span class="cell-bar"></span>
+              <span class="cell-bar"></span>
+              <span class="cell-badge"><span class="cell-badge-inner blue">User</span></span>
+              <span class="cell-badge"><span class="cell-badge-inner green">Aktif</span></span>
+              <span class="cell-actions">
+                <span class="btn-box-disabled">Edit</span>
+                <span class="btn-box-disabled">Hapus</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 40px;"></div>
+
+</body>
+</html>

@@ -31,7 +31,7 @@
 <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden animate-fade-in-up delay-1">
     <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
         <h3 class="text-base font-semibold text-gray-900 m-0">Daftar Anggota Referral</h3>
-        <a href="{{ route('leader.members.crud') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-[#8B1A1A] rounded-lg hover:bg-[#6B1010] transition-colors">Kelola Anggota</a>
+        <a href="{{ route('leader.members.manage') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-[#8B1A1A] rounded-lg hover:bg-[#6B1010] transition-colors">Kelola Anggota</a>
     </div>
     <div class="overflow-x-auto">
         <table class="w-full border-collapse text-left">

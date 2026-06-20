@@ -58,7 +58,7 @@ class UserInvoiceController extends Controller
         $paidInvoices = $user->payments()->where('status', 'sudah_lunas')->count();
         $unpaidInvoices = $user->payments()->whereIn('status', ['belum_lunas', 'ditolak'])->count();
 
-        return view('user.invoices', compact('payments', 'totalInvoices', 'paidInvoices', 'unpaidInvoices'), [
+        return view('user.invoices.index', compact('payments', 'totalInvoices', 'paidInvoices', 'unpaidInvoices'), [
             'pageTitle' => 'Travel Invoices',
             'pageSubtitle' => 'Kelola dan lihat invoice perjalanan Anda',
         ]);
@@ -99,7 +99,7 @@ class UserInvoiceController extends Controller
         $addons = is_array($booking->addons) ? $booking->addons : (json_decode($booking->addons ?? 'null', true) ?? []);
         $usdRate = $booking->usd_rate ?? 17229;
 
-        return view('user.invoice_print', compact(
+        return view('user.invoices.print', compact(
             'payment',
             'invoiceNo',
             'addonDefs',
