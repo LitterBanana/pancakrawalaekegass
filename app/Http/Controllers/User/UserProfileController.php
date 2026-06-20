@@ -26,7 +26,7 @@ class UserProfileController extends Controller
         $remaining    = max(0, $totalCost - $paidAmount);
         $percentage   = $totalCost > 0 ? min(round(($paidAmount / $totalCost) * 100), 100) : 0;
 
-        return view('user.profile', [
+        return view('user.profile.index', [
             'pageTitle'   => 'Profil Saya',
             'pageSubtitle' => 'Kelola informasi akun Anda',
             'user'        => $user,

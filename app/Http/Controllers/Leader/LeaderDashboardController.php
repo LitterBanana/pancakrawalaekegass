@@ -246,7 +246,7 @@ class LeaderDashboardController extends Controller
         $remaining   = $totalCost - $paidAmount;
         $percentage  = $totalCost > 0 ? min(round(($paidAmount / $totalCost) * 100), 100) : 0;
 
-        return view('leader.profile', compact(
+        return view('leader.profile.index', compact(
             'user',
             'booking',
             'totalCost',

@@ -25,7 +25,7 @@ class AuthController extends Controller
         }
         
         // Return view halaman login stand-alone Anda
-        return view('auth.login'); 
+        return view('auth.auth'); 
     }
 
     public function register(Request $request)
