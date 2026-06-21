@@ -30,12 +30,12 @@
     <!-- ================= HERO SIDE (Kiri) ================= -->
     <section class="hidden lg:flex lg:w-1/2 relative bg-slate-900 overflow-hidden group">
       <!-- Gambar Background -->
-      <img src="{{ asset('img/Umroh bareng ibu dan zahro.jpeg') }}" alt="Umroh HMI Tour"
-        class="absolute inset-0 w-full h-full object-cover object-center opacity-100 mix-blend-overlay group-hover:scale-105 transition-transform duration-1000 ease-in-out">
+      <img src="{{ asset('assets/images/hero.webp') }}" alt="Umroh HMI Tour"
+        class="absolute inset-0 w-full h-full object-cover object-center opacity-100 grayscale group-hover:scale-105 transition-transform duration-1000 ease-in-out">
 
       <!-- Gradient Overlay -->
-      <div class="absolute inset-0 bg-black/60"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-slate-900/50"></div>
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
       <!-- Content -->
       <div class="relative z-10 flex flex-col justify-end p-12 lg:p-20 w-full">

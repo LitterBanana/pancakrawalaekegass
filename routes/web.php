@@ -120,9 +120,13 @@ Route::middleware(['auth', 'leader'])->prefix('leader')->group(function () {
     // Dashboard Utama Leader
     Route::get('/dashboard', [LeaderDashboardController::class, 'index'])->name('leader.dashboard');
 
-    // Halaman Leader dengan struktur fungsi/index + fungsi/manage dll
     Route::get('/members', [LeaderDashboardController::class, 'members'])->name('leader.members.index');
-    Route::get('/members/manage', [LeaderDashboardController::class, 'membersManage'])->name('leader.members.manage');
+    Route::get('/members/create', [LeaderDashboardController::class, 'createMember'])->name('leader.members.create');
+    Route::post('/members', [LeaderDashboardController::class, 'storeMember'])->name('leader.members.store');
+    Route::get('/members/{id}/edit', [LeaderDashboardController::class, 'editMember'])->name('leader.members.edit');
+    Route::put('/members/{id}', [LeaderDashboardController::class, 'updateMember'])->name('leader.members.update');
+    Route::delete('/members/{id}', [LeaderDashboardController::class, 'destroyMember'])->name('leader.members.destroy');
+
     Route::get('/reports', [LeaderDashboardController::class, 'reports'])->name('leader.reports.index');
     Route::get('/reports/analytics', [LeaderDashboardController::class, 'reportsAnalytics'])->name('leader.reports.analytics');
     Route::get('/reports/export', [LeaderDashboardController::class, 'reportsExport'])->name('leader.reports.export');

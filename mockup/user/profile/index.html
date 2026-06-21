@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Kerangka - User Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #F0F2F5; color: #333; min-height: 100vh; }
+
+    /* Placeholder Box */
+    .box { border: 2px dashed #ccc; border-radius: 10px; position: relative; background: #fff; }
+    .box-label {
+      position: absolute; top: -10px; left: 14px; background: #fff; padding: 0 8px;
+      font-size: 10px; font-weight: 600; color: #8B1A1A; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* Layout */
+    .page-section { max-width: 1060px; margin: 0 auto; padding: 40px 24px 60px; }
+    .page-title { text-align: center; font-size: 18px; font-weight: 700; color: #333; margin-bottom: 4px; }
+    .page-subtitle { text-align: center; font-size: 12px; color: #999; margin-bottom: 32px; }
+
+    .layout-hint { display: flex; gap: 20px; min-height: 480px; }
+    .sidebar-hint {
+      width: 200px; border: 2px dashed #ccc; border-radius: 10px; padding: 16px 12px;
+      background: #fff; flex-shrink: 0; display: flex; flex-direction: column; gap: 6px;
+    }
+    .sidebar-hint-title {
+      font-size: 11px; font-weight: 700; color: #8B1A1A; text-align: center; padding: 12px;
+      border: 1.5px dashed #8B1A1A; border-radius: 6px; background: #FEF2F2; margin-bottom: 8px;
+    }
+    .sidebar-hint-item {
+      padding: 8px 12px; border: 1px dashed #ddd; border-radius: 6px; font-size: 11px; color: #777; background: #FAFAFA;
+    }
+    .sidebar-hint-item.active { border-color: #8B1A1A; background: #FEF2F2; color: #8B1A1A; font-weight: 600; }
+    
+    .main-area { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+
+    /* Profile Header Box */
+    .profile-header-box { border: 2px dashed #8B1A1A; border-radius: 12px; background: #fff; overflow: hidden; position: relative; }
+    .profile-cover { height: 100px; background: #FCE7F3; border-bottom: 1.5px dashed #ccc; }
+    .profile-info { padding: 0 24px 20px 24px; display: flex; gap: 20px; align-items: flex-end; margin-top: -30px; }
+    .profile-avatar {
+      width: 70px; height: 70px; border-radius: 16px; background: #fff; border: 2px dashed #8B1A1A;
+      display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8B1A1A; position: relative; z-index: 10;
+    }
+    .profile-details { flex: 1; padding-bottom: 4px; }
+    .profile-name { font-size: 18px; font-weight: 700; color: #333; margin-bottom: 4px; display: flex; gap: 10px; align-items: center; }
+    .profile-badge { border: 1px dashed #2563eb; background: #eff6ff; color: #2563eb; padding: 2px 8px; border-radius: 12px; font-size: 9px; font-weight: 600; text-transform: uppercase; }
+    .profile-meta { display: flex; gap: 12px; font-size: 11px; color: #777; }
+
+    /* Two Columns Grid */
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    .card-head { padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1.5px dashed #eee; font-size: 13px; font-weight: 700; color: #333; }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed #f0f0f0; }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { font-size: 11px; color: #999; }
+    .info-value { font-size: 11px; font-weight: 600; color: #333; }
+
+    /* Booking Block */
+    .booking-cover { background: #FCE7F3; border-radius: 8px; padding: 16px; margin-bottom: 16px; border: 1.5px dashed #ccc; }
+    .booking-title { font-size: 14px; font-weight: 700; color: #8B1A1A; margin-bottom: 4px; }
+    .booking-sub { font-size: 10px; color: #777; }
+    .booking-badge { display: inline-block; margin-top: 8px; border: 1px dashed #059669; background: #ECFDF5; color: #059669; padding: 2px 8px; border-radius: 12px; font-size: 9px; font-weight: 600; }
+
+    .prog-section { margin-top: 16px; }
+    .prog-header { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 6px; }
+    .prog-track { height: 8px; background: #F0F2F5; border-radius: 4px; }
+    .prog-bar { height: 100%; width: 60%; background: #8B1A1A; border-radius: 4px; }
+    .b-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .b-stat-box { border: 1px dashed #ddd; background: #FAFAFA; border-radius: 6px; padding: 10px; text-align: center; }
+
+    .action-row { display: flex; gap: 10px; margin-top: 20px; border-top: 1.5px dashed #eee; padding-top: 16px; }
+    .action-btn { flex: 1; padding: 10px; text-align: center; font-size: 11px; font-weight: 600; border-radius: 6px; }
+    .btn-outline { border: 1.5px dashed #8B1A1A; color: #8B1A1A; background: #fff; }
+    .btn-solid { background: #8B1A1A; color: #fff; border: 1.5px dashed transparent; }
+
+    @media (max-width: 768px) {
+      .layout-hint { flex-direction: column; }
+      .sidebar-hint { width: 100%; flex-direction: row; flex-wrap: wrap; }
+      .profile-info { flex-direction: column; align-items: center; text-align: center; margin-top: -35px; }
+      .profile-name { justify-content: center; flex-wrap: wrap; }
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-section">
+    <div class="page-title">Profil User</div>
+    <div class="page-subtitle">Layout: Sidebar User + Profile Header + Grid Info Akun & Info Paket Tour</div>
+
+    <div class="layout-hint">
+      <!-- Sidebar -->
+      <div class="sidebar-hint">
+        <div class="sidebar-hint-title">SIDEBAR USER</div>
+        <div class="sidebar-hint-item">Dashboard</div>
+        <div class="sidebar-hint-item">Pembayaran</div>
+        <div class="sidebar-hint-item">Travel Invoices</div>
+        <div class="sidebar-hint-item active">Profil Saya</div>
+      </div>
+
+      <!-- Main Area -->
+      <div class="main-area">
+        
+        <!-- Profile Header -->
+        <div class="profile-header-box">
+          <div class="profile-cover"></div>
+          <div class="profile-info">
+            <div class="profile-avatar">NN</div>
+            <div class="profile-details">
+              <div class="profile-name">
+                Nama Anggota Lengkap <span class="profile-badge">Anggota</span>
+              </div>
+              <div class="profile-meta">
+                <span>HMI-002</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="profile-grid">
+          
+          <!-- Personal Info -->
+          <div class="box" style="padding: 20px;">
+            <span class="box-label">Informasi Pribadi</span>
+            <div class="card-head">Data Akun</div>
+            
+            <div class="info-row">
+              <span class="info-label">Email</span>
+              <span class="info-value">user@example.com</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Role</span>
+              <span class="info-value">Anggota HMI</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Leader Referral</span>
+              <span class="info-value" style="color: #8B1A1A; font-weight: 700;">Nama Leader</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Kode Referral</span>
+              <span class="info-value" style="font-family: monospace;">REF-12345</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Bergabung</span>
+              <span class="info-value">dd mmm yyyy</span>
+            </div>
+          </div>
+
+          <!-- Package Info -->
+          <div class="box" style="padding: 20px;">
+            <span class="box-label">Paket Tour</span>
+            
+            <div class="booking-cover">
+              <div class="booking-title">Paket Umroh Reguler</div>
+              <div class="booking-sub">Keberangkatan: dd mmm yyyy</div>
+              <div class="booking-badge">Cicilan Berjalan</div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Jenis Paket</span>
+              <span class="info-value">Reguler</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Jenis Kamar</span>
+              <span class="info-value">Quad</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Jumlah Orang</span>
+              <span class="info-value">2 orang</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Harga/orang (IDR)</span>
+              <span class="info-value">Rp 15.000.000</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Total Tagihan</span>
+              <span class="info-value" style="color: #8B1A1A; font-weight: 700;">Rp 30.000.000</span>
+            </div>
+
+            <!-- Progress -->
+            <div class="prog-section">
+              <div class="prog-header">
+                <span style="color: #999;">Progress Pembayaran (Verified)</span>
+                <span style="color: #8B1A1A; font-weight: 700;">50%</span>
+              </div>
+              <div class="prog-track">
+                <div class="prog-bar" style="width: 50%;"></div>
+              </div>
+            </div>
+
+            <div class="b-stats">
+              <div class="b-stat-box">
+                <div style="font-size: 8px; color: #999; text-transform: uppercase; font-weight: 700;">Sudah Dibayar</div>
+                <div style="font-size: 12px; font-weight: 700; color: #059669; margin-top: 4px;">Rp 15.000.000</div>
+              </div>
+              <div class="b-stat-box">
+                <div style="font-size: 8px; color: #999; text-transform: uppercase; font-weight: 700;">Sisa Tagihan</div>
+                <div style="font-size: 12px; font-weight: 700; color: #DC2626; margin-top: 4px;">Rp 15.000.000</div>
+              </div>
+            </div>
+
+            <div class="action-row">
+              <div class="action-btn btn-outline">Lihat Invoice</div>
+              <div class="action-btn btn-solid">Bayar Sekarang</div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

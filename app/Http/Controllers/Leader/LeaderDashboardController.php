@@ -69,16 +69,73 @@ class LeaderDashboardController extends Controller
 
         return view('leader.members.index', compact('leader', 'members'));
     }
-
-    public function membersManage()
+    public function createMember()
     {
+        return view('leader.members.create');
+    }
+
+    public function storeMember(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+        ]);
+
         $leader = Auth::user();
 
-        // Gunakan paginate agar view bisa memanggil ->total()
-        $members = $leader->referrals()->latest()->paginate(15);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+            'role' => 'user',
+            'referred_by' => $leader->id,
+        ]);
 
-        return view('leader.members.manage', compact('leader', 'members'));
+        return redirect()->route('leader.members.index')->with('success', 'Anggota baru berhasil didaftarkan dan masuk ke afiliasi Anda.');
     }
+
+    public function editMember($id)
+    {
+        $leader = Auth::user();
+        $member = User::where('id', $id)->where('referred_by', $leader->id)->firstOrFail();
+
+        return view('leader.members.edit', compact('member'));
+    }
+
+    public function updateMember(Request $request, $id)
+    {
+        $leader = Auth::user();
+        $member = User::where('id', $id)->where('referred_by', $leader->id)->firstOrFail();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $member->id,
+            'password' => 'nullable|min:8',
+        ]);
+
+        $member->name = $request->name;
+        $member->email = $request->email;
+        if ($request->filled('password')) {
+            $member->password = \Illuminate\Support\Facades\Hash::make($request->password);
+        }
+        $member->save();
+
+        return redirect()->route('leader.members.index')->with('success', 'Profil anggota afiliasi berhasil diperbarui.');
+    }
+
+    public function destroyMember($id)
+    {
+        $leader = Auth::user();
+        $member = User::where('id', $id)->where('referred_by', $leader->id)->firstOrFail();
+
+        // Lepas dari afiliasi
+        $member->referred_by = null;
+        $member->save();
+
+        return redirect()->route('leader.members.index')->with('success', 'Anggota berhasil dilepas dari daftar afiliasi Anda.');
+    }
+
 
     public function reports()
     {
